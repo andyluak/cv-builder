@@ -1,10 +1,13 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
 import { htmlToPdf } from "convert-to-pdf";
 import path from "path";
-import TemplateOne from '../../../templates/one/template'
 
 const examples = async (req: NextApiRequest, res: NextApiResponse) => {
-  const cssPath = path.join(process.cwd(), "templates/one/dist.css");
+  const cssPath = path.join(process.cwd(), `templates/${'one'}/dist.css`);
+
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const template = require(`../../../templates/${'one'}/template`).default;
+
   const jobs = [
     {
       to: "2019",
@@ -60,7 +63,7 @@ const examples = async (req: NextApiRequest, res: NextApiResponse) => {
     // template options
     template: {
       type: "CONTENT", // If the template in in the form of a file
-      content: `${TemplateOne(html)}`,
+      content: `${template(html)}`,
       css: {
         type: "FILE",
         // the file is in the root of the project in styles/pdf.css

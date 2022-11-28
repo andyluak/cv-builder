@@ -32,6 +32,6 @@ const template = (html) => `
   </ul>
 </div>
 </body>
-`
+`;
 
 export default template;

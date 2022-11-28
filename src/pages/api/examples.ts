@@ -1,12 +1,12 @@
-import { type NextApiRequest, type NextApiResponse } from "next";
 import { htmlToPdf } from "convert-to-pdf";
+import { type NextApiRequest, type NextApiResponse } from "next";
 import path from "path";
 
 const examples = async (req: NextApiRequest, res: NextApiResponse) => {
-  const cssPath = path.join(process.cwd(), `templates/${'one'}/dist.css`);
+  const cssPath = path.join(process.cwd(), `templates/${"one"}/dist.css`);
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const template = require(`../../../templates/${'one'}/template`).default;
+  const template = require(`../../../templates/${"one"}/template`).default;
 
   const jobs = [
     {

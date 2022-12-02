@@ -14,7 +14,6 @@ export default function ResumeList() {
     isLoading,
     isError,
     data: resumes,
-    error,
   } = useQuery({
     queryKey: ["resumeList"],
     queryFn: async () => {

@@ -32,7 +32,7 @@ module.exports = {
     "^src/hooks[./]",
     "^src/pages[./]",
     "^src/utils/(.*)$",
-    "^src/public/(.*)$",
+    "^public/(.*)$",
     "^[./|~/]",
   ],
   importOrderSeparation: true,

@@ -49,14 +49,28 @@ model User {
   image               String?
   accounts            Account[]
   sessions            Session[]
-  educations          Education[]
-  jobs                Job[]
-  coverLetters        CoverLetter[]
-  links               Link[]
   profileDescriptions ProfileDescription[]
-  skills              Skill[]
+  coverLetters        CoverLetter[]
+  resumes             Resume[]
+
+  educations Education[]
+  jobs       Job[]
+  links      Link[]
+  skills     Skill[]
 
   role String @default("USER")
+}
+
+model Resume {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  profileDescriptions ProfileDescription[]
+  educations          Education[]
+  jobs                Job[]
+  links               Link[]
+  skills              Skill[]
 }
 
 model VerificationToken {
@@ -68,9 +82,13 @@ model VerificationToken {
 }
 
 model Education {
-  id           String  @id @default(cuid())
-  userId       String
-  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  resumeId String?
+  resume   Resume? @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
   school       String
   degree       String
   fieldOfStudy String
@@ -81,9 +99,13 @@ model Education {
 }
 
 model Job {
-  id          String     @id @default(cuid())
-  userId      String
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  resumeId String?
+  resume   Resume? @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
   company     String
   position    String
   location    String
@@ -113,21 +135,33 @@ model Link {
   id     String @id @default(cuid())
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  label  String
-  link   String
+
+  resumeId String?
+  resume   Resume? @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  label String
+  link  String
 }
 
 model ProfileDescription {
   id     String @id @default(cuid())
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  text   String
+
+  resumeId String?
+  resume   Resume? @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  text String
 }
 
 model Skill {
   id     String @id @default(cuid())
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  label  String
-  level  Int?
+
+  resumeId String?
+  resume   Resume? @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  label String
+  level Int?
 }

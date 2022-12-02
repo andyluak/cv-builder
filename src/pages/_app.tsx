@@ -6,7 +6,15 @@ import { type AppType } from "next/app";
 
 import "../styles/globals.css";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 60 * 24 * 7, // 7 days
+      refetchOnWindowFocus: false,
+      cacheTime: 1000 * 60 * 60 * 24 * 7, // 7 days
+    },
+  },
+});
 
 // extend component type
 

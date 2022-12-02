@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 
 import Welcome from "src/components/Welcome";
+import MainLayout from "src/components/layout/Main";
 
 const Home: NextPage = () => {
   return (
@@ -16,6 +17,12 @@ const Home: NextPage = () => {
       </main>
     </>
   );
+};
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+Home.getLayout = function getLayout(page: React.ReactNode) {
+  return <MainLayout>{page}</MainLayout>;
 };
 
 export default Home;

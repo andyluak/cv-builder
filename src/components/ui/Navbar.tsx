@@ -14,7 +14,7 @@ function Navbar() {
 
         <nav className="hidden md:block">
           <ul className="flex items-center gap-8">
-            <li> <Link href="/dashboard">Home</Link> </li>
+            <li> <Link href="/">Home</Link> </li>
             <li> <Link href="/dashboard">Dashboard</Link> </li>
           </ul>
         </nav>

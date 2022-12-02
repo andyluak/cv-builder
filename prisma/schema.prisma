@@ -42,11 +42,15 @@ model Session {
 }
 
 model User {
-  id                  String               @id @default(cuid())
-  name                String?
-  email               String?              @unique
-  emailVerified       DateTime?
-  image               String?
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+
+  firstName String?
+  lastName  String?
+
   accounts            Account[]
   sessions            Session[]
   profileDescriptions ProfileDescription[]

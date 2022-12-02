@@ -3,9 +3,10 @@ import { useState } from "react";
 
 import MultiStepForm from "src/components/MultiStepForm";
 import Modal from "src/components/ui/Modal";
-import Navbar from "src/components/ui/Navbar";
 
 import RemoteWork from "public/ilustrations/remote-work.svg";
+
+import ResumeCreator from "./ResumeCreator";
 
 export default function ResumeList() {
   const [isCreatingResume, setIsCreatingResume] = useState(false);
@@ -26,41 +27,6 @@ export default function ResumeList() {
       return res.json();
     },
   });
-
-  const createResumeMultiStepFormContent = [
-    {
-      title: `First, let's get some basic information`,
-      form: [
-        {
-          label: "First Name",
-          name: "firstName",
-          type: "text",
-          placeholder: "John",
-        },
-        {
-          label: "Last Name",
-          name: "lastName",
-          type: "text",
-          placeholder: "Doe",
-        },
-        {
-          label: "Email",
-          name: "email",
-          type: "email",
-        },
-        {
-          label: "Phone",
-          name: "phone",
-          type: "tel",
-        },
-      ],
-    },
-
-    {
-      title: `Now, let's get some job experience`,
-      component: <Navbar />,
-    },
-  ];
 
   if (isLoading) {
     return (
@@ -115,9 +81,10 @@ export default function ResumeList() {
         <RemoteWork className="h-72 w-72 text-gray-700" />
       </div>
       {isCreatingResume && (
-        <Modal setOpen={setIsCreatingResume}>
-          <MultiStepForm stepsContent={createResumeMultiStepFormContent} />
-        </Modal>
+        <ResumeCreator
+          setIsCreatingResume={setIsCreatingResume}
+          isCreatingResume={isCreatingResume}
+        />
       )}
     </>
   );

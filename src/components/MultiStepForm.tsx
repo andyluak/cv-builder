@@ -18,7 +18,7 @@ export default function MultiStepForm({ stepsContent }: Props) {
   const step = stepsContent[currentStep];
 
   return (
-    <div className="flex flex-col gap-4 text-gray-800">
+    <div className="flex flex-col gap-4 min-h-[500px] text-gray-800">
       {step && step.title && <h2 className="text-2xl">{step.title}</h2>}
       {step && step.form && (
         <form className="flex flex-col gap-4">
@@ -36,6 +36,8 @@ export default function MultiStepForm({ stepsContent }: Props) {
           ))}
         </form>
       )}
+      {step && step.component && step.component}
+
       <div className="flex justify-between">
         {currentStep > 0 && (
           <button
@@ -57,8 +59,6 @@ export default function MultiStepForm({ stepsContent }: Props) {
           </button>
         )}
       </div>
-
-      {step && step.component && step.component}
     </div>
   );
 }

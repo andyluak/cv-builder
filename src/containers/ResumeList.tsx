@@ -52,9 +52,9 @@ export default function ResumeList() {
   }
 
   return (
-    <div className="flex flex-row items-center overflow-hidden bg-gray-300 p-8">
+    <div className="flex max-w-4xl m-auto flex-col-reverse md:flex-row items-center overflow-hidden bg-gray-300 p-8">
       {resumes && resumes.length === 0 && (
-        <div className="flex flex-col items-start gap-8 text-gray-800">
+        <div className="flex flex-col md:items-start gap-8 text-gray-800">
           <div className="flex flex-col gap-2">
             <p>
               {`It looks like you don't have any resumes yet. That's okay, we can

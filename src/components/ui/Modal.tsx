@@ -15,10 +15,16 @@ export default function Modal({ children, setOpen, className }: Props) {
   };
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-gray-900 bg-opacity-50
+      "
       onClick={handleClickOutside}
     >
-      <div className={cx("w-full max-w-[600px] rounded-md bg-gray-100 p-8", className)}>
+      <div
+        className={cx(
+          "w-full max-w-[600px] rounded-md bg-gray-100 p-8",
+          className
+        )}
+      >
         {children}
       </div>
     </div>

@@ -1,9 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
-import MultiStepForm from "src/components/MultiStepForm";
-import Modal from "src/components/ui/Modal";
-
 import RemoteWork from "public/ilustrations/remote-work.svg";
 
 import ResumeCreator from "./ResumeCreator";

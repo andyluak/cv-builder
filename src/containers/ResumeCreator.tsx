@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import MultiStepForm from "src/components/MultiStepForm";
-import Modal from "src/components/ui/Modal";
+
+import JobExperience from "src/containers/JobExperienceCreator";
 
 type Props = {
   isCreatingResume: boolean;
@@ -43,12 +44,8 @@ export default function ResumeCreator({
 
     {
       title: `Now, let's get some job experience`,
-      component: <div />,
+      component: <JobExperience />,
     },
   ];
-  return (
-    <Modal className="min-h-[500px]" setOpen={setIsCreatingResume}>
-      <MultiStepForm stepsContent={createResumeMultiStepFormContent} />
-    </Modal>
-  );
+  return <MultiStepForm stepsContent={createResumeMultiStepFormContent} />;
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { z } from "zod";
 
 import MultiStepForm from "src/components/MultiStepForm";
 
@@ -13,11 +14,32 @@ export default function ResumeCreator({
   isCreatingResume,
   setIsCreatingResume,
 }: Props) {
+  const [basicInformation, setBasicInformation] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  });
 
-  const onHandleBasicInformationSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onHandleBasicInformationSubmit = (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
-    console.log("Basic Information Submitted");
-  }
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    const basicInformationSchema = z.object({
+      firstName: z.string(),
+      lastName: z.string(),
+      email: z.string().email(),
+      phone: z.string(),
+    });
+
+    const basicInformation = basicInformationSchema.parse(data);
+
+    setBasicInformation(basicInformation);
+  };
 
   const createResumeMultiStepFormContent = [
     {
@@ -28,22 +50,26 @@ export default function ResumeCreator({
           name: "firstName",
           type: "text",
           placeholder: "John",
+          value: basicInformation.firstName,
         },
         {
           label: "Last Name",
           name: "lastName",
           type: "text",
           placeholder: "Doe",
+          value: basicInformation.lastName,
         },
         {
           label: "Email",
           name: "email",
           type: "email",
+          value: basicInformation.email,
         },
         {
           label: "Phone",
           name: "phone",
           type: "tel",
+          value: basicInformation.phone,
         },
       ],
       onSubmit: onHandleBasicInformationSubmit,

@@ -8,6 +8,7 @@ type Props = {
       name: string;
       type: string;
       placeholder?: string;
+      value?: string;
     }>;
     component?: React.ReactNode;
     onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -23,10 +24,13 @@ export default function MultiStepForm({ stepsContent }: Props) {
       <div className="flex flex-col gap-16">
         {step && step.title && <h2 className="text-2xl">{step.title}</h2>}
         {step && step.form && (
-          <form className="flex flex-col gap-4" onSubmit={(e)=>{
-            step.onSubmit && step.onSubmit(e);
-            setCurrentStep(currentStep + 1);
-            }}>
+          <form
+            className="flex flex-col gap-4"
+            onSubmit={(e) => {
+              step.onSubmit && step.onSubmit(e);
+              setCurrentStep(currentStep + 1);
+            }}
+          >
             {step.form.map((input) => (
               <div key={input.name} className="flex flex-col gap-2">
                 <label htmlFor={input.name}>{input.label}</label>
@@ -36,6 +40,7 @@ export default function MultiStepForm({ stepsContent }: Props) {
                   id={input.name}
                   placeholder={input.placeholder}
                   className="rounded-md border-2 border-gray-800 px-4 py-2"
+                  defaultValue={input.value || ""}
                 />
               </div>
             ))}

@@ -13,6 +13,12 @@ export default function ResumeCreator({
   isCreatingResume,
   setIsCreatingResume,
 }: Props) {
+
+  const onHandleBasicInformationSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Basic Information Submitted");
+  }
+
   const createResumeMultiStepFormContent = [
     {
       title: `First, let's get some basic information`,
@@ -40,6 +46,7 @@ export default function ResumeCreator({
           type: "tel",
         },
       ],
+      onSubmit: onHandleBasicInformationSubmit,
     },
 
     {

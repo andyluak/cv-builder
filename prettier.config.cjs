@@ -32,6 +32,7 @@ module.exports = {
     "^src/hooks[./]",
     "^src/pages[./]",
     "^src/utils/(.*)$",
+    "^src/types/(.*)$",
     "^public/(.*)$",
     "^[./|~/]",
   ],

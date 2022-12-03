@@ -21,8 +21,8 @@ export default function MultiStepForm({ stepsContent }: Props) {
 
   return (
     <div className="flex min-h-[500px] flex-col justify-between gap-4 bg-gray-200 p-4 text-gray-800">
-      <div className="flex flex-col gap-16">
         {step && step.title && <h2 className="text-2xl">{step.title}</h2>}
+        <div className="flex flex-col gap-16">
         {step && step.form && (
           <form
             className="flex flex-col gap-4"

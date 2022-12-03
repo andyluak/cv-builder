@@ -3,7 +3,9 @@ import { z } from "zod";
 
 import MultiStepForm from "src/components/MultiStepForm";
 
-import JobExperience from "src/containers/JobExperienceCreator";
+import JobExperienceCreator from "src/containers/JobExperienceCreator";
+
+import { JobExperience } from "src/types/jobExperience";
 
 type Props = {
   isCreatingResume: boolean;
@@ -20,6 +22,12 @@ export default function ResumeCreator({
     email: "",
     phone: "",
   });
+  const [jobExperiences, setJobExperiences] = useState<JobExperience[]>(
+    localStorage.getItem("jobExperience")
+      ? JSON.parse(localStorage.getItem("jobExperience") || "")
+      : []
+  );
+  const [isJobSaved, setIsJobSaved] = useState(false);
 
   const onHandleBasicInformationSubmit = (
     e: React.FormEvent<HTMLFormElement>
@@ -39,6 +47,77 @@ export default function ResumeCreator({
     const basicInformation = basicInformationSchema.parse(data);
 
     setBasicInformation(basicInformation);
+  };
+
+  const onHandleJobExperienceSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    data.present = data.present === "true" ? true : false;
+
+    const jobExperienceFormSchema = z.object({
+      companyName: z.string(),
+      position: z.string(),
+      location: z.string(),
+      from: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+      to: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+      description: z.string(),
+      jobPoints: z.string(),
+      present: z.boolean().optional().default(false),
+    });
+
+    const jobExperience = jobExperienceFormSchema.parse(data);
+
+    const jobPoints = jobExperience.jobPoints
+      .split("\n")
+      .filter((point) => point.length > 0);
+
+    const jobExperienceWithJobPoints = {
+      ...jobExperience,
+      id: Math.random().toString(36).substr(2, 9),
+      jobPoints,
+    };
+
+    // save the job to local storage under the jobExperience key
+    const jobExperienceFromLocalStorage = JSON.parse(
+      localStorage.getItem("jobExperience") || "[]"
+    );
+    if (jobExperienceFromLocalStorage) {
+      const uniqueJobExperience = () => {
+        const uniqueJobExperience = jobExperienceFromLocalStorage.filter(
+          (job: { from: string }) => job.from !== jobExperience.from
+        );
+        return uniqueJobExperience;
+      };
+
+      const jobExperienceToSave = [
+        ...uniqueJobExperience(),
+        jobExperienceWithJobPoints,
+      ];
+
+      localStorage.setItem(
+        "jobExperience",
+        JSON.stringify(jobExperienceToSave)
+      );
+
+      const jobExperienceArray = JSON.parse(
+        localStorage.getItem("jobExperience") || "[]"
+      );
+      setJobExperiences(jobExperienceArray);
+    } else {
+      localStorage.setItem(
+        "jobExperience",
+        JSON.stringify([jobExperienceWithJobPoints])
+      );
+      const jobExperienceArray = JSON.parse(
+        localStorage.getItem("jobExperience") || "[]"
+      );
+      setJobExperiences(jobExperienceArray);
+    }
+
+    setIsJobSaved(true);
   };
 
   const createResumeMultiStepFormContent = [
@@ -77,7 +156,13 @@ export default function ResumeCreator({
 
     {
       title: `Now, let's get some job experience`,
-      component: <JobExperience />,
+      component: (
+        <JobExperienceCreator
+          jobExperiences={jobExperiences}
+          onHandleJobExperienceSubmit={onHandleJobExperienceSubmit}
+          isJobSaved={isJobSaved}
+        />
+      ),
     },
   ];
   return <MultiStepForm stepsContent={createResumeMultiStepFormContent} />;

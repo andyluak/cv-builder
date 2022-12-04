@@ -1,8 +1,12 @@
 import React from "react";
 
-export default function NotionTemplate() {
+type Props = {
+  style?: object;
+};
+
+export default function NotionTemplate({ style }: Props) {
   return (
-    <div className="p-8 bg-gray-100 text-black">
+    <div className={"bg-gray-100 p-8 text-black"} style={style}>
       <div className="border border-x-0 border-t-0 border-b-gray-500 pb-2">
         <h1 className="mb-4 text-4xl font-bold">John Doe</h1>
         <h2>Senior Frontend Developer</h2>

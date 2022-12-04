@@ -2,13 +2,15 @@ import React from "react";
 
 type Props = {
   style?: object;
+  firstName: string;
+  lastName: string;
 };
 
-export default function NotionTemplate({ style }: Props) {
+export default function NotionTemplate({ style, firstName, lastName }: Props) {
   return (
     <div className={"bg-gray-100 p-8 text-black"} style={style}>
       <div className="border border-x-0 border-t-0 border-b-gray-500 pb-2">
-        <h1 className="mb-4 text-4xl font-bold">John Doe</h1>
+        <h1 className="mb-4 text-4xl font-bold">{`${firstName} ${lastName}`}</h1>
         <h2>Senior Frontend Developer</h2>
         <p className="text-gray-800">Remote | Full-time</p>
       </div>

@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
+import { ResumeProvider } from "src/context/ResumeContext";
 
 import "../styles/globals.css";
 
@@ -29,7 +30,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return getLayout(
     <QueryClientProvider client={queryClient}>
       <SessionProvider session={session}>
-        <Component {...pageProps} />
+        <ResumeProvider>
+          <Component {...pageProps} />
+        </ResumeProvider>
       </SessionProvider>
     </QueryClientProvider>
   );

@@ -7,6 +7,7 @@ type ResumeContextProps = {
 };
 
 const ResumeProvider = ({ children }: ResumeContextProps) => {
+  const [template, setTemplate] = React.useState("default");
   const [userInfo, setUserInfo] = React.useState({});
   const [jobExperiences, setJobExperiences] = React.useState([]);
   const [education, setEducation] = React.useState([]);

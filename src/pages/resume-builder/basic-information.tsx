@@ -107,6 +107,18 @@ function BasicInformation() {
           </>
         )}
       </div>
+      <div className="flex flex-row items-center justify-center gap-12">
+        <Link href="/resume-builder/templates">
+          <button className="rounded-md bg-gray-300 px-8 py-3 text-gray-900 hover:outline-double hover:outline-2 hover:outline-gray-200">
+            Back
+          </button>
+        </Link>
+        <Link href="/resume-builder/job-experience">
+          <button className="rounded-md bg-gray-900 px-8 py-3 text-gray-300 hover:outline-double hover:outline-2 hover:outline-gray-200">
+            Next
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }

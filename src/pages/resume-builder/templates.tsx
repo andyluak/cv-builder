@@ -1,4 +1,3 @@
-import resumeBuilderContent from "content/resumeBuilderContent.json";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useResumeContext } from "src/context/ResumeContext";
@@ -6,6 +5,8 @@ import { useResumeContext } from "src/context/ResumeContext";
 import NotionTemplate from "src/components/NotionTemplate";
 import MainLayout from "src/components/layout/Main";
 import Input from "src/components/ui/Input";
+
+import resumeBuilderContent from "content/resumeBuilderContent.json";
 
 function Template() {
   const [showButton, setShowButton] = useState(false);

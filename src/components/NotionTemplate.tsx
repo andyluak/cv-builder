@@ -4,14 +4,26 @@ type Props = {
   style?: object;
   firstName: string;
   lastName: string;
+  position?: string;
+  address?: string;
+  phone?: string;
+  email?: string;
 };
 
-export default function NotionTemplate({ style, firstName, lastName }: Props) {
+export default function NotionTemplate({
+  style,
+  firstName,
+  lastName,
+  position,
+  address,
+  phone,
+  email,
+}: Props) {
   return (
     <div className={"bg-gray-100 p-8 text-black"} style={style}>
       <div className="border border-x-0 border-t-0 border-b-gray-500 pb-2">
         <h1 className="mb-4 text-4xl font-bold">{`${firstName} ${lastName}`}</h1>
-        <h2>Senior Frontend Developer</h2>
+        <h2>{position || 'Senior Frontend Developer'}</h2>
         <p className="text-gray-800">Remote | Full-time</p>
       </div>
       <div className="mt-8 grid grid-cols-3">
@@ -103,9 +115,8 @@ export default function NotionTemplate({ style, firstName, lastName }: Props) {
           <div>
             <p className="mb-2 font-bold">Contact</p>
             <div className="flex flex-col">
-              <p>alexandru.tirim@gmail.com</p>
-              <p>+1 123 456 789</p>
-              <p>alexandru.tirim.com</p>
+              <p>{email || 'someEmail@gmail.com'}</p>
+              <p>{phone || '+1 23456789'}</p>
             </div>
           </div>
           <div className="mt-12">

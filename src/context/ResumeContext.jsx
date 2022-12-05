@@ -7,6 +7,9 @@ const ResumeProvider = ({ children }) => {
   const [userInfo, setUserInfo] = React.useState({
     firstName: "",
     lastName: "",
+    position: "",
+    phone: "",
+    email: "",
   });
   const [jobExperiences, setJobExperiences] = React.useState([]);
   const [education, setEducation] = React.useState([]);

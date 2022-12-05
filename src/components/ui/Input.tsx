@@ -23,7 +23,7 @@ export default function Input({
   onChange,
 }: Props) {
   return (
-    <div className={cx("flex flex-col gap-2")}>
+    <div className={cx("flex flex-col gap-2", className)}>
       {label && <label htmlFor={name}>{label}</label>}
       <input
         className={cx("rounded-md border border-gray-300 p-2 text-gray-800", className)}

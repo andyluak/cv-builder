@@ -1,0 +1,21 @@
+{
+  "template": {
+    "header": "Choose a template and let's get started on your next job-winning resume",
+    "body": "Don't worry, you can always change your template later if you want to try something different."
+  },
+  "basicInformation": {
+    "header": "To create the header of your resume, we need some basic information from you.",
+    "body": "Please enter your address, the position you're applying for, your phone number, and your email address below."
+  },
+  "jobExperience": {
+    "header": "Next, we need to know about your work experience.",
+    "body": "Please provide details about your past jobs, including the name of the company, your job title, and your responsibilities and achievements. Here are some tips to help you write a great job history description:",
+    "tips": [
+      "Focus on your accomplishments and achievements, rather than just listing your daily tasks.",
+      "Use specific examples and numbers to quantify your successes, such as 'Increased sales by 20% within 6 months'",
+      "Use bullet points to make your job history description easy to read and understand",
+      "Tailor your description to the job you're applying for, highlighting the skills and experiences that are most relevant",
+      "Avoid using generic phrases like 'responsible for' or 'duties included' - instead, focus on what you accomplished in each role"
+    ]
+  }
+}

@@ -19,5 +19,9 @@
     ],
     "jobHighlight": "What was your biggest achievement at your previous job?",
     "jobBulletPoints": "What other achievements or accomplishments do you want to include on your resume? Please list them below  separating each achievement by a new line."
+  },
+  "education": {
+    "header": "It's time to add your education information to your resume.",
+    "body": "Please take a moment to provide details about your educational qualifications, including the name and location of your schools, the degree programs you completed, and any relevant coursework or certifications you earned."
   }
 }

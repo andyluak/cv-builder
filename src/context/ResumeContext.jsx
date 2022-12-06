@@ -12,13 +12,13 @@ const ResumeProvider = ({ children }) => {
     email: "",
   });
   const [jobExperiences, setJobExperiences] = React.useState([]);
-  const [education, setEducation] = React.useState([]);
+  const [educations, setEducations] = React.useState([]);
 
   useEffect(() => {
     const userInfoFromLocalStorage = localStorage.getItem("userInfo");
     const jobExperiencesFromLocalStorage =
       localStorage.getItem("jobExperiences");
-    const educationFromLocalStorage = localStorage.getItem("education");
+    const educationsFromLocalStorage = localStorage.getItem("educations");
     const templateFromLocalStorage = localStorage.getItem("template");
 
     if (userInfoFromLocalStorage) {
@@ -29,8 +29,8 @@ const ResumeProvider = ({ children }) => {
       setJobExperiences(JSON.parse(jobExperiencesFromLocalStorage));
     }
 
-    if (educationFromLocalStorage) {
-      setEducation(JSON.parse(educationFromLocalStorage));
+    if (educationsFromLocalStorage) {
+      setEducations(JSON.parse(educationsFromLocalStorage));
     }
 
     if (templateFromLocalStorage) {
@@ -51,10 +51,10 @@ const ResumeProvider = ({ children }) => {
   }, [jobExperiences]);
 
   useEffect(() => {
-    if (education.length > 0) {
-      localStorage.setItem("education", JSON.stringify(education));
+    if (educations.length > 0) {
+      localStorage.setItem("educations", JSON.stringify(educations));
     }
-  }, [education]);
+  }, [educations]);
 
   useEffect(() => {
     if (template) {
@@ -67,8 +67,8 @@ const ResumeProvider = ({ children }) => {
     setUserInfo,
     jobExperiences,
     setJobExperiences,
-    education,
-    setEducation,
+    educations,
+    setEducations,
     template,
     setTemplate,
   };

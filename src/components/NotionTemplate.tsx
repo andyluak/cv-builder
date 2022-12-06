@@ -8,6 +8,15 @@ type Props = {
   address?: string;
   phone?: string;
   email?: string;
+  jobExperiences?: {
+    company: string;
+    position: string;
+    location: string;
+    startDate: string;
+    endDate: string;
+    description: string;
+    jobPoints: string[];
+  }[];
 };
 
 export default function NotionTemplate({
@@ -18,12 +27,13 @@ export default function NotionTemplate({
   address,
   phone,
   email,
+  jobExperiences,
 }: Props) {
   return (
     <div className={"bg-gray-100 p-8 text-black"} style={style}>
       <div className="border border-x-0 border-t-0 border-b-gray-500 pb-2">
         <h1 className="mb-4 text-4xl font-bold">{`${firstName} ${lastName}`}</h1>
-        <h2>{position || 'Senior Frontend Developer'}</h2>
+        <h2>{position || "Senior Frontend Developer"}</h2>
         <p className="text-gray-800">Remote | Full-time</p>
       </div>
       <div className="mt-8 grid grid-cols-3">
@@ -39,62 +49,30 @@ export default function NotionTemplate({
               variety of clients.
             </p>
           </div>
-          <div className="mt-12">
+          <div className="mt-8">
             <p className="mb-2 font-bold">Work Experience</p>
-            <div className="mb-8 flex flex-col gap-4">
-              <div>
-                <p className="font-bold">
-                  Senior Frontend Developer at WPChill
-                </p>
-                <p className="text-gray-800">Remote | Full-time</p>
-              </div>
-              <div>
-                <p className="text-gray-700">May 2020 - Present</p>
-                <div className="bullet-points pl-4">
-                  <ul className="list-inside list-disc">
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Voluptates, quae.
-                    </li>
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Voluptates, quae.
-                    </li>
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Voluptates, quae.
-                    </li>
-                  </ul>
+            {jobExperiences?.map((jobExperience, index) => (
+              <div key={index} className="mb-8 flex flex-col gap-4">
+                <div>
+                  <p className="font-bold">
+                    {jobExperience.position} at {jobExperience.company}
+                  </p>
+                  <p className="text-gray-800">{jobExperience.location}</p>
+                </div>
+                <div>
+                  <p className="text-gray-700">
+                    {jobExperience.startDate} - {jobExperience.endDate}
+                  </p>
+                  <div className="bullet-points pl-4">
+                    <ul className="list-inside list-disc">
+                      {jobExperience.jobPoints.map((jobPoint, index) => (
+                        <li key={index}>{jobPoint}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="flex flex-col gap-4">
-              <div>
-                <p className="font-bold">
-                  Senior Frontend Developer at SFAPPSWorks
-                </p>
-                <p className="text-gray-800">Remote | Full-time</p>
-              </div>
-              <div>
-                <p className="text-gray-700">May 2019 - May 2020</p>
-                <div className="bullet-points pl-4">
-                  <ul className="list-inside list-disc">
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Voluptates, quae.
-                    </li>
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Voluptates, quae.
-                    </li>
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Voluptates, quae.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
           <div className="mt-12">
             <p className="mb-2 font-bold">Education</p>
@@ -115,8 +93,8 @@ export default function NotionTemplate({
           <div>
             <p className="mb-2 font-bold">Contact</p>
             <div className="flex flex-col">
-              <p>{email || 'someEmail@gmail.com'}</p>
-              <p>{phone || '+1 23456789'}</p>
+              <p>{email || "someEmail@gmail.com"}</p>
+              <p>{phone || "+1 23456789"}</p>
             </div>
           </div>
           <div className="mt-12">

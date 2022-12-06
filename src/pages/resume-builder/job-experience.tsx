@@ -8,9 +8,7 @@ import MainLayout from "src/components/layout/Main";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";
 
-type Props = {};
-
-export default function JobExperience({}: Props) {
+export default function JobExperience() {
   const { jobExperiences, setJobExperiences } = useResumeContext();
   const [jobExperience, setJobExperience] = React.useState({
     company: "",

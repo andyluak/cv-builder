@@ -9,7 +9,7 @@ import Input from "src/components/ui/Input";
 import resumeBuilderContent from "content/resumeBuilderContent.json";
 
 function BasicInformation() {
-  const { setTemplate, userInfo, setUserInfo } = useResumeContext();
+  const { userInfo, setUserInfo } = useResumeContext();
   const [showButton, setShowButton] = useState(false);
 
   const handleUserInfoChange = (e: { target: { name: any; value: any } }) => {

@@ -1,3 +1,4 @@
+import cx from "clsx";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useResumeContext } from "src/context/ResumeContext";
@@ -58,7 +59,7 @@ export default function Education() {
         </div>
       </div>
       {educations.length > 0 && (
-        <>
+        <div className="flex flex-col gap-4">
           {educations.map(
             (
               education: {
@@ -72,20 +73,35 @@ export default function Education() {
               <EducationPreview key={index} education={education} />
             )
           )}
-        </>
+          <button
+            className="self-start rounded-sm border border-transparent bg-gray-900 px-2 py-4 text-gray-200 transition-all hover:border-gray-200"
+            onClick={() => setIsAddingEducation(true)}
+          >
+            + Add another education
+          </button>
+        </div>
       )}
       <div className="grid grid-cols-1 place-items-center gap-4 md:w-4/5 md:grid-cols-3">
-        <EducationForm
-          school={education.school}
-          degree={education.degree}
-          location={education.location}
-          fieldOfStudy={education.fieldOfStudy}
-          from={education.from}
-          to={education.to}
-          handleEducationChange={handleEducationChange}
-        />
+        {educations.length === 0 ||
+          (isAddingEducation && (
+            <EducationForm
+              school={education.school}
+              degree={education.degree}
+              location={education.location}
+              fieldOfStudy={education.fieldOfStudy}
+              from={education.from}
+              to={education.to}
+              handleEducationChange={handleEducationChange}
+            />
+          ))}
+
         <div
-          className="relative w-[200px] cursor-pointer overflow-hidden outline-red-500 hover:outline-double hover:outline-2"
+          className={cx(
+            "relative w-[200px] cursor-pointer overflow-hidden outline-red-500 hover:outline-double hover:outline-2",
+            {
+              "col-span-3": !isAddingEducation && educations.length !== 0,
+            }
+          )}
           onMouseEnter={() => setShowButton(true)}
           onMouseLeave={() => setShowButton(false)}
         >
@@ -101,6 +117,7 @@ export default function Education() {
               phone={userInfo.phone}
               email={userInfo.email}
               jobExperiences={jobExperiences}
+              educations={educations}
             />
           </div>
           {showButton && (

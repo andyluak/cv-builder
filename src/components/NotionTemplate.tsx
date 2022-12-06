@@ -17,6 +17,14 @@ type Props = {
     description: string;
     jobPoints: string[];
   }[];
+  educations?: {
+    school: string;
+    degree: string;
+    fieldOfStudy: string;
+    from: string;
+    to: string;
+    description: string;
+  }[];
 };
 
 export default function NotionTemplate({
@@ -28,6 +36,7 @@ export default function NotionTemplate({
   phone,
   email,
   jobExperiences,
+  educations,
 }: Props) {
   return (
     <div className={"bg-gray-100 p-8 text-black"} style={style}>
@@ -76,16 +85,22 @@ export default function NotionTemplate({
           </div>
           <div className="mt-8">
             <p className="mb-2 font-bold">Education</p>
-            <div className="flex flex-col">
-              <div>
-                <p className="font-bold">University of California, Berkeley</p>
-                <p className="text-gray-800">
-                  Bachelor of Science in Computer Science
-                </p>
-              </div>
-              <div>
-                <p className="text-gray-700">Oct 2019 - Oct 2022</p>
-              </div>
+            <div className="flex flex-col gap-4">
+              {educations?.map((education, index) => (
+                <div key={index} className="flex flex-col">
+                  <div>
+                    <p className="font-bold">{education.school}</p>
+                    <p className="text-gray-800">
+                      {education.fieldOfStudy} | {education.degree}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-gray-700">
+                      {education.from} - {education.to}{" "}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

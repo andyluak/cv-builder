@@ -25,6 +25,7 @@ type Props = {
     to: string;
     description: string;
   }[];
+  skills?: string[];
 };
 
 export default function NotionTemplate({
@@ -37,6 +38,7 @@ export default function NotionTemplate({
   email,
   jobExperiences,
   educations,
+  skills,
 }: Props) {
   return (
     <div className={"bg-gray-100 p-8 text-black"} style={style}>
@@ -115,17 +117,9 @@ export default function NotionTemplate({
           <div className="mt-12">
             <p className="mb-2 font-bold">Skills</p>
             <div className="flex flex-col">
-              <p>HTML</p>
-              <p>CSS</p>
-              <p>JavaScript</p>
-              <p>React</p>
-              <p>Node.js</p>
-              <p>Express</p>
-              <p>Git</p>
-              <p>GitHub</p>
-              <p>Heroku</p>
-              <p>Netlify</p>
-              <p>VS Code</p>
+              {skills?.map((skill, index) => (
+                <p key={index}>{skill}</p>
+              ))}
             </div>
           </div>
           <div className="mt-12">

@@ -10,6 +10,7 @@ type Props = {
   type: string;
   className?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
 };
 
 export default function Input({
@@ -21,6 +22,7 @@ export default function Input({
   type,
   className,
   onChange,
+  required,
 }: Props) {
   return (
     <div className={cx("flex flex-col gap-2", className)}>
@@ -33,6 +35,7 @@ export default function Input({
         name={name}
         onChange={onChange}
         defaultValue={defaultValue}
+        required={required}
       />
     </div>
   );

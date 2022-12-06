@@ -7,9 +7,19 @@ type Props = {
   name: string;
   value: string;
   className?: string;
+  required?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
-const Textarea = ({ label, placeholder, name, value, className }: Props) => {
+const Textarea = ({
+  label,
+  placeholder,
+  name,
+  value,
+  className,
+  required,
+  onChange,
+}: Props) => {
   const textareaRef = useRef(null);
 
   const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -29,6 +39,10 @@ const Textarea = ({ label, placeholder, name, value, className }: Props) => {
       // @ts-ignore
       textareaRef.current.style.height = "100px";
     }
+
+    if (typeof onChange === "function") {
+      onChange(e);
+    }
   };
 
   return (
@@ -44,6 +58,7 @@ const Textarea = ({ label, placeholder, name, value, className }: Props) => {
         value={value}
         onChange={handleTextAreaChange}
         ref={textareaRef}
+        required={required}
       />
     </div>
   );

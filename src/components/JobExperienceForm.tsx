@@ -13,6 +13,7 @@ type Props = {
     startDate: string;
     endDate: string;
     description: string;
+    jobPoints: string[];
   };
   setJobExperience: React.Dispatch<
     React.SetStateAction<{
@@ -22,6 +23,7 @@ type Props = {
       startDate: string;
       endDate: string;
       description: string;
+      jobPoints: string[];
     }>
   >;
 
@@ -32,6 +34,7 @@ type Props = {
     startDate: string;
     endDate: string;
     description: string;
+    jobPoints: string[];
   }[];
   setJobExperiences: React.Dispatch<
     React.SetStateAction<
@@ -45,12 +48,21 @@ type Props = {
       }[]
     >
   >;
+  onHandleJobExperienceSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onHandleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function JobExperienceForm({}: Props) {
+export default function JobExperienceForm({
+  jobExperience,
+  setJobExperience,
+  jobExperiences,
+  setJobExperiences,
+  onHandleJobExperienceSubmit,
+  onHandleInputChange,
+}: Props) {
   const onHandleSubmit = (e) => {
     e.preventDefault();
-    console.log("submitted");
+    onHandleJobExperienceSubmit(e);
   };
 
   return (
@@ -63,24 +75,30 @@ export default function JobExperienceForm({}: Props) {
         placeholder="Company"
         type="text"
         name="company"
-        value=""
+        value={jobExperience.company}
         className="col-span-2"
+        required
+        onChange={onHandleInputChange}
       />
       <Input
         label="Position"
         placeholder="Position"
         type="text"
         name="position"
-        value=""
+        value={jobExperience.position}
         className="col-span-2"
+        required
+        onChange={onHandleInputChange}
       />
       <Input
         label="Location"
         placeholder="Location"
         type="text"
         name="location"
-        value=""
+        value={jobExperience.location}
         className="col-span-4"
+        required
+        onChange={onHandleInputChange}
       />
       <div className="col-span-4 grid grid-cols-4">
         <Input
@@ -88,30 +106,38 @@ export default function JobExperienceForm({}: Props) {
           placeholder="Start Date"
           type="date"
           name="startDate"
-          value=""
+          value={jobExperience.startDate}
+          required
+          onChange={onHandleInputChange}
         />
         <Input
           label="End Date"
           placeholder="End Date"
           type="date"
           name="endDate"
-          value=""
+          value={jobExperience.endDate}
           className="col-start-4"
+          required
+          onChange={onHandleInputChange}
         />
       </div>
       <Textarea
         label="Description"
         placeholder={resumeBuilderContent.jobExperience.jobHighlight}
         name="description"
-        value=""
+        value={jobExperience.description}
         className="col-span-4"
+        required
+        onChange={onHandleInputChange}
       />
       <Textarea
         label="Job Points"
         placeholder={resumeBuilderContent.jobExperience.jobBulletPoints}
         name="jobPoints"
-        value=""
+        value={jobExperience.jobPoints}
         className="col-span-4"
+        required
+        onChange={onHandleInputChange}
       />
       <div className="col-span-4 flex flex-row justify-between">
         <button

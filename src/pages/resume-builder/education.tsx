@@ -1,15 +1,48 @@
+import Link from "next/link";
 import React, { useState } from "react";
 import { useResumeContext } from "src/context/ResumeContext";
 
+import EducationForm from "src/components/EducationForm";
 import NotionTemplate from "src/components/NotionTemplate";
 import MainLayout from "src/components/layout/Main";
-import Input from "src/components/ui/Input";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";
 
 export default function Education() {
   const [showButton, setShowButton] = useState(false);
-  const { userInfo, jobExperiences } = useResumeContext();
+  const [isAddingEducation, setIsAddingEducation] = useState(false);
+  const [education, setEducation] = useState({
+    school: "",
+    degree: "",
+    fieldOfStudy: "",
+    location: "",
+    from: "",
+    to: "",
+  });
+
+  const { userInfo, jobExperiences, educations, setEducations } =
+    useResumeContext();
+
+  const handleEducationChange = (e: {
+    target: { name: string; value: string };
+  }) => {
+    setEducation({ ...education, [e.target.name]: e.target.value });
+  };
+  console.log(educations);
+
+  const handleEducationSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    setEducations([...educations, education]);
+    setEducation({
+      school: "",
+      degree: "",
+      fieldOfStudy: "",
+      location: "",
+      from: "",
+      to: "",
+    });
+    setIsAddingEducation(false);
+  };
 
   return (
     <div className="flex flex-col items-center gap-8 p-8">
@@ -24,49 +57,15 @@ export default function Education() {
         </div>
       </div>
       <div className="grid grid-cols-1 place-items-center gap-4 md:w-4/5 md:grid-cols-3">
-        <div className="col-span-2 grid grid-cols-4 gap-4">
-          <Input
-            label="School"
-            placeholder="School"
-            type="text"
-            value=""
-            name="school"
-            className="col-span-4"
-          />
-          <Input
-            label="Degree"
-            placeholder="Degree"
-            type="text"
-            value=""
-            name="degree"
-            className="col-span-2"
-          />
-          <Input
-            label="Field of Study"
-            placeholder="Field of Study"
-            type="text"
-            value=""
-            name="fieldOfStudy"
-            className="col-span-2"
-          />
-          <Input
-            label="Location"
-            placeholder="Location"
-            type="text"
-            value=""
-            name="location"
-            className="col-span-2"
-          />
-          <Input
-            label="From"
-            placeholder="From"
-            type="date"
-            value=""
-            name="from"
-            className="col-start-3"
-          />
-          <Input label="To" placeholder="To" type="date" value="" name="to" />
-        </div>
+        <EducationForm
+          school={education.school}
+          degree={education.degree}
+          location={education.location}
+          fieldOfStudy={education.fieldOfStudy}
+          from={education.from}
+          to={education.to}
+          handleEducationChange={handleEducationChange}
+        />
         <div
           className="relative w-[200px] cursor-pointer overflow-hidden outline-red-500 hover:outline-double hover:outline-2"
           onMouseEnter={() => setShowButton(true)}
@@ -95,6 +94,27 @@ export default function Education() {
             </>
           )}
         </div>
+      </div>
+      <div className="flex flex-row items-center justify-center gap-12">
+        <Link href="/resume-builder/job-experience">
+          <button className="rounded-md bg-gray-300 px-8 py-3 text-gray-900 hover:outline-double hover:outline-2 hover:outline-gray-200">
+            Back
+          </button>
+        </Link>
+        {isAddingEducation || educations.length === 0 ? (
+          <button
+            className="rounded-md bg-gray-900 px-8 py-3 text-gray-300 hover:outline-double hover:outline-2 hover:outline-gray-200"
+            onClick={handleEducationSubmit}
+          >
+            Save and Continue
+          </button>
+        ) : (
+          <Link href="/resume-builder/skills">
+            <button className="rounded-md bg-gray-900 px-8 py-3 text-gray-300 hover:outline-double hover:outline-2 hover:outline-gray-200">
+              Next
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

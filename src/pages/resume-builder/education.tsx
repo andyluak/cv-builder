@@ -23,7 +23,7 @@ export default function Education() {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-4 md:w-4/5">
+      <div className="grid grid-cols-1 place-items-center gap-4 md:w-4/5 md:grid-cols-3">
         <div className="col-span-2 grid grid-cols-4 gap-4">
           <Input
             label="School"
@@ -72,7 +72,7 @@ export default function Education() {
           onMouseEnter={() => setShowButton(true)}
           onMouseLeave={() => setShowButton(false)}
         >
-          <div className="h-96 w-[400px] select-none overflow-hidden bg-red-400 text-[9px]">
+          <div className="h-96 w-[400px] select-none overflow-hidden text-[9px]">
             <NotionTemplate
               style={{
                 transform: "scale(0.5,0.5)",

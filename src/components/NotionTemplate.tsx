@@ -74,7 +74,7 @@ export default function NotionTemplate({
               </div>
             ))}
           </div>
-          <div className="mt-12">
+          <div className="mt-8">
             <p className="mb-2 font-bold">Education</p>
             <div className="flex flex-col">
               <div>

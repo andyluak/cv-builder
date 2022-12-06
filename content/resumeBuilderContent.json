@@ -16,6 +16,8 @@
       "Use bullet points to make your job history description easy to read and understand",
       "Tailor your description to the job you're applying for, highlighting the skills and experiences that are most relevant",
       "Avoid using generic phrases like 'responsible for' or 'duties included' - instead, focus on what you accomplished in each role"
-    ]
+    ],
+    "jobHighlight": "What was your biggest achievement at your previous job?",
+    "jobBulletPoints": "What other achievements or accomplishments do you want to include on your resume? Please list them below  separating each achievement by a new line."
   }
 }

@@ -23,5 +23,9 @@
   "education": {
     "header": "It's time to add your education information to your resume.",
     "body": "Please take a moment to provide details about your educational qualifications, including the name and location of your schools, the degree programs you completed, and any relevant coursework or certifications you earned."
+  },
+  "skills": {
+    "header": "Add your skills",
+    "body": "It's important to highlight your skills on your resume to show potential employers what you can bring to the table. Take some time to think about your unique abilities and experiences, and list any skills that are relevant to the job you're applying for. This can include hard skills like technical expertise or software proficiency, as well as soft skills like communication and problem-solving."
   }
 }

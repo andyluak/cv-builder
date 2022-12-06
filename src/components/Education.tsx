@@ -12,7 +12,7 @@ type Props = {
 
 export default function Education({ education }: Props) {
   return (
-    <div className="grid w-full cursor-pointer select-none grid-cols-4 border border-gray-300 p-4 md:w-2/3 lg:w-1/2">
+    <div className="grid w-full cursor-pointer select-none grid-cols-4 border border-gray-300 p-4">
       <div className="col-span-3 flex flex-col gap-2">
         <h2 className="text-xl">
           {education.degree} at {education.school}

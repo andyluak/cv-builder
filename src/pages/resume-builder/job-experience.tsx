@@ -22,10 +22,12 @@ export default function JobExperience() {
   const [isAddingJobExperience, setIsAddingJobExperience] =
     React.useState(false);
 
-  const onHandleJobExperienceSubmit = (e) => {
+  const onHandleJobExperienceSubmit = (e: any) => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const jobPoints = data.jobPoints.split("\n");
     const filteredJobPoints = jobPoints.filter(
       (jobPoint: string) => jobPoint !== ""
@@ -45,7 +47,7 @@ export default function JobExperience() {
     setIsAddingJobExperience(false);
   };
 
-  const onHandleInputChange = (e) => {
+  const onHandleInputChange = (e: any) => {
     if (e.target.name === "jobPoints") {
       setJobExperience({
         ...jobExperience,

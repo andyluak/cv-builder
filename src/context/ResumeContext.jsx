@@ -13,6 +13,7 @@ const ResumeProvider = ({ children }) => {
   });
   const [jobExperiences, setJobExperiences] = React.useState([]);
   const [educations, setEducations] = React.useState([]);
+  const [skills, setSkills] = React.useState([]);
 
   useEffect(() => {
     const userInfoFromLocalStorage = localStorage.getItem("userInfo");
@@ -20,6 +21,7 @@ const ResumeProvider = ({ children }) => {
       localStorage.getItem("jobExperiences");
     const educationsFromLocalStorage = localStorage.getItem("educations");
     const templateFromLocalStorage = localStorage.getItem("template");
+    const skillsFromLocalStorage = localStorage.getItem("skills");
 
     if (userInfoFromLocalStorage) {
       setUserInfo(JSON.parse(userInfoFromLocalStorage));
@@ -35,6 +37,10 @@ const ResumeProvider = ({ children }) => {
 
     if (templateFromLocalStorage) {
       setTemplate(templateFromLocalStorage);
+    }
+
+    if (skillsFromLocalStorage) {
+      setSkills(JSON.parse(skillsFromLocalStorage));
     }
   }, []);
 
@@ -62,6 +68,12 @@ const ResumeProvider = ({ children }) => {
     }
   }, [template]);
 
+  useEffect(() => {
+    if (skills.length > 0) {
+      localStorage.setItem("skills", JSON.stringify(skills));
+    }
+  }, [skills]);
+
   const value = {
     userInfo,
     setUserInfo,
@@ -71,6 +83,8 @@ const ResumeProvider = ({ children }) => {
     setEducations,
     template,
     setTemplate,
+    skills,
+    setSkills,
   };
 
   return (

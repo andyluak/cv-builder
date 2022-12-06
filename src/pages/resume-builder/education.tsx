@@ -30,7 +30,6 @@ export default function Education() {
   }) => {
     setEducation({ ...education, [e.target.name]: e.target.value });
   };
-  console.log(educations);
 
   const handleEducationSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();

@@ -6,6 +6,13 @@ import { getServerAuthSession } from "../../server/common/get-server-auth-sessio
 const resume = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerAuthSession({ req, res });
   if (session) {
+
+    switch (req.method) {
+      case "POST": {
+        
+      }
+    }
+
     try {
       const resumes = await prisma.resume.findMany({
         where: {

@@ -3,67 +3,33 @@ import { type NextApiRequest, type NextApiResponse } from "next";
 import path from "path";
 
 const examples = async (req: NextApiRequest, res: NextApiResponse) => {
-  const cssPath = path.join(process.cwd(), `templates/${"one"}/dist.css`);
-
+  const cssPath = path.join(process.cwd(), `templates/${"notion"}/dist.css`);
+  const {
+    userInfo,
+    template: templateName,
+    jobExperiences,
+    educations,
+    skills,
+  } = req.body;
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const template = require(`../../../templates/${"one"}/template`).default;
+  const template =
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    require(`../../../templates/${'notion'}/template`).default;
 
-  const jobs = [
-    {
-      to: "2019",
-      from: "2018",
-      company: "Company 1",
-      position: "Position 1",
-      highlight: "Highlight 1",
-      location: "Sibiu",
-      jobPoints: ["Job Point 1", "Job Point 2", "Job Point 3"],
-    },
-    {
-      to: "2019",
-      from: "2018",
-      company: "Company 1",
-      position: "Position 1",
-      highlight: "Highlight 1",
-      location: "Sibiu",
-      jobPoints: ["Job Point 1", "Job Point 2", "Job Point 3"],
-    },
-    {
-      to: "2019",
-      from: "2018",
-      company: "Company 1",
-      position: "Position 1",
-      highlight: "Highlight 1",
-      location: "Sibiu",
-      jobPoints: ["Job Point 1", "Job Point 2", "Job Point 3"],
-    },
-  ];
-  const html = `
-  ${jobs
-    .map(({ to, from, position, location, jobPoints }) => {
-      return `
-      <div class="flex flex-row gap-10">
-      <p><span>${to}</span>-<span>${from}</span></p>
-      <div>
-        <h3 class="text-xl">${position}</h3>
-        <p class="italic">${location}</p>
-        <h4 class="font-semibold mt-4">{{highlight}}</h4>
-        <ul>
-          ${jobPoints
-            .map((point) => {
-              return `<li>${point}</li>`;
-            })
-            .join("")}
-        </ul>
-      </div>
-    </div>
-      `;
-    })
-    .join("")}`;
   const options = {
     // template options
     template: {
       type: "CONTENT", // If the template in in the form of a file
-      content: `${template(html)}`,
+      content: `${template({
+        firstName: userInfo.firstName,
+        lastName: userInfo.lastName,
+        position: userInfo.position,
+        phone: userInfo.phone,
+        email: userInfo.email,
+        jobExperiences,
+        educations,
+        skills,
+      })}`,
       css: {
         type: "FILE",
         // the file is in the root of the project in styles/pdf.css
@@ -91,6 +57,11 @@ const examples = async (req: NextApiRequest, res: NextApiResponse) => {
   // @ts-ignore
   const pdf = await htmlToPdf(options);
 
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename=${userInfo.firstName}-${userInfo.lastName}-resume.pdf`
+  );
+  
   return res.status(200).send(pdf);
 };
 

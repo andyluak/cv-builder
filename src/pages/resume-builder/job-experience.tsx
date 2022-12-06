@@ -11,6 +11,7 @@ type Props = {};
 export default function JobExperience({}: Props) {
 
   const {jobExperiences, setJobExperiences } = useResumeContext();
+  const [jobExperience, setJobExperience] = React.useState({ company: "", position: "", location: "", startDate: "", endDate: "", description: "" });
 
   return (
     <div className="flex flex-col items-center gap-8 p-8">
@@ -29,7 +30,12 @@ export default function JobExperience({}: Props) {
           </ul>
         </div>
       </div>
-      <JobExperienceForm />
+      <JobExperienceForm 
+        jobExperience={jobExperience}
+        setJobExperience={setJobExperience}
+        jobExperiences={jobExperiences}
+        setJobExperiences={setJobExperiences}
+      />
     </div>
   );
 }

@@ -41,7 +41,7 @@ const Textarea = ({ label, placeholder, name, value, className }: Props) => {
         )}
         placeholder={placeholder}
         name={name}
-        defaultValue={value}
+        value={value}
         onChange={handleTextAreaChange}
         ref={textareaRef}
       />

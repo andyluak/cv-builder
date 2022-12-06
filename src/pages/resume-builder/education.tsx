@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useResumeContext } from "src/context/ResumeContext";
 
+import EducationPreview from "src/components/Education";
 import EducationForm from "src/components/EducationForm";
 import NotionTemplate from "src/components/NotionTemplate";
 import MainLayout from "src/components/layout/Main";
@@ -56,6 +57,23 @@ export default function Education() {
           </p>
         </div>
       </div>
+      {educations.length > 0 && (
+        <>
+          {educations.map(
+            (
+              education: {
+                school: string;
+                degree: string;
+                from: string;
+                to: string;
+              },
+              index: React.Key | null | undefined
+            ) => (
+              <EducationPreview key={index} education={education} />
+            )
+          )}
+        </>
+      )}
       <div className="grid grid-cols-1 place-items-center gap-4 md:w-4/5 md:grid-cols-3">
         <EducationForm
           school={education.school}

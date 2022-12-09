@@ -1,0 +1,24 @@
+{
+  "introduction": {
+    "title": "Welcome to Easy Resume Builder!",
+    "body": "Whether you are just starting out in your career or are an experienced professional, our app can help you create a professional, personalized resume that will make a great impression on potential employers. With customizable templates, automatic formatting, and the ability to import and export data, our app makes it easy to create a high-quality resume that showcases your skills and experience. Try it out today and see the difference it can make in your job search!"
+  },
+  "features": [
+    {
+      "name": "Customizable templates",
+      "description": "Choose from a variety of templates to create a resume that is unique to you. You can also customize the templates to make them your own."
+    },
+    {
+      "name": "Real-time feedback",
+      "description": "Provides real-time feedback on the user's resume, highlighting areas that may need improvement or suggesting alternative language or formatting choices. This could include grammar and spelling checks, as well as suggestions for how to make the resume more concise or compelling."
+    },
+    {
+      "name": "Automatic formatting",
+      "description": "Automatically format your resume according to industry-standard guidelines, ensuring that it is easy to read and looks professional. This could include features such as line spacing, margins, and alignment."
+    }
+  ],
+  "examples": {
+    "title": "Examples",
+    "body": "Here are some examples of resumes created with Easy Resume Builder:"
+  }
+}

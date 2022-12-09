@@ -22,19 +22,21 @@ function Button({
     <button
       className={cx(
         {
-          "bg-gray-800 text-gray-300 hover:bg-gray-700": variant === "primary",
+          "bg-gray-900 text-gray-300 hover:border-gray-200":
+            variant === "primary",
         },
         {
-          "bg-gray-300 text-gray-800 hover:bg-gray-400":
+          "bg-gray-300 text-gray-800 hover:border-gray-400":
             variant === "secondary",
         },
         {
-          "bg-gray-100 text-gray-800 hover:bg-gray-200": variant === "tertiary",
+          "bg-gray-100 text-gray-800 hover:border-gray-200":
+            variant === "tertiary",
         },
         { "px-2 py-1 text-xs": size === "sm" },
         { "px-4 py-2 text-sm": size === "md" },
         { "px-6 py-3 text-base": size === "lg" },
-        "rounded-full outline-none focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-800",
+        "rounded-md border border-transparent outline-none focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-800",
         className
       )}
       onClick={onClick}

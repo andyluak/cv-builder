@@ -7,6 +7,7 @@ import MainLayout from "src/components/layout/Main";
 import Input from "src/components/ui/Input";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";
+import Button from "src/components/ui/Button";
 
 function BasicInformation() {
   const { userInfo, setUserInfo } = useResumeContext();
@@ -104,14 +105,20 @@ function BasicInformation() {
       </div>
       <div className="flex flex-row items-center justify-center gap-12">
         <Link href="/resume-builder/templates">
-          <button className="rounded-md bg-gray-300 px-8 py-3 text-gray-900 hover:outline-double hover:outline-2 hover:outline-gray-200">
+          <Button
+            variant="secondary"
+            size="lg"
+          >
             Back
-          </button>
+          </Button>
         </Link>
         <Link href="/resume-builder/job-experience">
-          <button className="rounded-md bg-gray-900 px-8 py-3 text-gray-300 hover:outline-double hover:outline-2 hover:outline-gray-200">
+          <Button
+            variant="primary"
+            size="lg"
+          >
             Next
-          </button>
+          </Button>
         </Link>
       </div>
     </div>

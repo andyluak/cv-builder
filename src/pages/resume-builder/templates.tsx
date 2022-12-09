@@ -50,7 +50,7 @@ function Template() {
           onMouseEnter={() => setShowButton(true)}
           onMouseLeave={() => setShowButton(false)}
         >
-          <div className="h-80 w-[400px] select-none overflow-hidden bg-red-400 text-[9px]">
+          <div className="h-80 w-[400px] select-none overflow-hidden text-[9px]">
             <NotionTemplate
               style={{
                 transform: "scale(0.5,0.5)",

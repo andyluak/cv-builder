@@ -40,6 +40,50 @@ export default function NotionTemplate({
   educations,
   skills,
 }: Props) {
+
+  const defaultWorkExperience = [
+    {
+      company: "Company",
+      position: "Position",
+      location: "Location",
+      startDate: "Start Date",
+      endDate: "End Date",
+      description: "Description",
+      jobPoints: ["Job Point 1", "Job Point 2"]
+    },
+    {
+      company: "Company",
+      position: "Position",
+      location: "Location",
+      startDate: "Start Date",
+      endDate: "End Date",
+      description: "Description",
+      jobPoints: ["Job Point 1", "Job Point 2"]
+    }
+  ]
+
+  const defaultEducation = [
+    {
+      school: "School",
+      degree: "Degree",
+      fieldOfStudy: "Field of Study",
+      from: "From",
+      to: "To",
+      description: "Description"
+    },
+    {
+      school: "School",
+      degree: "Degree",
+      fieldOfStudy: "Field of Study",
+      from: "From",
+      to: "To",
+      description: "Description"
+    }
+  ]
+
+  const usableJobExperience = jobExperiences || defaultWorkExperience;
+  const usableEducation = educations || defaultEducation;
+
   return (
     <div className={"bg-gray-100 p-8 text-black"} style={style}>
       <div className="border border-x-0 border-t-0 border-b-gray-500 pb-2">
@@ -62,7 +106,7 @@ export default function NotionTemplate({
           </div>
           <div className="mt-8">
             <p className="mb-2 font-bold">Work Experience</p>
-            {jobExperiences?.map((jobExperience, index) => (
+            {usableJobExperience?.map((jobExperience, index) => (
               <div key={index} className="mb-8 flex flex-col gap-4">
                 <div>
                   <p className="font-bold">
@@ -88,7 +132,7 @@ export default function NotionTemplate({
           <div className="mt-8">
             <p className="mb-2 font-bold">Education</p>
             <div className="flex flex-col gap-4">
-              {educations?.map((education, index) => (
+              {usableEducation?.map((education, index) => (
                 <div key={index} className="flex flex-col">
                   <div>
                     <p className="font-bold">{education.school}</p>

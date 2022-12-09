@@ -4,6 +4,7 @@ import { useResumeContext } from "src/context/ResumeContext";
 
 import NotionTemplate from "src/components/NotionTemplate";
 import MainLayout from "src/components/layout/Main";
+import Button from "src/components/ui/Button";
 import Input from "src/components/ui/Input";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";
@@ -64,12 +65,14 @@ function Template() {
             <>
               <div className="absolute top-0 left-0 bottom-0 right-0 bg-gray-800 opacity-50"></div>
               <Link href="/resume-builder/basic-information">
-                <button
-                  className="absolute left-1/2 top-1/2 min-w-[150px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-800 p-2 text-gray-300 hover:outline-double hover:outline-2 hover:outline-gray-200"
+                <Button
+                  className="absolute left-1/2 top-1/2 min-w-[150px] -translate-x-1/2 -translate-y-1/2"
                   onClick={() => setTemplate("notion")}
+                  variant="primary"
+                  size="md"
                 >
                   Select Template
-                </button>
+                </Button>
               </Link>
             </>
           )}

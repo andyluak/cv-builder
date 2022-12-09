@@ -37,9 +37,11 @@ function Button({
         { "px-2 py-1 text-xs": size === "sm" },
         { "px-4 py-2 text-sm": size === "md" },
         { "px-6 py-3 text-base": size === "lg" },
-        "rounded-md border border-transparent outline-none focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-800",
+        "rounded-md border border-transparent outline-none transition-all focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-800",
         className
       )}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       onClick={onClick}
       type={type}
     >

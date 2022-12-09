@@ -67,15 +67,19 @@ export default function Skills() {
           {showButton && (
             <>
               <div className="absolute top-0 left-0 bottom-0 right-0 bg-gray-800 opacity-50"></div>
-              <button className="absolute left-1/2 top-1/2 min-w-[150px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-800 p-2 text-gray-300 hover:outline-double hover:outline-2 hover:outline-gray-200">
+              <Button
+                className="absolute left-1/2 top-1/2 min-w-[150px] -translate-x-1/2 -translate-y-1/2"
+                variant="primary"
+                size="lg"
+              >
                 Preview
-              </button>
+              </Button>
             </>
           )}
         </div>
       </div>
       <div className="flex flex-row items-center justify-center gap-12">
-        <Link href="/resume-builder/skills">
+        <Link href="/resume-builder/education">
           <Button variant="secondary" size="lg">
             Back
           </Button>

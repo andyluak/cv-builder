@@ -94,12 +94,14 @@ export default function JobExperience() {
               <JobExperiencePreview key={index} jobExperience={jobExperience} />
             )
           )}
-          <button
-            className="self-start rounded-sm border border-transparent bg-gray-900 px-2 py-4 text-gray-200 transition-all hover:border-gray-200"
+          <Button
+            className="self-start rounded-sm border border-transparent bg-gray-900 px-2 py-4 text-gray-200  hover:border-gray-200"
             onClick={() => setIsAddingJobExperience(true)}
+            variant="primary"
+            size="lg"
           >
             + Add another job experience
-          </button>
+          </Button>
         </div>
       )}
       {jobExperiences.length === 0 ||

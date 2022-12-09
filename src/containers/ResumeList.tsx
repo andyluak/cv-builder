@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useState } from "react";
 
+import Button from "src/components/ui/Button";
+
 import RemoteWork from "public/ilustrations/remote-work.svg";
 
 import ResumeCreator from "./ResumeCreator";
@@ -41,14 +43,15 @@ export default function ResumeList() {
         <div className="flex flex-col items-start gap-4">
           <p>Something went wrong.</p>
 
-          <button
+          <Button
             onClick={() => {
               window.location.reload();
             }}
-            className="rounded-md border-2 border-gray-800 bg-gray-200 px-4 py-2 text-gray-800"
+            variant="tertiary"
+            size="lg"
           >
             Try Again
-          </button>
+          </Button>
         </div>
         <RemoteWork className="h-72 w-72 text-gray-700" />
       </div>

@@ -73,12 +73,14 @@ export default function Education() {
               <EducationPreview key={index} education={education} />
             )
           )}
-          <button
-            className="self-start rounded-sm border border-transparent bg-gray-900 px-2 py-4 text-gray-200 transition-all hover:border-gray-200"
+          <Button
+            className="self-start"
+            variant="primary"
+            size="lg"
             onClick={() => setIsAddingEducation(true)}
           >
             + Add another education
-          </button>
+          </Button>
         </div>
       )}
       <div className="grid grid-cols-1 place-items-center gap-4 md:w-4/5 md:grid-cols-3">
@@ -123,9 +125,13 @@ export default function Education() {
           {showButton && (
             <>
               <div className="absolute top-0 left-0 bottom-0 right-0 bg-gray-800 opacity-50"></div>
-              <button className="absolute left-1/2 top-1/2 min-w-[150px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-800 p-2 text-gray-300 hover:outline-double hover:outline-2 hover:outline-gray-200">
+              <Button
+                variant="primary"
+                size="lg"
+                className="absolute left-1/2 top-1/2 min-w-[150px] -translate-x-1/2 -translate-y-1/2"
+              >
                 Preview
-              </button>
+              </Button>
             </>
           )}
         </div>

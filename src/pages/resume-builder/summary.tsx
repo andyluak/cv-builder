@@ -3,6 +3,7 @@ import { useResumeContext } from "src/context/ResumeContext";
 
 import NotionTemplate from "src/components/NotionTemplate";
 import MainLayout from "src/components/layout/Main";
+import Button from "src/components/ui/Button";
 
 export default function Summary() {
   const { userInfo, jobExperiences, educations, skills, template } =
@@ -51,9 +52,14 @@ export default function Summary() {
           educations={educations}
           skills={skills}
         />
-        <button className="absolute top-2/3 border border-transparent bg-gray-600 p-4 text-white transition-all hover:border-gray-200" onClick={handleDownload}>
+        <Button
+          className="absolute top-2/3"
+          variant="primary"
+          size="lg"
+          onClick={handleDownload}
+        >
           Download
-        </button>
+        </Button>
       </div>
     </div>
   );

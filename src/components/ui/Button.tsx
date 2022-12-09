@@ -3,7 +3,8 @@ import React from "react";
 
 type Props = {
   className?: string;
-  onClick?: () => void;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onClick?: Function;
   children?: React.ReactNode;
   variant?: "primary" | "secondary" | "tertiary";
   size?: "sm" | "md" | "lg";

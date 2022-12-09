@@ -7,6 +7,7 @@ import EducationPreview from "src/components/Education";
 import EducationForm from "src/components/EducationForm";
 import NotionTemplate from "src/components/NotionTemplate";
 import MainLayout from "src/components/layout/Main";
+import Button from "src/components/ui/Button";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";
 
@@ -131,22 +132,19 @@ export default function Education() {
       </div>
       <div className="flex flex-row items-center justify-center gap-12">
         <Link href="/resume-builder/job-experience">
-          <button className="rounded-md bg-gray-300 px-8 py-3 text-gray-900 hover:outline-double hover:outline-2 hover:outline-gray-200">
+          <Button variant="secondary" size="lg">
             Back
-          </button>
+          </Button>
         </Link>
         {isAddingEducation || educations.length === 0 ? (
-          <button
-            className="rounded-md bg-gray-900 px-8 py-3 text-gray-300 hover:outline-double hover:outline-2 hover:outline-gray-200"
-            onClick={handleEducationSubmit}
-          >
+          <Button onClick={handleEducationSubmit} variant="primary" size="lg">
             Save and Continue
-          </button>
+          </Button>
         ) : (
           <Link href="/resume-builder/skills">
-            <button className="rounded-md bg-gray-900 px-8 py-3 text-gray-300 hover:outline-double hover:outline-2 hover:outline-gray-200">
+            <Button variant="primary" size="lg">
               Next
-            </button>
+            </Button>
           </Link>
         )}
       </div>

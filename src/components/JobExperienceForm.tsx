@@ -2,6 +2,7 @@ import React from "react";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";
 
+import Button from "./ui/Button";
 import Input from "./ui/Input";
 import Textarea from "./ui/Textarea";
 
@@ -140,18 +141,12 @@ export default function JobExperienceForm({
         onChange={onHandleInputChange}
       />
       <div className="col-span-4 flex flex-row justify-between">
-        <button
-          className=" border border-gray-800 bg-gray-200 px-14 py-4 text-gray-700"
-          type="submit"
-        >
+        <Button type="submit" variant="secondary" size="lg">
           Back
-        </button>
-        <button
-          className=" border border-transparent bg-gray-700 px-14 py-4 text-gray-200 transition-all hover:border-gray-300"
-          type="submit"
-        >
+        </Button>
+        <Button type="submit" variant="primary" size="lg">
           Save Position
-        </button>
+        </Button>
       </div>
     </form>
   );

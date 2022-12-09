@@ -5,6 +5,7 @@ import { useResumeContext } from "src/context/ResumeContext";
 import JobExperiencePreview from "src/components/JobExperience";
 import JobExperienceForm from "src/components/JobExperienceForm";
 import MainLayout from "src/components/layout/Main";
+import Button from "src/components/ui/Button";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";
 
@@ -114,14 +115,14 @@ export default function JobExperience() {
         ))}
       <div className="flex flex-row items-center justify-center gap-12">
         <Link href="/resume-builder/basic-information">
-          <button className="rounded-md bg-gray-300 px-8 py-3 text-gray-900 hover:outline-double hover:outline-2 hover:outline-gray-200">
+          <Button variant="secondary" size="lg">
             Back
-          </button>
+          </Button>
         </Link>
         <Link href="/resume-builder/education">
-          <button className="rounded-md bg-gray-900 px-8 py-3 text-gray-300 hover:outline-double hover:outline-2 hover:outline-gray-200">
+          <Button variant="primary" size="lg">
             Next
-          </button>
+          </Button>
         </Link>
       </div>
     </div>

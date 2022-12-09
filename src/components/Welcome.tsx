@@ -1,30 +1,35 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import React from "react";
 
+import Button from "./ui/Button";
+
 function Welcome() {
   const { data: session, status } = useSession();
 
-  const handleSignIn = async() => {
+  const handleSignIn = async () => {
     await signIn("google", {
       redirect: true,
     });
 
     // If you want to redirect the user to a specific page after signing in,
     // you can pass the url to the `redirect` option:
-
-  }
+  };
   if (session) {
     return (
-      <div>
+      <div className="flex flex-col gap-8">
         Signed in as {session?.user?.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
+        <Button variant="primary" size="lg" onClick={() => signOut()}>
+          Sign out
+        </Button>
       </div>
     );
   }
   return (
-    <div className="bg-white p-10 flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4 bg-white p-10">
       <p>Not signed in</p>
-      <button className="text-xl bg-black p-4 text-white" onClick={() => handleSignIn()}>Sign in</button>
+      <Button variant="primary" size="lg" onClick={() => handleSignIn()}>
+        Sign in
+      </Button>
     </div>
   );
 }

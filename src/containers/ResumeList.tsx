@@ -1,16 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { useState } from "react";
 
 import Button from "src/components/ui/Button";
 
 import RemoteWork from "public/ilustrations/remote-work.svg";
 
-import ResumeCreator from "./ResumeCreator";
-
 export default function ResumeList() {
-  const [isCreatingResume, setIsCreatingResume] = useState(false);
-
   const {
     isLoading,
     isError,

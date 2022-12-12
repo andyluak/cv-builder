@@ -8,9 +8,11 @@ import Button from "src/components/ui/Button";
 export default function Summary() {
   const { userInfo, jobExperiences, educations, skills, template } =
     useResumeContext();
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleDownload = async () => {
-    const res = fetch("/api/convertor", {
+  const handleDownload = async (isDownload: boolean) => {
+    setIsLoading(true);
+    const res = await fetch("/api/convertor", {
       method: "POST",
       body: JSON.stringify({
         template,
@@ -23,18 +25,29 @@ export default function Summary() {
         "Content-Type": "application/json",
       },
     });
-    const blob = await (await res).blob();
-    const url = window.URL.createObjectURL(blob);
+    const arrayBuffer = await res.arrayBuffer();
+    const file = new File([arrayBuffer], "CLATITE", {
+      type: "application/pdf",
+    });
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "resume.pdf";
-    a.click();
+    const url = window.URL.createObjectURL(file);
+
+    setIsLoading(false);
+
+    if (isDownload) {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "CLATITE.pdf";
+      a.click();
+      return;
+    }
+
+    window.open(url, "_blank");
   };
 
   return (
-    <div className="flex flex-col items-center gap-8 overflow-hidden p-8">
-      <div className="relative flex select-none flex-col justify-center overflow-hidden">
+    <div className="flex w-[21cm] flex-col items-start gap-8 overflow-hidden p-8">
+      <div className="flex select-none flex-col justify-center overflow-hidden">
         <NotionTemplate
           style={{
             transform: "scale(0.6,0.6)",
@@ -52,13 +65,21 @@ export default function Summary() {
           educations={educations}
           skills={skills}
         />
+      </div>
+      <div className="absolute bottom-24 flex flex-row items-center justify-center gap-4">
         <Button
-          className="absolute top-2/3"
           variant="primary"
           size="lg"
-          onClick={handleDownload}
+          onClick={() => handleDownload(true)}
         >
-          Download
+          {isLoading ? "Loading..." : "Download"}
+        </Button>
+        <Button
+          variant="primary"
+          size="lg"
+          onClick={() => handleDownload(false)}
+        >
+          {isLoading ? "Loading..." : "Preview"}
         </Button>
       </div>
     </div>

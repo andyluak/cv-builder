@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import JobExperienceForm from "src/components/JobExperienceForm";
 
-import { JobExperience } from "src/types/jobExperience";
+import type { JobExperience } from "src/types/jobExperience";
 
 const jobExperienceFormContent = [
   {

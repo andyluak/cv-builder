@@ -30,8 +30,8 @@ type Props = {
 
 function Professional({
   style,
-  firstName,
-  lastName,
+  firstName = "John",
+  lastName = "Doe",
   position = "Your Job",
   address = "Remote",
   phone = "012345678",
@@ -56,7 +56,16 @@ function Professional({
       jobPoints: ["Job Point 1", "Job Point 2"],
     },
   ],
-  educations,
+  educations = [
+    {
+      school: "School",
+      degree: "Degree",
+      fieldOfStudy: "Field of Study",
+      from: "From",
+      to: "To",
+      description: "Description",
+    },
+  ],
   skills = ["Skill 1", "Skill 2", "Skill 3"],
 }: Props) {
   return (
@@ -144,19 +153,26 @@ function Professional({
           <h2 className="mt-[2px] text-gray-500">Education</h2>
         </div>
         <div className="education col-span-5">
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col">
-              <h3 className="text-xl font-bold">
-                Bachelor of Science in Computer Science
-              </h3>
-              <p className="text-gray-500">2017 - 2021</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="font-bold">
-                Babes Bolyion University, Cluj-Napoca, Romania
-              </p>
-            </div>
-          </div>
+          {educations.map(
+            (
+              { school, degree, fieldOfStudy, from, to, description },
+              index
+            ) => (
+              <div key={index} className="flex flex-col gap-4">
+                <div className="flex flex-col">
+                  <h3 className="text-xl font-bold">
+                    {degree} in {fieldOfStudy}
+                  </h3>
+                  <p className="text-gray-500">
+                    {from} - {to}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="font-bold">{school}</p>
+                </div>
+              </div>
+            )
+          )}
         </div>
       </div>
     </div>

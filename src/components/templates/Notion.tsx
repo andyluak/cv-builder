@@ -28,7 +28,7 @@ type Props = {
   skills?: string[];
 };
 
-export default function NotionTemplate({
+export default function Notion({
   style,
   firstName,
   lastName,

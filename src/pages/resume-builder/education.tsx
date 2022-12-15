@@ -5,7 +5,7 @@ import { useResumeContext } from "src/context/ResumeContext";
 
 import EducationPreview from "src/components/Education";
 import EducationForm from "src/components/EducationForm";
-import NotionTemplate from "src/components/NotionTemplate";
+import NotionTemplate from "src/components/templates/Notion";
 import MainLayout from "src/components/layout/Main";
 import Button from "src/components/ui/Button";
 

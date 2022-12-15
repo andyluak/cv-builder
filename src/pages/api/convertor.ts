@@ -3,7 +3,6 @@ import { type NextApiRequest, type NextApiResponse } from "next";
 import path from "path";
 
 const examples = async (req: NextApiRequest, res: NextApiResponse) => {
-  const cssPath = path.join(process.cwd(), `templates/${"notion"}/dist.css`);
   const {
     userInfo,
     template: templateName,
@@ -11,10 +10,15 @@ const examples = async (req: NextApiRequest, res: NextApiResponse) => {
     educations,
     skills,
   } = req.body;
+  const cssPath = path.join(
+    process.cwd(),
+    `templates/${templateName}/dist.css`
+  );
+
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const template =
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    require(`../../../templates/${'notion'}/template`).default;
+    require(`../../../templates/${templateName}/template`).default;
 
   const options = {
     // template options
@@ -61,7 +65,7 @@ const examples = async (req: NextApiRequest, res: NextApiResponse) => {
     "Content-Disposition",
     `attachment; filename=${userInfo.firstName}-${userInfo.lastName}-resume.pdf`
   );
-  
+
   return res.status(200).send(pdf);
 };
 

@@ -2,12 +2,15 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useResumeContext } from "src/context/ResumeContext";
 
-import NotionTemplate from "src/components/NotionTemplate";
+import TemplateDisplayer from "src/components/TemplateDisplayer";
 import MainLayout from "src/components/layout/Main";
+import NotionTemplate from "src/components/templates/Notion";
 import Button from "src/components/ui/Button";
 import Input from "src/components/ui/Input";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";
+
+const templateList = ["Notion", "Professional"];
 
 function Template() {
   const [showButton, setShowButton] = useState(false);
@@ -16,7 +19,6 @@ function Template() {
   const handleUserInfoChange = (e: { target: { name: any; value: any } }) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
-
   return (
     <div className="flex flex-col items-center gap-12">
       <div className="flex flex-col gap-2">
@@ -46,22 +48,11 @@ function Template() {
         />
       </div>
       <div className="grid grid-cols-3 gap-16">
-        <div
-          className="relative w-[200px] cursor-pointer overflow-hidden outline-red-500 hover:outline-double hover:outline-2"
-          onMouseEnter={() => setShowButton(true)}
-          onMouseLeave={() => setShowButton(false)}
-        >
-          <div className="h-80 w-[400px] select-none overflow-hidden text-[9px]">
-            <NotionTemplate
-              style={{
-                transform: "scale(0.5,0.5)",
-                transformOrigin: "top left",
-              }}
-              firstName={userInfo.firstName}
-              lastName={userInfo.lastName}
-            />
-          </div>
-          {showButton && (
+        
+        {templateList.map((template) => (
+          <TemplateDisplayer
+          key={template}
+          LinkedButton={() => (
             <>
               <div className="absolute top-0 left-0 bottom-0 right-0 bg-gray-800 opacity-50"></div>
               <Link href="/resume-builder/basic-information">
@@ -74,9 +65,19 @@ function Template() {
                   Select Template
                 </Button>
               </Link>
-            </>
-          )}
-        </div>
+            </> 
+          )
+          }
+          template={template}
+          style={{
+            transform: "scale(0.5,0.5)",
+            transformOrigin: "top left",
+          }}
+          firstName={userInfo.firstName}
+          lastName={userInfo.lastName}
+        />
+        ))  
+        }
       </div>
     </div>
   );

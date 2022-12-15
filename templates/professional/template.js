@@ -45,7 +45,15 @@ const template = ({
     
     ${jobExperiences
       .map(
-        ({ position, company, location, startDate, endDate, jobPoints, description }) => `
+        ({
+          position,
+          company,
+          location,
+          startDate,
+          endDate,
+          jobPoints,
+          description,
+        }) => `
     <div class="job flex flex-col gap-4">
       <div class="flex flex-col">
         <h3 class="font-bold text-xl">
@@ -85,14 +93,13 @@ const template = ({
         </p>
       </div>
     </div>
-  </div>
-  `
+    `
       )
       .join("")}
-  `;
+  </div>`;
 
-  return `<body class="bg-gradient-to-b from-indigo-50 to-white w-[29cm]">
-  <div class="grid grid-cols-6 gap-10 px-10 py-4">
+  return `<body class="bg-gradient-to-b from-indigo-200 to-white">
+  <div class="grid grid-cols-6 gap-10 px-10 py-4 bg-indigo-600">
     <div class="col-span-6">
       <div class="flex flex-col gap-8">
         ${contactInformation}

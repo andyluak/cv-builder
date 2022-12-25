@@ -28,7 +28,10 @@ export default function Input({
     <div className={cx("flex flex-col gap-2", className)}>
       {label && <label htmlFor={name}>{label}</label>}
       <input
-        className={cx("rounded-md border border-gray-300 p-2 text-gray-800", className)}
+        className={cx(
+          "rounded-md border border-gray-300 p-2 text-gray-800",
+          className
+        )}
         type={type}
         placeholder={placeholder}
         value={value}

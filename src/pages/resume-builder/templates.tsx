@@ -1,10 +1,9 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { useResumeContext } from "src/context/ResumeContext";
 
 import TemplateDisplayer from "src/components/TemplateDisplayer";
 import MainLayout from "src/components/layout/Main";
-import NotionTemplate from "src/components/templates/Notion";
 import Button from "src/components/ui/Button";
 import Input from "src/components/ui/Input";
 
@@ -13,7 +12,6 @@ import resumeBuilderContent from "content/resumeBuilderContent.json";
 const templateList = ["Notion", "Professional"];
 
 function Template() {
-  const [showButton, setShowButton] = useState(false);
   const { setTemplate, userInfo, setUserInfo } = useResumeContext();
 
   const handleUserInfoChange = (e: { target: { name: any; value: any } }) => {

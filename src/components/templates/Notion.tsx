@@ -40,7 +40,6 @@ export default function Notion({
   educations,
   skills,
 }: Props) {
-
   const defaultWorkExperience = [
     {
       company: "Company",
@@ -49,7 +48,7 @@ export default function Notion({
       startDate: "Start Date",
       endDate: "End Date",
       description: "Description",
-      jobPoints: ["Job Point 1", "Job Point 2"]
+      jobPoints: ["Job Point 1", "Job Point 2"],
     },
     {
       company: "Company",
@@ -58,9 +57,9 @@ export default function Notion({
       startDate: "Start Date",
       endDate: "End Date",
       description: "Description",
-      jobPoints: ["Job Point 1", "Job Point 2"]
-    }
-  ]
+      jobPoints: ["Job Point 1", "Job Point 2"],
+    },
+  ];
 
   const defaultEducation = [
     {
@@ -69,7 +68,7 @@ export default function Notion({
       fieldOfStudy: "Field of Study",
       from: "From",
       to: "To",
-      description: "Description"
+      description: "Description",
     },
     {
       school: "School",
@@ -77,9 +76,9 @@ export default function Notion({
       fieldOfStudy: "Field of Study",
       from: "From",
       to: "To",
-      description: "Description"
-    }
-  ]
+      description: "Description",
+    },
+  ];
 
   const usableJobExperience = jobExperiences || defaultWorkExperience;
   const usableEducation = educations || defaultEducation;

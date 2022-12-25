@@ -8,7 +8,11 @@ function Section({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <section className={cx('p-4 md:p-8 lg:p-12', className)}>{children}</section>;
+  return (
+    <section className={cx("p-4 md:p-8 lg:p-12", className)}>
+      {children}
+    </section>
+  );
 }
 
 export default Section;

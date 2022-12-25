@@ -1,8 +1,8 @@
 import React from "react";
 import { useResumeContext } from "src/context/ResumeContext";
 
-import NotionTemplate from "src/components/templates/Notion";
 import MainLayout from "src/components/layout/Main";
+import NotionTemplate from "src/components/templates/Notion";
 import Button from "src/components/ui/Button";
 
 export default function Summary() {

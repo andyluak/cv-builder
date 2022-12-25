@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React from "react";
 
-import Logo from "public/logo.svg";
 import Hamburger from "public/hamburger.svg";
+import Logo from "public/logo.svg";
 
 function Navbar() {
   return (
@@ -14,12 +14,18 @@ function Navbar() {
 
         <nav className="hidden md:block">
           <ul className="flex items-center gap-8">
-            <li> <Link href="/">Home</Link> </li>
-            <li> <Link href="/dashboard">Dashboard</Link> </li>
+            <li>
+              {" "}
+              <Link href="/">Home</Link>{" "}
+            </li>
+            <li>
+              {" "}
+              <Link href="/dashboard">Dashboard</Link>{" "}
+            </li>
           </ul>
         </nav>
 
-        <Hamburger className="h-8 w-8 md:hidden fill-accent text-accent" />
+        <Hamburger className="h-8 w-8 fill-accent text-accent md:hidden" />
       </div>
     </header>
   );

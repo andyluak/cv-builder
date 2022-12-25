@@ -27,11 +27,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: any;
 }) => {
   const getLayout = Component.getLayout || ((page: unknown) => page);
-  return getLayout(
+  return (
     <QueryClientProvider client={queryClient}>
       <SessionProvider session={session}>
         <ResumeProvider>
-          <Component {...pageProps} />
+          {getLayout(<Component {...pageProps} />)}
         </ResumeProvider>
       </SessionProvider>
     </QueryClientProvider>

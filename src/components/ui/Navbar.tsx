@@ -1,26 +1,50 @@
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 
 import Hamburger from "public/hamburger.svg";
 import Logo from "public/logo.svg";
 
+import Button from "./Button";
+
 function Navbar() {
+  const { data: session, status } = useSession();
+  const handleSignIn = async () => {
+    await signIn("google", {
+      redirect: true,
+    });
+
+    // If you want to redirect the user to a specific page after signing in,
+    // you can pass the url to the `redirect` option:
+  };
   return (
     <header>
       <div className="flex items-center justify-between p-4 px-8 md:p-8 lg:p-12">
         <Link href="/">
           <Logo className="h-20 w-20 fill-accent" />
         </Link>
-
         <nav className="hidden md:block">
           <ul className="flex items-center gap-8">
             <li>
-              {" "}
-              <Link href="/">Home</Link>{" "}
+              <Link href="/">Home</Link>
             </li>
             <li>
-              {" "}
-              <Link href="/dashboard">Dashboard</Link>{" "}
+              <Link href="/dashboard">Dashboard</Link>
+            </li>
+            <li>
+              {session ? (
+                <Button variant="primary" size="lg" onClick={() => signOut()}>
+                  Sign out
+                </Button>
+              ) : (
+                <Button
+                  variant="primary"
+                  size="lg"
+                  onClick={() => handleSignIn()}
+                >
+                  Sign in
+                </Button>
+              )}
             </li>
           </ul>
         </nav>

@@ -4,7 +4,7 @@ import React from "react";
 import Button from "./ui/Button";
 
 function Welcome() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const handleSignIn = async () => {
     await signIn("google", {

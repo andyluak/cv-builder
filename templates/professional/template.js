@@ -98,8 +98,8 @@ const template = ({
       .join("")}
   </div>`;
 
-  return `<body class="bg-gradient-to-b from-indigo-200 to-white">
-  <div class="grid grid-cols-6 gap-10 px-10 py-4 bg-indigo-600">
+  return `<div class="bg-gradient-to-b from-indigo-200 to-white">
+  <div class="grid grid-cols-6 gap-10 px-10 py-4 ">
     <div class="col-span-6">
       <div class="flex flex-col gap-8">
         ${contactInformation}
@@ -119,7 +119,7 @@ const template = ({
     </div>
     ${education}
   </div>
-</body>`;
+</div>`;
 };
 
 export default template;

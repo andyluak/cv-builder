@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 const ResumeContext = React.createContext();
 
 const ResumeProvider = ({ children }) => {
-  const [template, setTemplate] = React.useState("default");
+  const [template, setTemplate] = React.useState("notion");
   const [userInfo, setUserInfo] = React.useState({
     firstName: "",
     lastName: "",

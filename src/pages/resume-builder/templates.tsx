@@ -48,36 +48,33 @@ function Template() {
         />
       </div>
       <div className="grid grid-cols-3 gap-16">
-        
         {templateList.map((template) => (
           <TemplateDisplayer
-          key={template}
-          LinkedButton={() => (
-            <>
-              <div className="absolute top-0 left-0 bottom-0 right-0 bg-gray-800 opacity-50"></div>
-              <Link href="/resume-builder/basic-information">
-                <Button
-                  className="absolute left-1/2 top-1/2 min-w-[150px] -translate-x-1/2 -translate-y-1/2"
-                  onClick={() => setTemplate("notion")}
-                  variant="primary"
-                  size="md"
-                >
-                  Select Template
-                </Button>
-              </Link>
-            </> 
-          )
-          }
-          template={template}
-          style={{
-            transform: "scale(0.5,0.5)",
-            transformOrigin: "top left",
-          }}
-          firstName={userInfo.firstName}
-          lastName={userInfo.lastName}
-        />
-        ))  
-        }
+            key={template}
+            LinkedButton={() => (
+              <>
+                <div className="absolute top-0 left-0 bottom-0 right-0 bg-gray-800 opacity-50"></div>
+                <Link href="/resume-builder/basic-information">
+                  <Button
+                    className="absolute left-1/2 top-1/2 min-w-[150px] -translate-x-1/2 -translate-y-1/2"
+                    onClick={() => setTemplate("notion")}
+                    variant="primary"
+                    size="md"
+                  >
+                    Select Template
+                  </Button>
+                </Link>
+              </>
+            )}
+            template={template}
+            style={{
+              transform: "scale(0.5,0.5)",
+              transformOrigin: "top left",
+            }}
+            firstName={userInfo.firstName}
+            lastName={userInfo.lastName}
+          />
+        ))}
       </div>
     </div>
   );

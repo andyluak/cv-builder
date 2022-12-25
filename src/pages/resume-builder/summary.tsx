@@ -12,6 +12,7 @@ export default function Summary() {
 
   const handleDownload = async (isDownload: boolean) => {
     setIsLoading(true);
+    console.log(template);
     const res = await fetch("/api/convertor", {
       method: "POST",
       body: JSON.stringify({

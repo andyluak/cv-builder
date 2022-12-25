@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useMemo, useState } from "react";
 
 type Props = {
   template: string;
@@ -18,9 +18,11 @@ function TemplateDisplayer({
   lastName,
 }: Props) {
   const [showButton, setShowButton] = useState(false);
-  const TemplateComponent = React.lazy(
-    () => import(`src/components/templates/${template}`)
-  );
+
+  // memoize the template component
+  const TemplateComponent = useMemo(() => {
+    return React.lazy(() => import(`src/components/templates/${template}`));
+  }, [template]);
 
   return (
     <div>

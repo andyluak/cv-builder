@@ -8,7 +8,7 @@ import Logo from "public/logo.svg";
 import Button from "./Button";
 
 function Navbar() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const handleSignIn = async () => {
     await signIn("google", {
       redirect: true,

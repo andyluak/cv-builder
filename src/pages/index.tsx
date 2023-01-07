@@ -121,6 +121,13 @@ const Home: NextPage<Props, Record<string, never>> = ({
             ))}
           </ul>
         </div>
+
+        {/* CTA */}
+        <CTA
+          callToAction="Try our CV builder today and land your dream job"
+          buttonLabel="Get started with your dream job today"
+          onClick={handleSignIn}
+        />
       </main>
     </>
   );

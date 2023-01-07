@@ -30,9 +30,9 @@ function Benefit({ title, description, SvgComponent, leftImage = false }: Props)
         "md:pr-8": !leftImage,
       }
       )}>
-        <h2 className="text-center leading-snug md:text-left sm:mt-0">
+        <h3 className="text-center font-semibold leading-snug md:text-left sm:mt-0">
           {title}
-        </h2>
+        </h3>
         <p className="text-center md:text-left">{description}</p>
       </div>
       {!leftImage && (

@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --color-primary: 252 252 252;
+    --color-secondary: 47 36 58;
+    --color-accent: 246 174 45;
+  }
+
+  body[data-theme='dark'] {
+    --color-primary: 47 36 58;
+    --color-secondary: 252 252 252;
+    --color-accent: 246 174 45;
+  }
+}

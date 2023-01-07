@@ -18,7 +18,7 @@ function Navbar() {
     // you can pass the url to the `redirect` option:
   };
   return (
-    <header>
+    <header className="border border-b-secondary">
       <div className="flex items-center justify-between p-4 px-8 md:p-8 lg:p-12">
         <Link href="/">
           <Logo className="h-20 w-20 fill-accent" />

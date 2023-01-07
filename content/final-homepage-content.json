@@ -1,0 +1,63 @@
+{
+  "hero": {
+    "headline": "Stand out from the crowd with a tailored, professional CV",
+    "button": {
+      "label": "Get started with your dream job today",
+      "link": "/signup"
+    }
+  },
+  "features": [
+    {
+      "title": "Customizable templates",
+      "description": "A selection of customizable templates that allow the user to choose the layout and design that best fits their needs and personal style."
+    },
+    {
+      "title": "Content suggestions",
+      "description": "An AI-powered tool that suggests relevant skills and experiences to include in the user's CV based on the job they are applying for. This can help the user to create a more targeted and effective CV."
+    }
+  ],
+  "benefits": [
+    {
+      "title": "Save time",
+      "description": "Creating a CV from scratch can be a time-consuming process, especially if you are not familiar with design principles or the latest industry standards. A CV builder app can streamline the process by providing you with pre-designed templates and easy-to-use design tools, so you can create a professional-looking CV in a fraction of the time."
+    },
+    {
+      "title": "Easy to customize",
+      "description": "With a CV builder app, you have the ability to customize your CV to fit your specific needs and goals. This includes selecting the layout and design elements that best showcase your skills and experiences, as well as adding or removing sections as needed."
+    },
+    {
+      "title": "Professional quality",
+      "description": "A professionally designed CV can make a big difference in how you are perceived by potential employers. A CV builder app can help you create a CV that looks polished and professional, increasing your chances of getting noticed and landing the job you want."
+    }
+  ],
+  "stepByStepGuide": [
+    {
+      "title": "Sign up for an account",
+      "description": "Connect with Gmail to create your account on our website."
+    },
+    {
+      "title": "Choose a template",
+      "description": "Browse through the available templates and select one that fits your needs and personal style."
+    },
+    {
+      "title": "Customize the template",
+      "description": "Use the design tools and customization options on this website to tailor the template to your specific needs. This may include adding or removing sections, adjusting the layout, and changing the font and color scheme."
+    },
+    {
+      "title": "Add your content",
+      "description": "Begin filling in the various sections of your CV with your personal and professional information on this website. This may include your contact details, work experience, education, skills, and achievements."
+    },
+    {
+      "title": "Review and proofread",
+      "description": "Carefully review your CV for spelling and grammar errors, as well as consistency in formatting and layout."
+    },
+    {
+      "title": "Save and export",
+      "description": "When you are satisfied with your CV, save it to your account and export it as a PDF or Word document."
+    },
+    {
+      "title": "Update as needed",
+      "description": "As you gain new experiences and skills, be sure to update your CV to reflect these changes. This will help to keep it current and relevant to potential employers."
+    }
+  ]
+}

@@ -6,17 +6,10 @@ import Hamburger from "public/hamburger.svg";
 import Logo from "public/logo.svg";
 
 import Button from "./Button";
+import { handleSignIn } from "src/utils/authHelpers";
 
 function Navbar() {
   const { data: session } = useSession();
-  const handleSignIn = async () => {
-    await signIn("google", {
-      redirect: true,
-    });
-
-    // If you want to redirect the user to a specific page after signing in,
-    // you can pass the url to the `redirect` option:
-  };
   return (
     <header className="border border-b-secondary">
       <div className="flex items-center justify-between p-4 px-8 md:p-8 lg:p-12">
@@ -40,7 +33,7 @@ function Navbar() {
                 <Button
                   variant="primary"
                   size="lg"
-                  onClick={() => handleSignIn()}
+                  onClick={handleSignIn}
                 >
                   Sign in
                 </Button>

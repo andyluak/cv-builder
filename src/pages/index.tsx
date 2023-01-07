@@ -1,11 +1,45 @@
 import { type NextPage } from "next";
+import { signIn } from "next-auth/react";
 import Head from "next/head";
 
+import Benefit from "src/components/Homepage/Benefit";
+import CTA from "src/components/Homepage/CTA";
 import MainLayout from "src/components/layout/Main";
 
-import HeroResume from "public/ilustrations/hero_resume.svg";
+import homepageContent from "content/final-homepage-content.json";
 
-const Home: NextPage = () => {
+import BenefitCustomize from "public/ilustrations/benefit_customize.svg";
+import BenefitQuality from "public/ilustrations/benefit_quality.svg";
+import BenefitTime from "public/ilustrations/benefit_time.svg";
+import HeroResume from "public/ilustrations/hero_resume.svg";
+import { handleSignIn } from "src/utils/authHelpers";
+
+type HomepageContentBase = {
+  title: string;
+  description: string;
+};
+
+type Props = {
+  hero: {
+    headline: string;
+    button: {
+      text: string;
+      link: string;
+    };
+  };
+  // they are the HomepageContentBase
+  features: HomepageContentBase[];
+  benefits: HomepageContentBase[];
+  stepByStepGuide: HomepageContentBase[];
+};
+
+const Home: NextPage<Props, Record<string, never>> = ({
+  hero,
+  features,
+  benefits,
+  stepByStepGuide,
+}) => {
+  const benefitsArray = [BenefitTime, BenefitCustomize, BenefitQuality];
   return (
     <>
       <Head>
@@ -14,25 +48,51 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="prose-xl flex flex-col-reverse items-center justify-center gap-4 px-10 py-4 md:flex-row mt-10">
-          <div className="flex flex-col items-center md:items-start">
-            <h1 className="text-center text-4xl leading-snug md:text-left">
+        <div className="prose-xl mt-10 flex flex-col-reverse items-center justify-center gap-4 px-10 py-4 md:flex-row">
+          <div className="prose-sm flex flex-col items-center md:items-start md:prose-base lg:prose-lg xl:prose-xl">
+            <h1 className="text-center leading-snug md:text-left">
               <span className="font-bold italic">Stand out</span> from the crowd
               with a tailored, professional CV
             </h1>
-            <button className="rounded-lg bg-accent px-4 py-4">
+            <button className="rounded-lg bg-accent px-4 py-4" onClick={handleSignIn}>
               Get Started with your dream job today
             </button>
           </div>
 
           <div>
-            <HeroResume className="h-96 w-96 xl:h-[600px] xl:w-[600px]" />
+            <HeroResume className="h-64 w-64 md:h-96 md:w-96 xl:h-[600px] xl:w-[600px]" />
           </div>
         </div>
+        {benefits.map((benefit, index) => (
+          <Benefit
+            key={index}
+            {...benefit}
+            SvgComponent={benefitsArray[index]}
+            leftImage={index % 2 ? false : true}
+          />
+        ))}
+
+        {/* {CTA} */}
+        <CTA
+          callToAction="Try our CV builder today and land your dream job"
+          buttonLabel="Get started with your dream job today"
+          onClick={handleSignIn}
+        />
       </main>
     </>
   );
 };
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      hero: homepageContent.hero,
+      features: homepageContent.features,
+      benefits: homepageContent.benefits,
+      stepByStepGuide: homepageContent.stepByStepGuide,
+    },
+  };
+}
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

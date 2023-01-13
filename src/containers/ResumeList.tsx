@@ -22,7 +22,7 @@ export default function ResumeList() {
       return res.json();
     },
   });
-
+  console.log(resumes)
   if (isLoading) {
     return (
       <div className="flex min-h-[300px] items-center justify-around bg-gray-300 text-gray-700">

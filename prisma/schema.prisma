@@ -70,11 +70,27 @@ model Resume {
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  userInfo            UserInfo             @relation(fields: [userInfoId], references: [id])
   profileDescriptions ProfileDescription[]
   educations          Education[]
   jobs                Job[]
   links               Link[]
   skills              Skill[]
+  template            String
+  userInfoId          String
+}
+
+model UserInfo {
+  id String @id @default(cuid())
+
+  firstName String
+  lastName  String
+  email     String
+  phone     String
+  address   String
+  position  String
+
+  Resume Resume[]
 }
 
 model VerificationToken {

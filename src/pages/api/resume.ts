@@ -16,6 +16,16 @@ const resume = async (req: NextApiRequest, res: NextApiResponse) => {
         where: {
           userId: session?.user?.id,
         },
+        include: {
+          userInfo: true,
+          jobs: {
+            include: { jobPoints: true },
+          },
+          educations: true,
+          skills: true,
+          profileDescriptions: true,
+          links: true,
+        },
       });
       res.status(200).json(resumes);
     } catch (error) {

@@ -6,8 +6,14 @@ import NotionTemplate from "src/components/templates/Notion";
 import Button from "src/components/ui/Button";
 
 export default function Summary() {
-  const { userInfo, jobExperiences, educations, skills, template } =
-    useResumeContext();
+  const {
+    userInfo,
+    jobExperiences,
+    educations,
+    skills,
+    template,
+    profileDescription,
+  } = useResumeContext();
   const [isLoading, setIsLoading] = React.useState(false);
 
   const handleDownload = async (isDownload: boolean) => {
@@ -46,17 +52,27 @@ export default function Summary() {
     window.open(url, "_blank");
   };
 
+  const handleSave = async () => {
+    const res = await fetch("/api/resume/add-resume", {
+      method: "POST",
+      body: JSON.stringify({
+        userInfo,
+        jobExperiences,
+        educations,
+        skills,
+        profileDescription,
+        template
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
   return (
     <div className="flex w-[21cm] flex-col items-start gap-8 overflow-hidden p-8">
       <div className="flex select-none flex-col justify-center overflow-hidden">
         <NotionTemplate
-          style={{
-            transform: "scale(0.6,0.6)",
-            transformOrigin: "top left",
-            left: 0,
-            top: 0,
-            right: 0,
-          }}
           firstName={userInfo.firstName}
           lastName={userInfo.lastName}
           position={userInfo.position}
@@ -67,7 +83,7 @@ export default function Summary() {
           skills={skills}
         />
       </div>
-      <div className="absolute bottom-24 flex flex-row items-center justify-center gap-4">
+      <div className="flex flex-row items-center justify-center gap-4">
         <Button
           variant="primary"
           size="lg"
@@ -81,6 +97,10 @@ export default function Summary() {
           onClick={() => handleDownload(false)}
         >
           {isLoading ? "Loading..." : "Preview"}
+        </Button>
+
+        <Button variant="secondary" size="lg" onClick={handleSave}>
+          Save
         </Button>
       </div>
     </div>

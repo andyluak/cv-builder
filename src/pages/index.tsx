@@ -1,6 +1,4 @@
 import { type NextPage } from "next";
-import { signIn } from "next-auth/react";
-import Head from "next/head";
 
 import Benefit from "src/components/Homepage/Benefit";
 import CTA from "src/components/Homepage/CTA";

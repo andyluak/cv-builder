@@ -6,11 +6,13 @@ import MainLayout from "src/components/layout/Main";
 import NotionTemplate from "src/components/templates/Notion";
 import Button from "src/components/ui/Button";
 import Input from "src/components/ui/Input";
+import Textarea from "src/components/ui/Textarea";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";
 
 function BasicInformation() {
-  const { userInfo, setUserInfo } = useResumeContext();
+  const { userInfo, setUserInfo, profileDescription, setProfileDescription } =
+    useResumeContext();
   const [showButton, setShowButton] = useState(false);
 
   const handleUserInfoChange = (e: { target: { name: any; value: any } }) => {
@@ -74,6 +76,14 @@ function BasicInformation() {
           className="col-span-4 w-full md:col-span-2 md:w-[350px] md:max-w-[350px]"
           onChange={handleUserInfoChange}
         />
+        <Textarea
+          label="Profile Description"
+          placeholder="Tell us something about yourself"
+          className="col-span-4 h-40 w-full"
+          name="profileDescription"
+          value={profileDescription}
+          onChange={(e)=>setProfileDescription(e.target.value)}
+        /> 
       </div>
 
       <div

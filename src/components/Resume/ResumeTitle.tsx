@@ -17,7 +17,7 @@ function ResumeTitle({ title, resumeId }: Props) {
   const [isEditing, setIsEditing] = useState(false);
 
   const editMutation = useMutation({
-    mutationFn: async (newTitle) => {
+    mutationFn: async (newTitle: FormDataEntryValue) => {
       const res = await fetch("/api/resume/edit-resume-title", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -53,7 +53,7 @@ function ResumeTitle({ title, resumeId }: Props) {
         });
       });
     },
-    onSettled: (data, variables, context) => {
+    onSettled: () => {
       setIsEditing(false);
     },
   });

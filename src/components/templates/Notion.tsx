@@ -1,5 +1,7 @@
 import React from "react";
 
+import type { IEducation, IJob } from "src/types/resume";
+
 type Props = {
   style?: object;
   firstName: string;
@@ -8,23 +10,8 @@ type Props = {
   address?: string;
   phone?: string;
   email?: string;
-  jobExperiences?: {
-    company: string;
-    position: string;
-    location: string;
-    startDate: string;
-    endDate: string;
-    description: string;
-    jobPoints: string[];
-  }[];
-  educations?: {
-    school: string;
-    degree: string;
-    fieldOfStudy: string;
-    from: string;
-    to: string;
-    description: string;
-  }[];
+  jobExperiences?: IJob[];
+  educations?: IEducation[];
   skills?: string[];
 };
 
@@ -84,16 +71,16 @@ export default function Notion({
   const usableEducation = educations || defaultEducation;
 
   return (
-    <div className={"bg-gray-100 p-8 text-black"} style={style}>
-      <div className="border border-x-0 border-t-0 border-b-gray-500 pb-2">
-        <h1 className="mb-4 text-4xl font-bold">{`${firstName} ${lastName}`}</h1>
+    <div className={"bg-gray-100 p-8-em text-black"} style={style}>
+      <div className="border border-x-0 border-t-0 border-b-gray-500 pb-2-em">
+        <h1 className="mb-4-em text-4xl-em font-bold">{`${firstName} ${lastName}`}</h1>
         <h2>{position || "Senior Frontend Developer"}</h2>
         <p className="text-gray-800">Remote | Full-time</p>
       </div>
-      <div className="mt-8 grid grid-cols-3">
-        <div className="col-span-2 grid pr-12">
+      <div className="mt-8-em grid grid-cols-3">
+        <div className="col-span-2 grid pr-12-em">
           <div>
-            <p className="mb-2 font-bold">Bio</p>
+            <p className="mb-2-em font-bold">Bio</p>
             <p>
               I am Alex, a web developer with a passion for building and
               maintaining scalable, user-friendly websites and applications. I
@@ -103,10 +90,10 @@ export default function Notion({
               variety of clients.
             </p>
           </div>
-          <div className="mt-8">
-            <p className="mb-2 font-bold">Work Experience</p>
+          <div className="mt-8-em">
+            <p className="mb-2-em font-bold">Work Experience</p>
             {usableJobExperience?.map((jobExperience, index) => (
-              <div key={index} className="mb-8 flex flex-col gap-4">
+              <div key={index} className="mb-8-em flex flex-col gap-4-em">
                 <div>
                   <p className="font-bold">
                     {jobExperience.position} at {jobExperience.company}
@@ -117,10 +104,10 @@ export default function Notion({
                   <p className="text-gray-700">
                     {jobExperience.startDate} - {jobExperience.endDate}
                   </p>
-                  <div className="bullet-points pl-4">
+                  <div className="bullet-points pl-4-em">
                     <ul className="list-inside list-disc">
                       {jobExperience.jobPoints.map((jobPoint, index) => (
-                        <li key={index}>{jobPoint}</li>
+                        <li key={index}>{jobPoint.point}</li>
                       ))}
                     </ul>
                   </div>
@@ -128,9 +115,9 @@ export default function Notion({
               </div>
             ))}
           </div>
-          <div className="mt-8">
-            <p className="mb-2 font-bold">Education</p>
-            <div className="flex flex-col gap-4">
+          <div className="mt-8-em">
+            <p className="mb-2-em font-bold">Education</p>
+            <div className="flex flex-col gap-4-em">
               {usableEducation?.map((education, index) => (
                 <div key={index} className="flex flex-col">
                   <div>
@@ -151,22 +138,22 @@ export default function Notion({
         </div>
         <div>
           <div>
-            <p className="mb-2 font-bold">Contact</p>
+            <p className="mb-2-em font-bold">Contact</p>
             <div className="flex flex-col">
               <p>{email || "someEmail@gmail.com"}</p>
               <p>{phone || "+1 23456789"}</p>
             </div>
           </div>
-          <div className="mt-12">
-            <p className="mb-2 font-bold">Skills</p>
+          <div className="mt-12-em">
+            <p className="mb-2-em font-bold">Skills</p>
             <div className="flex flex-col">
               {skills?.map((skill, index) => (
-                <p key={index}>{skill}</p>
+                <p key={index}>{skill.label}</p>
               ))}
             </div>
           </div>
-          <div className="mt-12">
-            <p className="mb-2 font-bold">Languages</p>
+          <div className="mt-12-em">
+            <p className="mb-2-em font-bold">Languages</p>
             <div className="flex flex-col">
               <p>English</p>
               <p>Romanian</p>

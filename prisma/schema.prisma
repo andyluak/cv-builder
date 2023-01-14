@@ -78,6 +78,7 @@ model Resume {
   skills              Skill[]
   template            String
   userInfoId          String
+  title               String?              @default("Untitled")
 }
 
 model UserInfo {

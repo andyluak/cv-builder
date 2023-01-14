@@ -87,6 +87,22 @@ const ResumeProvider = ({ children }) => {
     }
   }, [profileDescription]);
 
+  const clearAllData = () => {
+    localStorage.clear();
+    setUserInfo({
+      firstName: "",
+      lastName: "",
+      position: "",
+      phone: "",
+      email: "",
+    });
+    setJobExperiences([]);
+    setEducations([]);
+    setTemplate("notion");
+    setSkills([]);
+    setProfileDescription("");
+  }
+
   const value = {
     userInfo,
     setUserInfo,
@@ -100,6 +116,7 @@ const ResumeProvider = ({ children }) => {
     setSkills,
     profileDescription,
     setProfileDescription,
+    clearAllData
   };
 
   return (

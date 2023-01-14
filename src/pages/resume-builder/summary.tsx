@@ -13,12 +13,12 @@ export default function Summary() {
     skills,
     template,
     profileDescription,
+    clearAllData,
   } = useResumeContext();
   const [isLoading, setIsLoading] = React.useState(false);
 
   const handleDownload = async (isDownload: boolean) => {
     setIsLoading(true);
-    console.log(template);
     const res = await fetch("/api/convertor", {
       method: "POST",
       body: JSON.stringify({
@@ -53,20 +53,28 @@ export default function Summary() {
   };
 
   const handleSave = async () => {
-    const res = await fetch("/api/resume/add-resume", {
-      method: "POST",
-      body: JSON.stringify({
-        userInfo,
-        jobExperiences,
-        educations,
-        skills,
-        profileDescription,
-        template
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const res = await fetch("/api/resume/add-resume", {
+        method: "POST",
+        body: JSON.stringify({
+          userInfo,
+          jobExperiences,
+          educations,
+          skills,
+          profileDescription,
+          template,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) throw new Error("Something went wrong");
+
+      clearAllData();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -1,13 +1,21 @@
 import React, { memo, useMemo, useState } from "react";
 
+import type { IEducation, IJob } from "src/types/resume";
+
 type Props = {
   template: string;
-  // linkedButton is a component that will be rendered inside the template displayer
-  // and will be linked to the next page
   LinkedButton: React.FC;
   style?: object;
   firstName?: string;
   lastName?: string;
+  position?: string;
+  address?: string;
+  phone?: string;
+  email?: string;
+  jobExperiences?: IJob[];
+  educations?: IEducation[];
+  skills?: string[];
+  profileDescription?: string;
 };
 
 function TemplateDisplayer({
@@ -16,6 +24,14 @@ function TemplateDisplayer({
   style,
   firstName,
   lastName,
+  position,
+  address,
+  phone,
+  email,
+  jobExperiences,
+  educations,
+  skills,
+  profileDescription,
 }: Props) {
   const [showButton, setShowButton] = useState(false);
 
@@ -32,11 +48,19 @@ function TemplateDisplayer({
           onMouseEnter={() => setShowButton(true)}
           onMouseLeave={() => setShowButton(false)}
         >
-          <div className="h-80 w-[400px] select-none overflow-hidden text-[9px]">
+          <div className="h-80 select-none overflow-hidden text-[9px]">
             <TemplateComponent
               style={style}
               firstName={firstName}
               lastName={lastName}
+              position={position}
+              address={address}
+              phone={phone}
+              email={email}
+              jobExperiences={jobExperiences}
+              educations={educations}
+              skills={skills}
+              profileDescription={profileDescription}
             />
           </div>
           {showButton && <LinkedButton />}

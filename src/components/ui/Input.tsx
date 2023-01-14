@@ -4,8 +4,8 @@ import React from "react";
 type Props = {
   label?: string;
   placeholder: string;
-  value: string;
-  defaultValue?: string;
+  value: string | undefined;
+  defaultValue: string | undefined;
   name: string;
   type: string;
   className?: string;

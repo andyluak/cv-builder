@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React from "react";
+import useEditResumeTitle from "src/mutations/useEditResumeTitle";
 
-import type { IResume } from "src/types/resume";
+import useEdit from "src/hooks/useEdit";
 
 import Pencil from "public/edit-button.svg";
 
@@ -13,50 +13,8 @@ type Props = {
 };
 
 function ResumeTitle({ title, resumeId }: Props) {
-  const queryClient = useQueryClient();
-  const [isEditing, setIsEditing] = useState(false);
-
-  const editMutation = useMutation({
-    mutationFn: async (newTitle: FormDataEntryValue) => {
-      const res = await fetch("/api/resume/edit-resume-title", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: newTitle, resumeId }),
-      });
-
-      if (!res.ok) {
-        const { errors } = await res.json();
-        throw new Error(errors);
-      }
-    },
-    onSuccess: (data, variables) => {
-      const resumes: IResume[] | undefined = queryClient.getQueryData([
-        "resumeList",
-      ]);
-      const editedResumes = resumes?.find(
-        (resume: IResume) => resume.id === resumeId
-      );
-
-      if (!editedResumes || !resumes) return;
-
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      queryClient.setQueryData(["resumeList"], (oldResumes:IResume[]) => {
-        return oldResumes?.map((resume: IResume) => {
-          if (resume.id === resumeId) {
-            return {
-              ...resume,
-              title: variables,
-            };
-          }
-          return resume;
-        });
-      });
-    },
-    onSettled: () => {
-      setIsEditing(false);
-    },
-  });
+  const { isEditing, setIsEditing } = useEdit();
+  const editMutation = useEditResumeTitle(resumeId, () => setIsEditing(false));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,7 +22,7 @@ function ResumeTitle({ title, resumeId }: Props) {
     const newTitle = formData.get("title");
     if (!newTitle) return;
 
-    editMutation.mutate(newTitle);
+    editMutation.mutate({ newTitle, resumeId });
   };
 
   return (

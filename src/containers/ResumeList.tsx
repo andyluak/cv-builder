@@ -1,30 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import useResumes from "src/queries/useResumes";
 
-import TemplateDisplayer from "src/components/TemplateDisplayer";
+import ResumePreview from "src/components/Resume/ResumePreview";
 import Button from "src/components/ui/Button";
 
-import RemoteWork from "public/ilustrations/remote-work.svg";
 import type { IResume } from "src/types/resume";
-import ResumePreview from "src/components/Resume/ResumePreview";
+
+import RemoteWork from "public/ilustrations/remote-work.svg";
 
 export default function ResumeList() {
-  const {
-    isLoading,
-    isError,
-    data: resumes,
-  } = useQuery({
-    queryKey: ["resumeList"],
-    queryFn: async () => {
-      const res = await fetch("/api/resume");
-
-      if (!res.ok) {
-        throw new Error("Something went wrong");
-      }
-
-      return res.json();
-    },
-  });
+  const { isLoading, isError, resumes } = useResumes();
   if (isLoading) {
     return (
       <div className="flex min-h-[300px] items-center justify-around bg-gray-300 text-gray-700">
@@ -88,9 +73,7 @@ export default function ResumeList() {
         {resumes &&
           resumes.length > 0 &&
           resumes.map((resume: IResume) => {
-            return (
-              <ResumePreview key={resume.id} resume={resume} />
-            );
+            return <ResumePreview key={resume.id} resume={resume} />;
           })}
       </div>
     </>

@@ -1,8 +1,6 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
 import { prisma } from "src/server/db/client";
 
-import type { IEducation, IJob, IJobPoint } from "src/types/resume";
-
 import { getServerAuthSession } from "../../../server/common/get-server-auth-session";
 
 const addResume = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -25,8 +23,6 @@ const addResume = async (req: NextApiRequest, res: NextApiResponse) => {
     user: { id: userId },
   } = session;
   const { title, resumeId } = req.body;
-  console.log("title", title);
-  console.log("resumeId", resumeId);
   try {
     const resume = await prisma.resume.update({
       where: {

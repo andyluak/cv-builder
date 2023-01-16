@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 
-
 function useResumes() {
   const {
     isLoading,

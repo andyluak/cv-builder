@@ -1,5 +1,7 @@
 import React from "react";
+
 import type { IResume } from "src/types/resume";
+
 import TemplateDisplayer from "../TemplateDisplayer";
 import ResumeTitle from "./ResumeTitle";
 
@@ -7,17 +9,10 @@ type Props = {
   resume: IResume;
 };
 
-function ResumePreview({resume}: Props) {
+function ResumePreview({ resume }: Props) {
   const {
     id,
-    userInfo: {
-      firstName,
-      lastName,
-      email,
-      phone,
-      address,
-      position,
-    },
+    userInfo: { firstName, lastName, email, phone, address, position },
     jobs,
     educations,
     skills,

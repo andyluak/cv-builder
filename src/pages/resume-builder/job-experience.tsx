@@ -57,7 +57,6 @@ export default function JobExperience() {
     }
     setJobExperience({ ...jobExperience, [e.target.name]: e.target.value });
   };
-  console.log(jobExperiences.length === 0);
   return (
     <div className="flex flex-col items-center gap-8 p-8">
       <div className="grid-row-6 grid gap-8">

@@ -8,9 +8,9 @@ type Props = {
 
 function useDownloadResume({ resume }: Props) {
   const [isLoading, setIsLoading] = React.useState(false);
-  const { template, userInfo, jobs, educations, skills } = resume;
-  console.log({jobs, educations, skills});
+
   const handleDownload = async () => {
+    const { template, userInfo, jobs, educations, skills } = resume;
     setIsLoading(true);
     const res = await fetch("/api/convertor", {
       method: "POST",

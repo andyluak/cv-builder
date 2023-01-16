@@ -1,7 +1,7 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
 import { prisma } from "src/server/db/client";
 
-import { getServerAuthSession } from "../../server/common/get-server-auth-session";
+import { getServerAuthSession } from "../../../server/common/get-server-auth-session";
 
 const resume = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerAuthSession({ req, res });

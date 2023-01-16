@@ -38,7 +38,7 @@ function ResumeTitle({ title, resumeId }: Props) {
           />
         </form>
       ) : (
-        <h2 className="group/edit flex flex-row gap-2 py-2 hover:flex">
+        <h2 className="group/edit flex flex-row gap-2 hover:flex">
           {title}
           <span
             className="cursor-pointer opacity-0 transition-opacity group-hover/edit:opacity-100"

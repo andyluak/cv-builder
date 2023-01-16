@@ -84,18 +84,28 @@ export default function Education() {
         </div>
       )}
       <div className="grid grid-cols-1 place-items-center gap-4 md:w-4/5 md:grid-cols-3">
-        {educations.length === 0 ||
-          (isAddingEducation && (
-            <EducationForm
-              school={education.school}
-              degree={education.degree}
-              location={education.location}
-              fieldOfStudy={education.fieldOfStudy}
-              from={education.from}
-              to={education.to}
-              handleEducationChange={handleEducationChange}
-            />
-          ))}
+        {educations.length === 0 && (
+          <EducationForm
+            school={education.school}
+            degree={education.degree}
+            location={education.location}
+            fieldOfStudy={education.fieldOfStudy}
+            from={education.from}
+            to={education.to}
+            handleEducationChange={handleEducationChange}
+          />
+        )}
+        {isAddingEducation && (
+          <EducationForm
+            school={education.school}
+            degree={education.degree}
+            location={education.location}
+            fieldOfStudy={education.fieldOfStudy}
+            from={education.from}
+            to={education.to}
+            handleEducationChange={handleEducationChange}
+          />
+        )}
 
         <div
           className={cx(

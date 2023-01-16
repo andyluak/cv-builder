@@ -57,7 +57,7 @@ export default function JobExperience() {
     }
     setJobExperience({ ...jobExperience, [e.target.name]: e.target.value });
   };
-
+  console.log(jobExperiences.length === 0);
   return (
     <div className="flex flex-col items-center gap-8 p-8">
       <div className="grid-row-6 grid gap-8">
@@ -104,17 +104,28 @@ export default function JobExperience() {
           </Button>
         </div>
       )}
-      {jobExperiences.length === 0 ||
-        (isAddingJobExperience && (
-          <JobExperienceForm
-            jobExperience={jobExperience}
-            setJobExperience={setJobExperience}
-            jobExperiences={jobExperiences}
-            setJobExperiences={setJobExperiences}
-            onHandleJobExperienceSubmit={onHandleJobExperienceSubmit}
-            onHandleInputChange={onHandleInputChange}
-          />
-        ))}
+
+      {jobExperiences.length === 0 && (
+        <JobExperienceForm
+          jobExperience={jobExperience}
+          setJobExperience={setJobExperience}
+          jobExperiences={jobExperiences}
+          setJobExperiences={setJobExperiences}
+          onHandleJobExperienceSubmit={onHandleJobExperienceSubmit}
+          onHandleInputChange={onHandleInputChange}
+        />
+      )}
+
+      {isAddingJobExperience && (
+        <JobExperienceForm
+          jobExperience={jobExperience}
+          setJobExperience={setJobExperience}
+          jobExperiences={jobExperiences}
+          setJobExperiences={setJobExperiences}
+          onHandleJobExperienceSubmit={onHandleJobExperienceSubmit}
+          onHandleInputChange={onHandleInputChange}
+        />
+      )}
       <div className="flex flex-row items-center justify-center gap-12">
         <Link href="/resume-builder/basic-information">
           <Button variant="secondary" size="lg">

@@ -3,6 +3,7 @@ import React from "react";
 import type { IResume } from "src/types/resume";
 
 import TemplateDisplayer from "../TemplateDisplayer";
+import ResumePreviewActions from "./ResumePreviewActions";
 import ResumeTitle from "./ResumeTitle";
 
 type Props = {
@@ -21,7 +22,7 @@ function ResumePreview({ resume }: Props) {
     title,
   } = resume;
   return (
-    <div key={resume.id}>
+    <div key={id} className="flex flex-col gap-2 items-center">
       <ResumeTitle title={title} resumeId={id} />
       <TemplateDisplayer
         style={{
@@ -45,6 +46,7 @@ function ResumePreview({ resume }: Props) {
           return null;
         }}
       />
+      <ResumePreviewActions id={id} />
     </div>
   );
 }

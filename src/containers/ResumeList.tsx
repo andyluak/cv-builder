@@ -69,7 +69,7 @@ export default function ResumeList() {
           Create Another One
         </Link>
       </div>
-      <div className="flex flex-row justify-around">
+      <div className="m-auto grid w-3/4 grid-cols-2 place-content-center gap-y-8">
         {resumes &&
           resumes.length > 0 &&
           resumes.map((resume: IResume) => {

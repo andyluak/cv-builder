@@ -10,6 +10,7 @@ const examples = async (req: NextApiRequest, res: NextApiResponse) => {
     educations,
     skills,
   } = req.body;
+  const lowerCaseTemplateName = templateName.toLowerCase();
   const cssPath = path.join(
     process.cwd(),
     `templates/${templateName}/dist.css`
@@ -18,8 +19,7 @@ const examples = async (req: NextApiRequest, res: NextApiResponse) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const template =
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    require(`../../../templates/${templateName}/template`).default;
-
+    require(`../../../templates/${lowerCaseTemplateName}/template`).default;
   const options = {
     // template options
     template: {

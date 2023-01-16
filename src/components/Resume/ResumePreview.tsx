@@ -46,7 +46,7 @@ function ResumePreview({ resume }: Props) {
           return null;
         }}
       />
-      <ResumePreviewActions id={id} />
+      <ResumePreviewActions id={id} resume={resume}/>
     </div>
   );
 }

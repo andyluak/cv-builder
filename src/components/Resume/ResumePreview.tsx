@@ -45,6 +45,7 @@ function ResumePreview({ resume }: Props) {
         LinkedButton={() => {
           return null;
         }}
+        isPreview
       />
       <ResumePreviewActions id={id} resume={resume}/>
     </div>

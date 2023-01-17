@@ -71,6 +71,7 @@ function Template() {
             }}
             firstName={userInfo.firstName}
             lastName={userInfo.lastName}
+            isPreview
           />
         ))}
       </div>

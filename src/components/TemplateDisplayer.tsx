@@ -1,4 +1,5 @@
-import React, { memo, useMemo, useState } from "react";
+import cx from "clsx";
+import React, { useMemo, useState } from "react";
 
 import type { IEducation, IJob } from "src/types/resume";
 
@@ -16,6 +17,7 @@ type Props = {
   educations?: IEducation[];
   skills?: string[];
   profileDescription?: string;
+  isPreview?: boolean;
 };
 
 function TemplateDisplayer({
@@ -32,6 +34,7 @@ function TemplateDisplayer({
   educations,
   skills,
   profileDescription,
+  isPreview,
 }: Props) {
   const [showButton, setShowButton] = useState(false);
 
@@ -44,11 +47,20 @@ function TemplateDisplayer({
     <div>
       <React.Suspense fallback={<div>Loading...</div>}>
         <div
-          className="relative w-[200px] cursor-pointer overflow-hidden outline-red-500 hover:outline-double hover:outline-2"
+          className={cx(
+            "relative cursor-pointer overflow-hidden outline-red-500 hover:outline-double hover:outline-2",
+            {
+              "w-[200px]": isPreview,
+            }
+          )}
           onMouseEnter={() => setShowButton(true)}
           onMouseLeave={() => setShowButton(false)}
         >
-          <div className="h-80 select-none overflow-hidden text-[9px]">
+          <div
+            className={cx("select-none overflow-hidden", {
+              "h-80 text-[9px]": isPreview,
+            })}
+          >
             <TemplateComponent
               style={style}
               firstName={firstName}

@@ -37,7 +37,8 @@ function useEditResumeTitle(resumeId: string, onSettledAction: () => void) {
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
-      queryClient.setQueryData(["resumeList"], (oldResumes: IResume[]) => {
+      queryClient.setQueryData(["resumes"], (oldResumes: IResume[]) => {
+        console.log("oldResumes", oldResumes)
         return oldResumes?.map((resume: IResume) => {
           if (resume.id === resumeId) {
             return {

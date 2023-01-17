@@ -3,6 +3,8 @@
 import * as Accordion from "@radix-ui/react-accordion";
 import React from "react";
 
+import ChevronDown from "public/chevron-down.svg";
+
 type Props = {
   type: "single" | "multiple";
   collapsible: boolean;
@@ -10,13 +12,17 @@ type Props = {
   isOpened?: boolean;
   defaultValue?: string;
   title: string;
-  content: string | React.FC;
+  children?: React.ReactNode;
 };
 
-
 const AccordionComponent = ({
-  title, content, type, collapsible, defaultValue, isOpened
-} : Props) => (
+  title,
+  type,
+  collapsible,
+  defaultValue,
+  isOpened,
+  children,
+}: Props) => (
   <Accordion.Root
     className="AccordionRoot"
     type={type}
@@ -25,25 +31,29 @@ const AccordionComponent = ({
   >
     <Accordion.Item className="AccordionItem" value="item-1">
       <AccordionTrigger>{title}</AccordionTrigger>
-      <AccordionContent>
-        {content}
-      </AccordionContent>
+      <AccordionContent>{children}</AccordionContent>
     </Accordion.Item>
   </Accordion.Root>
 );
 
 const AccordionTrigger = React.forwardRef(
-  ({ children, className, ...props }, forwardedRef) => (
-    <Accordion.Header className="AccordionHeader">
-      <Accordion.Trigger
-        className="AccordionTrigger"
-        {...props}
-        ref={forwardedRef}
-      >
-        {children}
-      </Accordion.Trigger>
-    </Accordion.Header>
-  )
+  ({ children, className, ...props }, forwardedRef) => {
+    return (
+      <Accordion.Header className="AccordionHeader">
+        <Accordion.Trigger
+          className="AccordionTrigger group/trigger flex w-full flex-row justify-between"
+          {...props}
+          ref={forwardedRef}
+        >
+          {children}
+          <ChevronDown
+            className="AccordionChevron w-4 fill-secondary transition-transform group-data-[state=open]/trigger:rotate-180"
+            aria-hidden
+          />
+        </Accordion.Trigger>
+      </Accordion.Header>
+    );
+  }
 );
 
 const AccordionContent = React.forwardRef(

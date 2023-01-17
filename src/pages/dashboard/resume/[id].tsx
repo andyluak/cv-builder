@@ -1,9 +1,9 @@
-import * as Accordion from "@radix-ui/react-accordion";
 import { useRouter } from "next/router";
 import React from "react";
 import useResume from "src/queries/useResume";
 
 import MainLayout from "src/components/layout/Main";
+import Accordion from "src/components/ui/Accordion";
 import Loading from "src/components/ui/Loading";
 
 function Resume() {
@@ -17,22 +17,13 @@ function Resume() {
 
   return (
     <div>
-      <Accordion.Root type="single">
-        <Accordion.Item value="1">
-          <Accordion.Header>
-            <Accordion.Trigger>Is it unstyled?</Accordion.Trigger>
-          </Accordion.Header>
-          <Accordion.Content>
-            <div>Job SAl</div>
-          </Accordion.Content>
-        </Accordion.Item>
-        <Accordion.Item value="2">
-          <Accordion.Header>Education</Accordion.Header>
-          <Accordion.Content>
-            <div>Education</div>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion.Root>
+      <Accordion
+        title="Education"
+        content="Education content"
+        value="education"
+        type="single"
+        collapsible
+      />
     </div>
   );
 }

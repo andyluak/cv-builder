@@ -70,15 +70,15 @@ model Resume {
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  userInfo            UserInfo             @relation(fields: [userInfoId], references: [id])
-  profileDescriptions ProfileDescription[]
+  userInfo            UserInfo           @relation(fields: [userInfoId], references: [id])
+  profileDescriptions ProfileDescription?
   educations          Education[]
   jobs                Job[]
   links               Link[]
   skills              Skill[]
   template            String
   userInfoId          String
-  title               String?              @default("Untitled")
+  title               String?            @default("Untitled")
 }
 
 model UserInfo {
@@ -169,8 +169,8 @@ model ProfileDescription {
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  resumeId String?
-  resume   Resume? @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  resumeId String @unique
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 
   text String
 }

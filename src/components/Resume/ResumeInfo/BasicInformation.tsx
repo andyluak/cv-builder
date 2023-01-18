@@ -1,8 +1,11 @@
 import React from "react";
+import useEditBasicInformation from "src/mutations/useEditBasicInformation";
 
 import Button from "src/components/ui/Button";
 import Input from "src/components/ui/Input";
 import Textarea from "src/components/ui/Textarea";
+
+import { debounce } from "src/utils/debounce";
 
 type Props = {
   firstName: string;
@@ -11,6 +14,7 @@ type Props = {
   phone: string;
   email: string;
   profileDescription: string;
+  resumeId: string;
 };
 
 function BasicInformation({
@@ -20,17 +24,20 @@ function BasicInformation({
   phone,
   email,
   profileDescription,
+  resumeId,
 }: Props) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+  const basicInformationMutation = useEditBasicInformation();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    basicInformationMutation.mutate({
+      [e.target.name]: e.target.value,
+      resumeId,
+    });
   };
+  const debouncedHandleChange = debounce(handleChange, 500);
 
   return (
-    <form
-      className="col-span-4 grid grid-cols-4 place-items-center gap-2"
-      onSubmit={handleSubmit}
-    >
+    <form className="col-span-4 grid grid-cols-4 place-items-center gap-2">
       <Input
         label="First Name"
         placeholder="First Name"
@@ -39,6 +46,7 @@ function BasicInformation({
         name="firstName"
         className="col-span-2 w-full"
         value={undefined}
+        onChange={debouncedHandleChange}
       />
       <Input
         label="Last Name"
@@ -48,6 +56,7 @@ function BasicInformation({
         name="lastName"
         className="col-span-2 w-full"
         value={undefined}
+        onChange={debouncedHandleChange}
       />
       <Input
         label="Position"
@@ -57,6 +66,7 @@ function BasicInformation({
         name="position"
         className="col-span-4 w-full"
         value={undefined}
+        onChange={debouncedHandleChange}
       />
       <Input
         label="Phone"
@@ -66,6 +76,7 @@ function BasicInformation({
         name="phone"
         className="col-span-4 w-full md:col-span-2"
         value={undefined}
+        onChange={debouncedHandleChange}
       />
       <Input
         label="Email"
@@ -75,6 +86,7 @@ function BasicInformation({
         name="email"
         className="col-span-4 w-full md:col-span-2"
         value={undefined}
+        onChange={debouncedHandleChange}
       />
       <Textarea
         label="Profile Description"
@@ -83,15 +95,8 @@ function BasicInformation({
         name="profileDescription"
         defaultValue={profileDescription}
         value={undefined}
+        onChange={debouncedHandleChange}
       />
-      <Button
-        variant="primary"
-        size="lg"
-        type="submit"
-        className="justify-self-start"
-      >
-        Save Changes
-      </Button>
     </form>
   );
 }

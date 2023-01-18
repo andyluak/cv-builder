@@ -27,7 +27,8 @@ function Resume() {
     profileDescriptions,
     template,
   } = resume;
-  const profileDescription = profileDescriptions[0];
+  const profileDescription = profileDescriptions
+  console.log(resume);
   return (
     <div className="grid grid-cols-2 gap-8 p-6">
       <aside>
@@ -39,6 +40,7 @@ function Resume() {
             phone={phone}
             email={email}
             profileDescription={profileDescription.text}
+            resumeId={id}
           />
         </Accordion>
       </aside>

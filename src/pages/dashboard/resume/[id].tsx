@@ -41,6 +41,7 @@ function Resume() {
             phone={phone}
             email={email}
             profileDescription={profileDescription.text}
+            d
           />
         </Accordion>
       </aside>

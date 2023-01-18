@@ -96,6 +96,7 @@ function BasicInformation({
         defaultValue={profileDescription}
         value={undefined}
         onChange={debouncedHandleChange}
+        d
       />
     </form>
   );

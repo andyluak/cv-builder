@@ -3,6 +3,7 @@ import React from "react";
 import useResume from "src/queries/useResume";
 
 import Education from "src/components/Education";
+import BasicInformation from "src/components/Resume/ResumeInfo/BasicInformation";
 import TemplateDisplayer from "src/components/TemplateDisplayer";
 import MainLayout from "src/components/layout/Main";
 import Accordion from "src/components/ui/Accordion";
@@ -25,21 +26,22 @@ function Resume() {
     jobs,
     educations,
     skills,
-    profileDescription,
+    profileDescriptions,
     template,
   } = resume;
+  const profileDescription = profileDescriptions[0];
   return (
     <div className="grid grid-cols-2 gap-8 p-6">
       <aside>
-        <Accordion
-          title="User Info"
-          value="userInfo"
-          type="single"
-          collapsible
-        >
-          {educations.map((education: IEducation) => (
-            <Education key={education.to} education={education} />
-          ))}
+        <Accordion title="User Info" value="userInfo" type="single" collapsible>
+          <BasicInformation
+            firstName={firstName}
+            lastName={lastName}
+            position={position}
+            phone={phone}
+            email={email}
+            profileDescription={profileDescription.text}
+          />
         </Accordion>
       </aside>
       <div>

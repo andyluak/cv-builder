@@ -30,7 +30,7 @@ const AccordionComponent = ({
     defaultValue={isOpened ? defaultValue : undefined}
   >
     <Accordion.Item className="AccordionItem" value="item-1">
-      <AccordionTrigger>{title}</AccordionTrigger>
+      <AccordionTrigger>{title.toUpperCase()}</AccordionTrigger>
       <AccordionContent>{children}</AccordionContent>
     </Accordion.Item>
   </Accordion.Root>
@@ -41,7 +41,7 @@ const AccordionTrigger = React.forwardRef(
     return (
       <Accordion.Header className="AccordionHeader">
         <Accordion.Trigger
-          className="AccordionTrigger group/trigger flex w-full flex-row justify-between"
+          className="AccordionTrigger group/trigger mb-2 flex w-full flex-row justify-between text-xl"
           {...props}
           ref={forwardedRef}
         >

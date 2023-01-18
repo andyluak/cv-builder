@@ -5,7 +5,8 @@ type Props = {
   label: string;
   placeholder: string;
   name: string;
-  value: string;
+  value: string | undefined;
+  defaultValue?: string;
   className?: string;
   required?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -16,6 +17,7 @@ const Textarea = ({
   placeholder,
   name,
   value,
+  defaultValue,
   className,
   required,
   onChange,
@@ -56,6 +58,7 @@ const Textarea = ({
         placeholder={placeholder}
         name={name}
         value={value}
+        defaultValue={defaultValue}
         onChange={handleTextAreaChange}
         ref={textareaRef}
         required={required}

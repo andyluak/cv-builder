@@ -2,14 +2,12 @@ import { useRouter } from "next/router";
 import React from "react";
 import useResume from "src/queries/useResume";
 
-import Education from "src/components/Education";
 import BasicInformation from "src/components/Resume/ResumeInfo/BasicInformation";
 import TemplateDisplayer from "src/components/TemplateDisplayer";
 import MainLayout from "src/components/layout/Main";
 import Accordion from "src/components/ui/Accordion";
 import Loading from "src/components/ui/Loading";
 
-import { IEducation } from "src/types/resume";
 
 function Resume() {
   const router = useRouter();
@@ -41,7 +39,6 @@ function Resume() {
             phone={phone}
             email={email}
             profileDescription={profileDescription.text}
-            d
           />
         </Accordion>
       </aside>

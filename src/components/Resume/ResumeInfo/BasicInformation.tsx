@@ -1,7 +1,6 @@
 import React from "react";
 import useEditBasicInformation from "src/mutations/useEditBasicInformation";
 
-import Button from "src/components/ui/Button";
 import Input from "src/components/ui/Input";
 import Textarea from "src/components/ui/Textarea";
 

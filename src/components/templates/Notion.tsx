@@ -13,6 +13,7 @@ type Props = {
   jobExperiences?: IJob[];
   educations?: IEducation[];
   skills?: string[];
+  profileDescription?: string;
 };
 
 export default function Notion({
@@ -26,6 +27,7 @@ export default function Notion({
   jobExperiences,
   educations,
   skills,
+  profileDescription,
 }: Props) {
   const defaultWorkExperience = [
     {
@@ -67,8 +69,12 @@ export default function Notion({
     },
   ];
 
+  const defaultProfileDescription = `I am Alex, a web developer with a passion for building and maintaining scalable, user-friendly websites and applications. I have a strong background in the latest technologies, and a talent for problem-solving. As a web developer, I am responsible for designing, building, and maintaining web-based solutions for a variety of clients.`;
+
   const usableJobExperience = jobExperiences || defaultWorkExperience;
   const usableEducation = educations || defaultEducation;
+  const usableProfileDescription =
+    profileDescription || defaultProfileDescription;
 
   return (
     <div className={"bg-gray-100 p-8-em text-black"} style={style}>
@@ -81,14 +87,7 @@ export default function Notion({
         <div className="col-span-2 grid pr-12-em">
           <div>
             <p className="mb-2-em font-bold">Bio</p>
-            <p>
-              I am Alex, a web developer with a passion for building and
-              maintaining scalable, user-friendly websites and applications. I
-              have a strong background in the latest technologies, and a talent
-              for problem-solving. As a web developer, I am responsible for
-              designing, building, and maintaining web-based solutions for a
-              variety of clients.
-            </p>
+            <p>{usableProfileDescription}</p>
           </div>
           <div className="mt-8-em">
             <p className="mb-2-em font-bold">Work Experience</p>

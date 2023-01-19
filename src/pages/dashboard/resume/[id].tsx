@@ -8,7 +8,6 @@ import MainLayout from "src/components/layout/Main";
 import Accordion from "src/components/ui/Accordion";
 import Loading from "src/components/ui/Loading";
 
-
 function Resume() {
   const router = useRouter();
   const id = router.query.id as string;
@@ -27,8 +26,7 @@ function Resume() {
     profileDescriptions,
     template,
   } = resume;
-  const profileDescription = profileDescriptions
-  console.log(resume);
+  const profileDescription = profileDescriptions;
   return (
     <div className="grid grid-cols-2 gap-8 p-6">
       <aside>

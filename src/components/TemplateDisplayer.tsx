@@ -16,7 +16,9 @@ type Props = {
   jobExperiences?: IJob[];
   educations?: IEducation[];
   skills?: string[];
-  profileDescription?: string;
+  profileDescription?: {
+    text: string;
+  };
   isPreview?: boolean;
 };
 
@@ -37,7 +39,6 @@ function TemplateDisplayer({
   isPreview,
 }: Props) {
   const [showButton, setShowButton] = useState(false);
-
   // memoize the template component
   const TemplateComponent = useMemo(() => {
     return React.lazy(() => import(`src/components/templates/${template}`));
@@ -72,7 +73,7 @@ function TemplateDisplayer({
               jobExperiences={jobExperiences}
               educations={educations}
               skills={skills}
-              profileDescription={profileDescription}
+              profileDescription={profileDescription?.text}
             />
           </div>
           {showButton && <LinkedButton />}

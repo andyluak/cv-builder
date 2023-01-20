@@ -27,7 +27,26 @@ const editJobExperience = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     if (req.body.jobPoints) {
-      return res.status(200);
+      let jobPointsArray = req.body.jobPoints.split("\n");
+      jobPointsArray = jobPointsArray.filter((point: string) => point !== "");
+      await prisma.jobPoint.deleteMany({
+        where: {
+          jobId,
+        },
+      });
+      await prisma.job.update({
+        where: {
+          id: jobId,
+        },
+        data: {
+          jobPoints: {
+            create: jobPointsArray.map((point: string) => ({
+              point,
+            })),
+          },
+        },
+      });
+      return res.status(200).json("success");
     }
     await prisma.job.update({
       where: {

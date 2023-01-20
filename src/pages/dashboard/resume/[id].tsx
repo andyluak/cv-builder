@@ -85,7 +85,7 @@ function Resume() {
                 type="single"
                 collapsible
               >
-                <JobForm job={job} />
+                <JobForm job={job} resumeId={id}/>
               </Accordion>
             ))}
           </div>

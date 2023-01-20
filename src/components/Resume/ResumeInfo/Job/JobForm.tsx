@@ -1,4 +1,5 @@
 import React from "react";
+import useEditJobExperience from "src/mutations/useEditJobExperience";
 
 import Input from "src/components/ui/Input";
 import Textarea from "src/components/ui/Textarea";
@@ -7,13 +8,17 @@ import { debounce } from "src/utils/debounce";
 
 import { ISavedJob } from "src/types/resume";
 
-function JobForm({ job }: { job: ISavedJob }) {
+function JobForm({ job, resumeId }: { job: ISavedJob; resumeId: string }) {
+  const editJob = useEditJobExperience();
+
   const { id, company, position, from, to, description, jobPoints } = job;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    editJob.mutate({ id, [name]: value, resumeId });
   };
   const debouncedHandleChange = debounce(handleChange, 500);
 
-  const formattedJobPoints = jobPoints.map(({point}) => {
+  const formattedJobPoints = jobPoints.map(({ point }) => {
     return `${point}\n`;
   });
 
@@ -69,10 +74,10 @@ function JobForm({ job }: { job: ISavedJob }) {
         onChange={debouncedHandleChange}
       />
       <Textarea
-        label="Profile Description"
+        label="Job Highlights"
         placeholder="Tell us something about yourself"
         className="col-span-4 w-full"
-        name="profileDescription"
+        name="jobPoints"
         defaultValue={formattedJobPoints.join("")}
         value={undefined}
         onChange={debouncedHandleChange}

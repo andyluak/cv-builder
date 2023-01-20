@@ -1,6 +1,7 @@
 import React from "react";
 
 import type { IEducation, IJob } from "src/types/resume";
+import { convertDateToReadable } from "src/utils/date";
 
 type Props = {
   style?: object;
@@ -14,6 +15,7 @@ type Props = {
   educations?: IEducation[];
   skills?: string[];
   profileDescription?: string;
+  description?: string;
 };
 
 export default function Notion({
@@ -28,6 +30,7 @@ export default function Notion({
   educations,
   skills,
   profileDescription,
+  description,
 }: Props) {
   const defaultWorkExperience = [
     {
@@ -71,10 +74,14 @@ export default function Notion({
 
   const defaultProfileDescription = `I am Alex, a web developer with a passion for building and maintaining scalable, user-friendly websites and applications. I have a strong background in the latest technologies, and a talent for problem-solving. As a web developer, I am responsible for designing, building, and maintaining web-based solutions for a variety of clients.`;
 
+  const defaultDescription =
+    "This is where you can write a description about what you did at your job.";
+
   const usableJobExperience = jobExperiences || defaultWorkExperience;
   const usableEducation = educations || defaultEducation;
   const usableProfileDescription =
     profileDescription || defaultProfileDescription;
+  const usableDescription = description || defaultDescription;
 
   return (
     <div className={"bg-gray-100 p-8-em text-black"} style={style}>
@@ -101,8 +108,9 @@ export default function Notion({
                 </div>
                 <div>
                   <p className="text-gray-700">
-                    {jobExperience.startDate} - {jobExperience.endDate}
+                    {convertDateToReadable(jobExperience.from)} - {convertDateToReadable(jobExperience.to)}
                   </p>
+                  <p className="mt-2 mb-4">{jobExperience.description}</p>
                   <div className="bullet-points pl-4-em">
                     <ul className="list-inside list-disc">
                       {jobExperience.jobPoints.map((jobPoint, index) => (

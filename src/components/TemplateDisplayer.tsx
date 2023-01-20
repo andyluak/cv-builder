@@ -19,6 +19,7 @@ type Props = {
   profileDescription?: {
     text: string;
   };
+  description?: string;
   isPreview?: boolean;
 };
 
@@ -37,6 +38,7 @@ function TemplateDisplayer({
   skills,
   profileDescription,
   isPreview,
+  description,
 }: Props) {
   const [showButton, setShowButton] = useState(false);
   // memoize the template component
@@ -74,6 +76,7 @@ function TemplateDisplayer({
               educations={educations}
               skills={skills}
               profileDescription={profileDescription?.text}
+              description={description}
             />
           </div>
           {showButton && <LinkedButton />}

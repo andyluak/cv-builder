@@ -3,15 +3,14 @@ import React from "react";
 import useResume from "src/queries/useResume";
 
 import BasicInformation from "src/components/Resume/ResumeInfo/BasicInformation";
+import JobComponent from "src/components/Resume/ResumeInfo/Job/JobComponent";
 import JobForm from "src/components/Resume/ResumeInfo/Job/JobForm";
 import TemplateDisplayer from "src/components/TemplateDisplayer";
 import MainLayout from "src/components/layout/Main";
 import Accordion from "src/components/ui/Accordion";
 import Loading from "src/components/ui/Loading";
 
-import { convertDateToReadable } from "src/utils/date";
-
-import { ISavedJob } from "src/types/resume";
+import type { ISavedJob } from "src/types/resume";
 
 function Resume() {
   const router = useRouter();
@@ -32,25 +31,6 @@ function Resume() {
     template,
   } = resume;
   const profileDescription = profileDescriptions;
-  const JobComponent = ({ job, newJob }) => {
-    return (
-      <div className="color-secondary text-md flex min-w-full cursor-pointer select-none flex-col items-start gap-1 bg-slate-100 p-4">
-        {newJob ? (
-          <p className="font-bold">Add New Job</p>
-        ) : (
-          <>
-            <p className="font-bold">
-              {job.position} <span className="font-normal">at</span>{" "}
-              <span className="font-bold"> {job.company}</span>
-            </p>
-            <p className="font-light">
-              {convertDateToReadable(job.from)}-{convertDateToReadable(job.to)}
-            </p>
-          </>
-        )}
-      </div>
-    );
-  };
   return (
     <div className="grid grid-cols-2 gap-8 p-6">
       <aside className="flex flex-col gap-6">
@@ -79,8 +59,6 @@ function Resume() {
           hasChevron
         >
           <div className="flex flex-col gap-2">
-            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-            {/* @ts-ignore */}
             {jobs
               .sort(
                 (a: ISavedJob, b: ISavedJob) =>
@@ -103,7 +81,7 @@ function Resume() {
               type="single"
               collapsible
             >
-              <JobForm job={{}} newJob resumeId={id}/>
+              <JobForm job={{}} newJob resumeId={id} />
             </Accordion>
           </div>
         </Accordion>

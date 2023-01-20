@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const JobExperienceSchema = z.object({
+export const JobExperienceSchema = z.object({
   companyName: z.string(),
   position: z.string(),
   location: z.string(),

@@ -110,7 +110,7 @@ export default function Notion({
                   <p className="text-gray-700">
                     {convertDateToReadable(jobExperience.from)} - {convertDateToReadable(jobExperience.to)}
                   </p>
-                  <p className="mt-2 mb-4">{jobExperience.description}</p>
+                  <p className="mt-2 mb-4 font-medium">{jobExperience.description}</p>
                   <div className="bullet-points pl-4-em">
                     <ul className="list-inside list-disc">
                       {jobExperience.jobPoints.map((jobPoint, index) => (

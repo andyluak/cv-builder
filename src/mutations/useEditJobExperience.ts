@@ -5,7 +5,7 @@ function useEditJobExperience() {
   const editMutation = useMutation({
     mutationFn: async (variables: Record<string, unknown>) => {
       const res = await fetch("/api/resume/edit-job-experience", {
-        method: "POST",
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...variables,

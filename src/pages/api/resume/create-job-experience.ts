@@ -13,47 +13,43 @@ const editJobExperience = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  if (req.method !== "PUT") {
+  if (req.method !== "POST") {
     res.status(405).json({ error: "Method Not Allowed" });
     return;
   }
 
-  const jobId = req.body.id;
-  delete req.body.jobId;
-  if (!jobId) {
+  const resumeId = req.body.resumeId;
+  const userId = session.user.id;
+  if (!resumeId) {
     res.status(400).json({ error: "Missing required fields" });
     return;
   }
 
   try {
-    if (req.body.jobPoints) {
-      let jobPointsArray = req.body.jobPoints.split("\n");
-      jobPointsArray = jobPointsArray.filter((point: string) => point !== "");
-      await prisma.jobPoint.deleteMany({
-        where: {
-          jobId,
-        },
-      });
-      await prisma.job.update({
-        where: {
-          id: jobId,
-        },
-        data: {
-          jobPoints: {
-            create: jobPointsArray.map((point: string) => ({
-              point,
-            })),
-          },
-        },
-      });
-      return res.status(200).json("success");
-    }
-    await prisma.job.update({
+    const { company, position, from, location, to, jobPoints, description } =
+      req.body;
+    const formattedJobPoints = jobPoints.split("\n");
+    await prisma.resume.update({
       where: {
-        id: jobId,
+        id: resumeId,
       },
       data: {
-        ...req.body,
+        jobs: {
+          create: {
+            company,
+            position,
+            from,
+            to,
+            location,
+            description,
+            jobPoints: {
+              create: jobPoints
+                ? formattedJobPoints.map((point: string) => ({ point }))
+                : [],
+            },
+            userId: userId,
+          },
+        },
       },
     });
 

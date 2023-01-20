@@ -29,7 +29,6 @@ function Resume() {
     template,
   } = resume;
   const profileDescription = profileDescriptions;
-  console.log(jobs);
   return (
     <div className="grid grid-cols-2 gap-8 p-6">
       <aside className="flex flex-col gap-6">

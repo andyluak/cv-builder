@@ -11,17 +11,19 @@ type Props = {
   value: string;
   isOpened?: boolean;
   defaultValue?: string;
-  title: string;
+  triggerComponent: string | React.ReactNode;
   children?: React.ReactNode;
+  hasChevron?: boolean;
 };
 
 const AccordionComponent = ({
-  title,
   type,
   collapsible,
   defaultValue,
   isOpened,
   children,
+  triggerComponent,
+  hasChevron,
 }: Props) => (
   <Accordion.Root
     className="AccordionRoot"
@@ -30,26 +32,32 @@ const AccordionComponent = ({
     defaultValue={isOpened ? defaultValue : undefined}
   >
     <Accordion.Item className="AccordionItem" value="item-1">
-      <AccordionTrigger>{title.toUpperCase()}</AccordionTrigger>
+      <AccordionTrigger hasChevron={hasChevron}>
+        {typeof triggerComponent === "string"
+          ? triggerComponent.toUpperCase()
+          : triggerComponent}
+      </AccordionTrigger>
       <AccordionContent>{children}</AccordionContent>
     </Accordion.Item>
   </Accordion.Root>
 );
 
 const AccordionTrigger = React.forwardRef(
-  ({ children, className, ...props }, forwardedRef) => {
+  ({ children, className, hasChevron, ...props }, forwardedRef) => {
     return (
       <Accordion.Header className="AccordionHeader">
         <Accordion.Trigger
-          className="AccordionTrigger group/trigger mb-2 flex w-full flex-row justify-between text-xl"
+          className="AccordionTrigger group/trigger mb-2 flex w-full flex-row justify-between"
           {...props}
           ref={forwardedRef}
         >
           {children}
-          <ChevronDown
-            className="AccordionChevron w-4 fill-secondary transition-transform group-data-[state=open]/trigger:rotate-180"
-            aria-hidden
-          />
+          {hasChevron && (
+            <ChevronDown
+              className="AccordionChevron w-4 fill-secondary transition-transform group-data-[state=open]/trigger:rotate-180"
+              aria-hidden
+            />
+          )}
         </Accordion.Trigger>
       </Accordion.Header>
     );

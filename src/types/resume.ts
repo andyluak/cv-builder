@@ -60,8 +60,14 @@ const ResumeSchema = z.object({
   title: z.string(),
 });
 
+const SavedJobSchema = JobSchema.extend({
+  id: z.string(),
+});
+
 export type IEducation = z.infer<typeof EducationSchema>;
 export type IJobPoint = z.infer<typeof JobPointSchema>;
+
 export type IJob = z.infer<typeof JobSchema>;
+export type ISavedJob = z.infer<typeof SavedJobSchema>;
 export type IUserInfo = z.infer<typeof UserInfoSchema>;
 export type IResume = z.infer<typeof ResumeSchema>;

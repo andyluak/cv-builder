@@ -9,6 +9,8 @@ import Accordion from "src/components/ui/Accordion";
 import Loading from "src/components/ui/Loading";
 
 import { convertDateToReadable } from "src/utils/date";
+import { ISavedJob } from "src/types/resume";
+import JobForm from "src/components/Resume/ResumeInfo/Job/JobForm";
 
 function Resume() {
   const router = useRouter();
@@ -29,10 +31,34 @@ function Resume() {
     template,
   } = resume;
   const profileDescription = profileDescriptions;
+
+  const JobComponent = ({ job }) => {
+    return (
+      <div
+        key={job.id}
+        className="color-secondary text-md flex min-w-full cursor-pointer select-none flex-col items-start gap-1 bg-slate-100 p-4"
+      >
+        <p className="font-bold">
+          {job.position} <span className="font-normal">at</span>{" "}
+          <span className="font-bold"> {job.company}</span>
+        </p>
+        <p className="font-light">
+          {convertDateToReadable(job.from)}-{convertDateToReadable(job.to)}
+        </p>
+      </div>
+    );
+  };
+
   return (
     <div className="grid grid-cols-2 gap-8 p-6">
       <aside className="flex flex-col gap-6">
-        <Accordion title="User Info" value="userInfo" type="single" collapsible>
+        <Accordion
+          triggerComponent="User Info"
+          value="userInfo"
+          type="single"
+          collapsible
+          hasChevron
+        >
           <BasicInformation
             firstName={firstName}
             lastName={lastName}
@@ -44,23 +70,23 @@ function Resume() {
           />
         </Accordion>
         <Accordion
-          title="Work Experience"
+          triggerComponent="Work Experience"
           value="userInfo"
           type="single"
           collapsible
+          hasChevron
         >
           <div className="flex flex-col gap-2">
-            {jobs.map((job) => (
-              <div key={job.id} className="color-secondary bg-slate-100 p-4">
-                <p className="font-bold">
-                  {job.position} <span className="font-normal">at</span>{" "}
-                  <span className="font-bold"> {job.company}</span>
-                </p>
-                <p className="font-light">
-                  {convertDateToReadable(job.from)}-
-                  {convertDateToReadable(job.to)}
-                </p>
-              </div>
+            {jobs.map((job:ISavedJob) => (
+              <Accordion
+                key={job.id}
+                triggerComponent={<JobComponent job={job} />}
+                value={job.id}
+                type="single"
+                collapsible
+              >
+                <JobForm job={job} />
+              </Accordion>
             ))}
           </div>
         </Accordion>

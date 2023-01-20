@@ -8,6 +8,8 @@ import MainLayout from "src/components/layout/Main";
 import Accordion from "src/components/ui/Accordion";
 import Loading from "src/components/ui/Loading";
 
+import { convertDateToReadable } from "src/utils/date";
+
 function Resume() {
   const router = useRouter();
   const id = router.query.id as string;
@@ -27,9 +29,10 @@ function Resume() {
     template,
   } = resume;
   const profileDescription = profileDescriptions;
+  console.log(jobs);
   return (
     <div className="grid grid-cols-2 gap-8 p-6">
-      <aside>
+      <aside className="flex flex-col gap-6">
         <Accordion title="User Info" value="userInfo" type="single" collapsible>
           <BasicInformation
             firstName={firstName}
@@ -40,6 +43,27 @@ function Resume() {
             profileDescription={profileDescription.text}
             resumeId={id}
           />
+        </Accordion>
+        <Accordion
+          title="Work Experience"
+          value="userInfo"
+          type="single"
+          collapsible
+        >
+          <div className="flex flex-col gap-2">
+            {jobs.map((job) => (
+              <div key={job.id} className="color-secondary bg-slate-100 p-4">
+                <p className="font-bold">
+                  {job.position} <span className="font-normal">at</span>{" "}
+                  <span className="font-bold"> {job.company}</span>
+                </p>
+                <p className="font-light">
+                  {convertDateToReadable(job.from)}-
+                  {convertDateToReadable(job.to)}
+                </p>
+              </div>
+            ))}
+          </div>
         </Accordion>
       </aside>
       <div>

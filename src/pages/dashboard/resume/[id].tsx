@@ -34,7 +34,7 @@ function Resume() {
   const profileDescription = profileDescriptions;
   return (
     <div className="grid grid-cols-5 gap-8 p-6">
-      <aside className="flex flex-col gap-6 col-span-2">
+      <aside className="col-span-2 flex flex-col gap-6">
         <Accordion
           triggerComponent="User Info"
           value="userInfo"

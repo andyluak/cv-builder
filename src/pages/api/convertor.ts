@@ -40,27 +40,16 @@ const examples = async (req: NextApiRequest, res: NextApiResponse) => {
         content: cssPath,
       },
     },
-    // data to render on the template
-    data: {
-      name: "John Doe",
-      adress: "1234 Main St, Anytown, CA 12345",
-      phone: "123-456-7890",
-      email: "a@yahoo.com",
-      profileDescription:
-        "I am a software engineer with 5 years of experience. I have worked on many projects and I am looking for a new challenge. I am a fast learner and I am always looking to improve my skills. I am a team player and I am always willing to help others. I am a fast learner and I am always looking to improve my skills. I am a team player and I am always willing to help others.",
+    page: {
+      height: 4000,
     },
-    // additional data, used here as translations key/value
-    additionalData: {
-      resourceType: "CONTENT",
-      data: {
-        HELLO: "Hej",
-      },
-    },
+    pdf: {
+      format: "A4"
+    }
   };
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const pdf = await htmlToPdf(options);
-
   res.setHeader(
     "Content-Disposition",
     `attachment; filename=${userInfo.firstName}-${userInfo.lastName}-resume.pdf`

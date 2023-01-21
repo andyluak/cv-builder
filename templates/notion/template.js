@@ -7,7 +7,11 @@ const template = ({
   jobExperiences,
   educations,
   skills,
-}) => `
+}) => {
+
+  
+
+  return `
 <div class="bg-gray-100 p-8 text-black">
   <div class="border border-x-0 border-t-0 border-b-gray-500 pb-2">
     <h1 class="mb-4 text-4xl font-bold">${firstName} ${lastName}</h1>
@@ -110,5 +114,6 @@ const template = ({
   </div>
 </div>
 `;
+};
 
 export default template;

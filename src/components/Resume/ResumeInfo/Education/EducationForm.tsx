@@ -5,12 +5,14 @@ import React from "react";
 import Button from "src/components/ui/Button";
 import Input from "src/components/ui/Input";
 
+import useEditEducation from "src/mutations/useEditEducation";
+
 import { debounce } from "src/utils/debounce";
 
 import type { ISavedEducation } from "src/types/resume";
 
 function EducationForm({
-  education,
+  education = {},
   resumeId,
   isNewEducation = false,
 }: {
@@ -18,11 +20,13 @@ function EducationForm({
   resumeId: string;
   isNewEducation?: boolean;
 }) {
+  const editEducation = useEditEducation();
+
   const { school, degree, fieldOfStudy, from, to, location, id } = education;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    //edit mutation
+    editEducation.mutate({ id, [name]: value, resumeId });
   };
   const debouncedHandleChange = debounce(handleChange, 500);
 

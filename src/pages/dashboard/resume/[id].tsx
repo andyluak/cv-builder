@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import React from "react";
-import useResume from "src/queries/useResume";
 
 import BasicInformation from "src/components/Resume/ResumeInfo/BasicInformation";
 import JobComponent from "src/components/Resume/ResumeInfo/Job/JobComponent";
@@ -9,6 +8,8 @@ import TemplateDisplayer from "src/components/TemplateDisplayer";
 import MainLayout from "src/components/layout/Main";
 import Accordion from "src/components/ui/Accordion";
 import Loading from "src/components/ui/Loading";
+
+import useResume from "src/queries/useResume";
 
 import type { ISavedJob } from "src/types/resume";
 
@@ -61,8 +62,10 @@ function Resume() {
           <div className="flex flex-col gap-2">
             {jobs
               .sort(
-                (a: ISavedJob, b: ISavedJob) =>
-                  new Date(a.from) - new Date(b.from)
+                (
+                  { from: aFrom }: { from: string },
+                  { from: bFrom }: { from: string }
+                ) => new Date(aFrom).getTime() - new Date(bFrom).getTime()
               )
               .map((job: ISavedJob) => (
                 <Accordion

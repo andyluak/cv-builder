@@ -29,6 +29,8 @@ module.exports = {
     "^src/core/(.*)$",
     "^src/components/(.*)$",
     "^src/containers/(.*)$",
+    "^src/queries/(.*)$",
+    "^src/mutations/(.*)$",
     "^src/hooks[./]",
     "^src/pages[./]",
     "^src/utils/(.*)$",

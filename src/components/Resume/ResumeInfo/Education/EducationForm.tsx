@@ -5,6 +5,7 @@ import React from "react";
 import Button from "src/components/ui/Button";
 import Input from "src/components/ui/Input";
 
+import useCreateEducation from "src/mutations/useCreateEducation";
 import useEditEducation from "src/mutations/useEditEducation";
 
 import { debounce } from "src/utils/debounce";
@@ -21,6 +22,7 @@ function EducationForm({
   isNewEducation?: boolean;
 }) {
   const editEducation = useEditEducation();
+  const createEducation = useCreateEducation();
 
   const { school, degree, fieldOfStudy, from, to, location, id } = education;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,13 +38,22 @@ function EducationForm({
       new FormData(e.currentTarget).entries()
     );
 
-    const { school, degree, fieldOfStudy, from, to, location, id } =
+    const { school, degree, fieldOfStudy, from, to, location } =
       educationData as ISavedEducation;
-
-    if (!school || !degree || !fieldOfStudy || !from || !to || !location || !id)
+    console.log(educationData);
+    if (!school || !degree || !fieldOfStudy || !from || !to || !location)
       return;
 
     // creation mutation
+    createEducation.mutate({
+      school,
+      degree,
+      fieldOfStudy,
+      from,
+      to,
+      location,
+      resumeId,
+    });
   };
 
   const formFields = [
@@ -125,7 +136,7 @@ function EducationForm({
 
       {isNewEducation && (
         <Button type="submit" className="col-span-4 place-self-start" size="lg">
-          Add Job
+          Save
         </Button>
       )}
     </form>

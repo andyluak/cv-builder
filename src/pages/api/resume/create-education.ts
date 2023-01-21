@@ -3,7 +3,7 @@ import { prisma } from "src/server/db/client";
 
 import { getServerAuthSession } from "../../../server/common/get-server-auth-session";
 
-const editJobExperience = async (req: NextApiRequest, res: NextApiResponse) => {
+const editEducation = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerAuthSession({ req, res });
   if (!session) {
     res.status(401).json({
@@ -26,28 +26,23 @@ const editJobExperience = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const { company, position, from, location, to, jobPoints, description } =
+    const { school, degree, fieldOfStudy, from, location, to, current } =
       req.body;
-    const formattedJobPoints = jobPoints.split("\n");
     await prisma.resume.update({
       where: {
         id: resumeId,
       },
       data: {
-        jobs: {
+        educations: {
           create: {
-            company,
-            position,
+            school,
+            degree,
+            fieldOfStudy,
             from,
-            to,
             location,
-            description,
-            jobPoints: {
-              create: jobPoints
-                ? formattedJobPoints.map((point: string) => ({ point }))
-                : [],
-            },
-            userId: userId,
+            to,
+            current,
+            userId
           },
         },
       },
@@ -60,4 +55,4 @@ const editJobExperience = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default editJobExperience;
+export default editEducation;

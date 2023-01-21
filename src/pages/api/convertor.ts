@@ -44,8 +44,8 @@ const examples = async (req: NextApiRequest, res: NextApiResponse) => {
       height: 4000,
     },
     pdf: {
-      format: "A4"
-    }
+      format: "A4",
+    },
   };
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

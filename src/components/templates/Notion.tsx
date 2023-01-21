@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
+
+import { convertDateToReadable } from "src/utils/date";
+import { convertPixelsToMillimeters } from "src/utils/pdfHelpers";
 
 import type { IEducation, IJob } from "src/types/resume";
-import { convertDateToReadable } from "src/utils/date";
 
 type Props = {
   style?: object;
@@ -83,8 +85,18 @@ export default function Notion({
     profileDescription || defaultProfileDescription;
   const usableDescription = description || defaultDescription;
 
+  const jobExperienceRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const jobExperiences = jobExperienceRef.current;
+
+    const jobExperienceHeights = Array.from(jobExperiences.children).map(
+      (child: any) => convertPixelsToMillimeters(child.offsetHeight)
+    );
+  });
   return (
-    <div className={"bg-gray-100 p-8-em text-black"} style={style}>
+    <div className={"bg-gray-100 p-8-em font-sans text-black"} style={style}>
+      <div className="border-1 absolute top-[293mm] h-1 w-full bg-black"></div>
       <div className="border border-x-0 border-t-0 border-b-gray-500 pb-2-em">
         <h1 className="mb-4-em text-4xl-em font-bold">{`${firstName} ${lastName}`}</h1>
         <h2>{position || "Senior Frontend Developer"}</h2>
@@ -96,7 +108,7 @@ export default function Notion({
             <p className="mb-2-em font-bold">Bio</p>
             <p>{usableProfileDescription}</p>
           </div>
-          <div className="mt-8-em">
+          <div className="mt-8-em" ref={jobExperienceRef}>
             <p className="mb-2-em font-bold">Work Experience</p>
             {usableJobExperience?.map((jobExperience, index) => (
               <div key={index} className="mb-8-em flex flex-col gap-4-em">
@@ -108,9 +120,12 @@ export default function Notion({
                 </div>
                 <div>
                   <p className="text-gray-700">
-                    {convertDateToReadable(jobExperience.from)} - {convertDateToReadable(jobExperience.to)}
+                    {convertDateToReadable(jobExperience.from)} -{" "}
+                    {convertDateToReadable(jobExperience.to)}
                   </p>
-                  <p className="mt-2 mb-4 font-medium">{jobExperience.description}</p>
+                  <p className="mt-2 mb-4 font-medium">
+                    {jobExperience.description}
+                  </p>
                   <div className="bullet-points pl-4-em">
                     <ul className="list-inside list-disc">
                       {jobExperience.jobPoints.map((jobPoint, index) => (

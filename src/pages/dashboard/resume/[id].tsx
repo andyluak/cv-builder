@@ -33,8 +33,8 @@ function Resume() {
   } = resume;
   const profileDescription = profileDescriptions;
   return (
-    <div className="grid grid-cols-2 gap-8 p-6">
-      <aside className="flex flex-col gap-6">
+    <div className="grid grid-cols-5 gap-8 p-6">
+      <aside className="flex flex-col gap-6 col-span-2">
         <Accordion
           triggerComponent="User Info"
           value="userInfo"
@@ -89,7 +89,7 @@ function Resume() {
           </div>
         </Accordion>
       </aside>
-      <div>
+      <div className="col-span-3">
         <TemplateDisplayer
           firstName={firstName}
           lastName={lastName}

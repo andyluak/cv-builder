@@ -68,6 +68,20 @@ const SavedEducationSchema = EducationSchema.extend({
   id: z.string(),
 });
 
+const SkillSchema = z.object({
+  label: z.string(),
+  level: z.number().optional(),
+})
+
+const SavedSkillSchema = SkillSchema.extend({
+  id: z.string(),
+  userId: z.string(),
+  resumeId: z.string(),
+});
+
+export type ISkill = z.infer<typeof SkillSchema>;
+export type ISavedSkill = z.infer<typeof SavedSkillSchema>;
+
 export type IEducation = z.infer<typeof EducationSchema>;
 export type ISavedEducation = z.infer<typeof SavedEducationSchema>;
 

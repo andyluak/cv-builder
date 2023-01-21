@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
 import React from "react";
 
+import EducationComponent from "src/components/Resume/Education/EducationComponent";
+import EducationForm from "src/components/Resume/Education/EducationForm";
+import JobComponent from "src/components/Resume/Job/JobComponent";
+import JobForm from "src/components/Resume/Job/JobForm";
 import BasicInformation from "src/components/Resume/ResumeInfo/BasicInformation";
-import EducationComponent from "src/components/Resume/ResumeInfo/Education/EducationComponent";
-import EducationForm from "src/components/Resume/ResumeInfo/Education/EducationForm";
-import JobComponent from "src/components/Resume/ResumeInfo/Job/JobComponent";
-import JobForm from "src/components/Resume/ResumeInfo/Job/JobForm";
+import SkillForm from "src/components/Resume/Skills/SkillForm";
 import TemplateDisplayer from "src/components/TemplateDisplayer";
 import MainLayout from "src/components/layout/Main";
 import Accordion from "src/components/ui/Accordion";
@@ -34,6 +35,7 @@ function Resume() {
     template,
   } = resume;
   const profileDescription = profileDescriptions;
+
   return (
     <div className="grid grid-cols-5 gap-8 p-6">
       <aside className="col-span-2 flex flex-col gap-6">
@@ -131,6 +133,15 @@ function Resume() {
               <EducationForm isNewEducation resumeId={id} />
             </Accordion>
           </div>
+        </Accordion>
+        <Accordion
+          triggerComponent="Skills"
+          value="userInfo"
+          type="single"
+          collapsible
+          hasChevron
+        >
+          <SkillForm resumeId={id} skills={skills} />
         </Accordion>
       </aside>
       <div className="col-span-3">

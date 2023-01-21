@@ -15,9 +15,9 @@ const EducationComponent = ({
         <>
           <p className="font-bold">{education?.school}</p>
           <p className="font-light">
-            <p>
+            <span>
               {education?.fieldOfStudy} | {education?.degree}
-            </p>
+            </span>
           </p>
         </>
       )}

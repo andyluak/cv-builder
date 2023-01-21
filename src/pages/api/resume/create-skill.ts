@@ -3,7 +3,7 @@ import { prisma } from "src/server/db/client";
 
 import { getServerAuthSession } from "../../../server/common/get-server-auth-session";
 
-const editEducation = async (req: NextApiRequest, res: NextApiResponse) => {
+const createSkill = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerAuthSession({ req, res });
   if (!session) {
     res.status(401).json({
@@ -17,46 +17,38 @@ const editEducation = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(405).json({ error: "Method Not Allowed" });
     return;
   }
-
-  const resumeId = req.body.resumeId;
-  const userId = session?.user?.id;
-  if (!resumeId) {
-    res.status(400).json({ error: "Missing required fields" });
-    return;
-  }
-
+  const {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    user: { id: userId },
+  } = session;
+  const {
+    skill,
+    resumeId,
+  }: {
+    skill: string;
+    resumeId: string;
+  } = req.body;
   try {
-    const { school, degree, fieldOfStudy, from, location, to, current } =
-      req.body;
-    await prisma.resume.update({
+    console.log(skill, resumeId, userId)
+    const resume = await prisma.resume.update({
       where: {
         id: resumeId,
       },
       data: {
-        educations: {
+        skills: {
           create: {
-            school,
-            degree,
-            fieldOfStudy,
-            from,
-            location,
-            to,
-            current,
-            user: {
-              connect: {
-                id: userId,
-              },
-            },
+            label: skill,
+            userId,
           },
         },
       },
     });
-
-    res.status(200).json("success");
+    res.status(200).json(resume);
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ error });
   }
 };
 
-export default editEducation;
+export default createSkill;

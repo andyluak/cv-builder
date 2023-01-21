@@ -2,6 +2,8 @@ import { useRouter } from "next/router";
 import React from "react";
 
 import BasicInformation from "src/components/Resume/ResumeInfo/BasicInformation";
+import EducationComponent from "src/components/Resume/ResumeInfo/Education/EducationComponent";
+import EducationForm from "src/components/Resume/ResumeInfo/Education/EducationForm";
 import JobComponent from "src/components/Resume/ResumeInfo/Job/JobComponent";
 import JobForm from "src/components/Resume/ResumeInfo/Job/JobForm";
 import TemplateDisplayer from "src/components/TemplateDisplayer";
@@ -11,7 +13,7 @@ import Loading from "src/components/ui/Loading";
 
 import useResume from "src/queries/useResume";
 
-import type { ISavedJob } from "src/types/resume";
+import type { ISavedEducation, ISavedJob } from "src/types/resume";
 
 function Resume() {
   const router = useRouter();
@@ -31,6 +33,7 @@ function Resume() {
     profileDescriptions,
     template,
   } = resume;
+  console.log(educations);
   const profileDescription = profileDescriptions;
   return (
     <div className="grid grid-cols-5 gap-8 p-6">
@@ -80,6 +83,48 @@ function Resume() {
               ))}
             <Accordion
               triggerComponent={<JobComponent newJob job={undefined} />}
+              value={"newJob"}
+              type="single"
+              collapsible
+            >
+              <JobForm job={{}} newJob resumeId={id} />
+            </Accordion>
+          </div>
+        </Accordion>
+
+        <Accordion
+          triggerComponent="Education"
+          value="userInfo"
+          type="single"
+          collapsible
+          hasChevron
+        >
+          <div className="flex flex-col gap-2">
+            {educations
+              .sort(
+                (
+                  { from: aFrom }: { from: string },
+                  { from: bFrom }: { from: string }
+                ) => new Date(aFrom).getTime() - new Date(bFrom).getTime()
+              )
+              .map((education: ISavedEducation) => (
+                <Accordion
+                  key={education.id}
+                  triggerComponent={
+                    <EducationComponent
+                      isNewEducation={false}
+                      education={education}
+                    />
+                  }
+                  value={education.id}
+                  type="single"
+                  collapsible
+                >
+                  <EducationForm education={education} resumeId={id} />
+                </Accordion>
+              ))}
+            <Accordion
+              triggerComponent={<EducationComponent isNewEducation />}
               value={"newJob"}
               type="single"
               collapsible

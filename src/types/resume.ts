@@ -64,7 +64,13 @@ const SavedJobSchema = JobSchema.extend({
   id: z.string(),
 });
 
+const SavedEducationSchema = EducationSchema.extend({
+  id: z.string(),
+});
+
 export type IEducation = z.infer<typeof EducationSchema>;
+export type ISavedEducation = z.infer<typeof SavedEducationSchema>;
+
 export type IJobPoint = z.infer<typeof JobPointSchema>;
 
 export type IJob = z.infer<typeof JobSchema>;

@@ -8,9 +8,6 @@ const template = ({
   educations,
   skills,
 }) => {
-
-  
-
   return `
 <div class="bg-gray-100 p-8 text-black">
   <div class="border border-x-0 border-t-0 border-b-gray-500 pb-2">
@@ -45,14 +42,15 @@ const template = ({
             </div>
             <div>
               <p class="text-gray-700">
-                ${jobExperience.startDate} - ${jobExperience.endDate}
+                ${jobExperience.from} - ${jobExperience.to}
               </p>
               <div class="bullet-points pl-4">
+                <p>${jobExperience.description}</p>
                 <ul class="list-inside list-disc">
                   ${jobExperience.jobPoints
                     .map(
                       (jobPoint, index) => `
-                  <li key="${index}">${jobPoint}</li>
+                  <li key="${index}">${jobPoint.point}</li>
                   `
                     )
                     .join("")}

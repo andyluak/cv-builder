@@ -40,7 +40,6 @@ function EducationForm({
 
     const { school, degree, fieldOfStudy, from, to, location } =
       educationData as ISavedEducation;
-    console.log(educationData);
     if (!school || !degree || !fieldOfStudy || !from || !to || !location)
       return;
 

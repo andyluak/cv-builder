@@ -33,7 +33,6 @@ function Resume() {
     profileDescriptions,
     template,
   } = resume;
-  console.log(educations);
   const profileDescription = profileDescriptions;
   return (
     <div className="grid grid-cols-5 gap-8 p-6">

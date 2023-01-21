@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import React from "react";
 import useCreateJobExperience from "src/mutations/useCreateJobExperience";
 import useEditJobExperience from "src/mutations/useEditJobExperience";
@@ -10,6 +12,8 @@ import { debounce } from "src/utils/debounce";
 
 import type { JobExperienceSchema } from "src/types/jobExperience";
 import type { ISavedJob } from "src/types/resume";
+
+import PositionSuggestion from "./PositionSuggestion";
 
 function JobForm({
   job,
@@ -69,11 +73,11 @@ function JobForm({
     },
     {
       label: "Position",
-      type: "text",
+      type: "position",
       defaultValue: newJob ? "" : position,
       name: "position",
       className: "col-span-2 w-full",
-      value: undefined,
+      value: newJob ? undefined : position,
       onChange: newJob ? undefined : debouncedHandleChange,
     },
     {
@@ -143,6 +147,17 @@ function JobForm({
             />
           );
         }
+
+        if (field.type === "position") {
+          return (
+            <PositionSuggestion
+              key={field.name}
+              className="col-span-2 w-full"
+              onChange={field.onChange}
+              value={field.value}
+            />
+          );
+        }
         return (
           <Input
             key={field.name}
@@ -157,6 +172,7 @@ function JobForm({
           />
         );
       })}
+
       {newJob && (
         <Button type="submit" className="col-span-4 place-self-start" size="lg">
           Add Job

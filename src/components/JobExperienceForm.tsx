@@ -14,57 +14,28 @@ type Props = {
     startDate: string;
     endDate: string;
     description: string;
-    jobPoints: string[];
+    jobPoints: {
+      point: string;
+    }[];
   };
-  setJobExperience: React.Dispatch<
-    React.SetStateAction<{
-      company: string;
-      position: string;
-      location: string;
-      startDate: string;
-      endDate: string;
-      description: string;
-      jobPoints: string[];
-    }>
-  >;
-
-  jobExperiences: {
-    company: string;
-    position: string;
-    location: string;
-    startDate: string;
-    endDate: string;
-    description: string;
-    jobPoints: string[];
-  }[];
-  setJobExperiences: React.Dispatch<
-    React.SetStateAction<
-      {
-        company: string;
-        position: string;
-        location: string;
-        startDate: string;
-        endDate: string;
-        description: string;
-      }[]
-    >
-  >;
   onHandleJobExperienceSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   onHandleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function JobExperienceForm({
   jobExperience,
-  setJobExperience,
-  jobExperiences,
-  setJobExperiences,
   onHandleJobExperienceSubmit,
   onHandleInputChange,
 }: Props) {
-  const onHandleSubmit = (e) => {
+  const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onHandleJobExperienceSubmit(e);
   };
+
+  console.log(jobExperience);
+  const formattedJobPoints = jobExperience.jobPoints?.map(({ point }) => {
+    return `${point}`;
+  });
 
   return (
     <form
@@ -133,11 +104,10 @@ export default function JobExperienceForm({
       />
       <Textarea
         label="Job Points"
-        placeholder={resumeBuilderContent.jobExperience.jobBulletPoints}
+        defaultValue={formattedJobPoints.join("")}
         name="jobPoints"
-        value={jobExperience.jobPoints}
-        className="col-span-4"
-        required
+        className="col-span-4 w-full"
+        value={formattedJobPoints.join("")}
         onChange={onHandleInputChange}
       />
       <div className="col-span-4 flex flex-row justify-between">

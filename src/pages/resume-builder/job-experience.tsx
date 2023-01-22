@@ -18,9 +18,11 @@ export default function JobExperience() {
     startDate: "",
     endDate: "",
     description: "",
-    jobPoints: [{
-      point: "",
-    }],
+    jobPoints: [
+      {
+        point: "",
+      },
+    ],
   });
   const [isAddingJobExperience, setIsAddingJobExperience] =
     React.useState(false);
@@ -33,10 +35,14 @@ export default function JobExperience() {
     // @ts-ignore
     const jobPoints = data.jobPoints.split("\n");
     const filteredJobPoints = jobPoints.filter(
-      (jobPoint: string) => jobPoint !== ""
+      (jobPoint: { point: string }) => jobPoint?.point !== ""
     );
 
-    const newJobExperience = { ...data, jobPoints: filteredJobPoints };
+    const formattedJobPoints = filteredJobPoints.map((jobPoint: string) => {
+      return { point: jobPoint };
+    });
+
+    const newJobExperience = { ...data, jobPoints: formattedJobPoints };
     setJobExperiences([...jobExperiences, newJobExperience]);
     setJobExperience({
       company: "",
@@ -45,9 +51,11 @@ export default function JobExperience() {
       startDate: "",
       endDate: "",
       description: "",
-      jobPoints: [{
-        point: "",
-      }],
+      jobPoints: [
+        {
+          point: "",
+        },
+      ],
     });
     setIsAddingJobExperience(false);
   };
@@ -56,11 +64,13 @@ export default function JobExperience() {
     if (e.target.name === "jobPoints") {
       setJobExperience({
         ...jobExperience,
-        [e.target.name]: e.target.value.split("\n"),
+        jobPoints: [{ point: e.target.value }],
       });
+    } else {
+      setJobExperience({ ...jobExperience, [e.target.name]: e.target.value });
     }
-    setJobExperience({ ...jobExperience, [e.target.name]: e.target.value });
   };
+
   return (
     <div className="flex flex-col items-center gap-8 p-8">
       <div className="grid-row-6 grid gap-8">
@@ -109,9 +119,6 @@ export default function JobExperience() {
       {jobExperiences.length === 0 && (
         <JobExperienceForm
           jobExperience={jobExperience}
-          setJobExperience={setJobExperience}
-          jobExperiences={jobExperiences}
-          setJobExperiences={setJobExperiences}
           onHandleJobExperienceSubmit={onHandleJobExperienceSubmit}
           onHandleInputChange={onHandleInputChange}
         />
@@ -120,9 +127,6 @@ export default function JobExperience() {
       {isAddingJobExperience && (
         <JobExperienceForm
           jobExperience={jobExperience}
-          setJobExperience={setJobExperience}
-          jobExperiences={jobExperiences}
-          setJobExperiences={setJobExperiences}
           onHandleJobExperienceSubmit={onHandleJobExperienceSubmit}
           onHandleInputChange={onHandleInputChange}
         />

@@ -1,0 +1,94 @@
+{
+  "userInfo": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "position": "Software Engineer",
+    "phone": "555-555-5555",
+    "email": "john.doe@gmail.com",
+    "profileDescription": "I am a software engineer at Google"
+  },
+  "jobExperiences": [
+    {
+      "company": "Google",
+      "position": "Software Engineer",
+      "from": "2010-01-01",
+      "to": "2012-01-01",
+      "description": "I was a software engineer at Google",
+      "jobPoints": [
+        {
+          "point": "I was a software engineer at Google"
+        },
+        {
+          "point": "I was a software engineer at Google"
+        }
+      ]
+    },
+    {
+      "company": "Facebook",
+      "position": "Software Engineer",
+      "from": "2012-01-01",
+      "to": "2014-01-01",
+      "description": "I was a software engineer at Facebook",
+      "jobPoints": [
+        {
+          "point": "I was a software engineer at Facebook"
+        },
+        {
+          "point": "I was a software engineer at Facebook"
+        }
+      ]
+    }
+  ],
+  "educations": [
+    {
+      "school": "University of California",
+      "degree": "Bachelor of Science",
+      "from": "2006-01-01",
+      "to": "2010-01-01",
+      "description": "I studied Computer Science at University of California",
+      "educationPoints": [
+        {
+          "point": "I studied Computer Science at University of California"
+        },
+        {
+          "point": "I studied Computer Science at University of California"
+        }
+      ]
+    },
+    {
+      "school": "Stanford University",
+      "degree": "Master of Science",
+      "from": "2010-01-01",
+      "to": "2012-01-01",
+      "description": "I studied Computer Science at Stanford University",
+      "educationPoints": [
+        {
+          "point": "I studied Computer Science at Stanford University"
+        },
+        {
+          "point": "I studied Computer Science at Stanford University"
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "label": "Java"
+    },
+    {
+      "label": "C++"
+    },
+    {
+      "label": "Python"
+    },
+    {
+      "label": "JavaScript"
+    },
+    {
+      "label": "HTML"
+    },
+    {
+      "label": "CSS"
+    }
+  ]
+}

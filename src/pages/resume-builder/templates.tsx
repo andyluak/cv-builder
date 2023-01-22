@@ -9,7 +9,7 @@ import Input from "src/components/ui/Input";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";
 
-const templateList = ["Notion", "Professional"];
+const templateList = ["Notion"];
 
 function Template() {
   const { setTemplate, userInfo, setUserInfo } = useResumeContext();
@@ -55,7 +55,7 @@ function Template() {
                 <Link href="/resume-builder/basic-information">
                   <Button
                     className="absolute left-1/2 top-1/2 min-w-[150px] -translate-x-1/2 -translate-y-1/2"
-                    onClick={() => setTemplate("notion")}
+                    onClick={() => setTemplate("Notion")}
                     variant="primary"
                     size="md"
                   >
@@ -66,8 +66,10 @@ function Template() {
             )}
             template={template}
             style={{
-              transform: "scale(0.5,0.5)",
-              transformOrigin: "top left",
+              width: "100%",
+              maxWidth: "800px",
+              height: "100%",
+              fontSize: "0.3rem",
             }}
             firstName={userInfo.firstName}
             lastName={userInfo.lastName}

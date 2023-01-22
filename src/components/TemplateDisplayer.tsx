@@ -1,5 +1,6 @@
 import cx from "clsx";
 import React, { useMemo, useState } from "react";
+import templateDefault from "static/templateDefaults.json";
 
 import type { IEducation, IJob } from "src/types/resume";
 
@@ -66,16 +67,19 @@ function TemplateDisplayer({
           >
             <TemplateComponent
               style={style}
-              firstName={firstName}
-              lastName={lastName}
-              position={position}
+              firstName={firstName || templateDefault.userInfo.firstName}
+              lastName={lastName || templateDefault.userInfo.lastName}
+              position={position || templateDefault.userInfo.position}
               address={address}
-              phone={phone}
-              email={email}
-              jobExperiences={jobExperiences}
-              educations={educations}
+              phone={phone || templateDefault.userInfo.phone}
+              email={email || templateDefault.userInfo.email}
+              jobExperiences={jobExperiences || templateDefault.jobExperiences}
+              educations={educations || templateDefault.educations}
               skills={skills}
-              profileDescription={profileDescription?.text}
+              profileDescription={
+                profileDescription?.text || profileDescription ||
+                templateDefault.userInfo.profileDescription
+              }
               description={description}
             />
           </div>

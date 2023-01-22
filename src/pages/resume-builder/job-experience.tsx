@@ -18,7 +18,9 @@ export default function JobExperience() {
     startDate: "",
     endDate: "",
     description: "",
-    jobPoints: [""],
+    jobPoints: [{
+      point: "",
+    }],
   });
   const [isAddingJobExperience, setIsAddingJobExperience] =
     React.useState(false);
@@ -43,7 +45,9 @@ export default function JobExperience() {
       startDate: "",
       endDate: "",
       description: "",
-      jobPoints: [""],
+      jobPoints: [{
+        point: "",
+      }],
     });
     setIsAddingJobExperience(false);
   };
@@ -63,11 +67,9 @@ export default function JobExperience() {
         <h1 className="max-w-4xl text-4xl">
           {resumeBuilderContent.jobExperience.header}
         </h1>
-        <div className="flex flex-col gap-4">
-          <p className="max-w-4xl text-gray-300">
-            {resumeBuilderContent.jobExperience.body}
-          </p>
-          <ul className="list-inside list-disc text-sm text-gray-300">
+        <div className="flex flex-col gap-4 text-gray-400">
+          <p className="max-w-4xl">{resumeBuilderContent.jobExperience.body}</p>
+          <ul className="list-inside list-disc text-sm">
             {resumeBuilderContent.jobExperience.tips.map((tip) => {
               return <li key={tip}>{tip}</li>;
             })}

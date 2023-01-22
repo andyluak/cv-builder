@@ -3,18 +3,18 @@ import React, { useEffect } from "react";
 const ResumeContext = React.createContext();
 
 const ResumeProvider = ({ children }) => {
-  const [template, setTemplate] = React.useState("notion");
+  const [template, setTemplate] = React.useState("Notion");
   const [userInfo, setUserInfo] = React.useState({
     firstName: "",
     lastName: "",
     position: "",
     phone: "",
     email: "",
+    profileDescription: "",
   });
   const [jobExperiences, setJobExperiences] = React.useState([]);
   const [educations, setEducations] = React.useState([]);
   const [skills, setSkills] = React.useState([]);
-  const [profileDescription, setProfileDescription] = React.useState("");
 
   useEffect(() => {
     const userInfoFromLocalStorage = localStorage.getItem("userInfo");
@@ -23,8 +23,6 @@ const ResumeProvider = ({ children }) => {
     const educationsFromLocalStorage = localStorage.getItem("educations");
     const templateFromLocalStorage = localStorage.getItem("template");
     const skillsFromLocalStorage = localStorage.getItem("skills");
-    const profileDescriptionFromLocalStorage =
-      localStorage.getItem("profileDescription");
 
     if (userInfoFromLocalStorage) {
       setUserInfo(JSON.parse(userInfoFromLocalStorage));
@@ -44,10 +42,6 @@ const ResumeProvider = ({ children }) => {
 
     if (skillsFromLocalStorage) {
       setSkills(JSON.parse(skillsFromLocalStorage));
-    }
-
-    if (profileDescriptionFromLocalStorage) {
-      setProfileDescription(profileDescriptionFromLocalStorage);
     }
   }, []);
 
@@ -81,12 +75,6 @@ const ResumeProvider = ({ children }) => {
     }
   }, [skills]);
 
-  useEffect(() => {
-    if (profileDescription) {
-      localStorage.setItem("profileDescription", profileDescription);
-    }
-  }, [profileDescription]);
-
   const clearAllData = () => {
     localStorage.clear();
     setUserInfo({
@@ -95,12 +83,12 @@ const ResumeProvider = ({ children }) => {
       position: "",
       phone: "",
       email: "",
+      profileDescription: "",
     });
     setJobExperiences([]);
     setEducations([]);
-    setTemplate("notion");
+    setTemplate("Notion");
     setSkills([]);
-    setProfileDescription("");
   }
 
   const value = {
@@ -114,8 +102,6 @@ const ResumeProvider = ({ children }) => {
     setTemplate,
     skills,
     setSkills,
-    profileDescription,
-    setProfileDescription,
     clearAllData
   };
 

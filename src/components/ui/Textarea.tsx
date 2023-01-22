@@ -9,7 +9,8 @@ type Props = {
   defaultValue?: string;
   className?: string;
   required?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onChange?: Function;
 };
 
 const Textarea = ({

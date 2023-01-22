@@ -15,9 +15,10 @@ type Props = {
   email?: string;
   jobExperiences?: IJob[];
   educations?: IEducation[];
-  skills?: string[];
+  skills?: {
+    label: string;
+  }[];
   profileDescription?: string;
-  description?: string;
 };
 
 export default function Notion({
@@ -32,59 +33,7 @@ export default function Notion({
   educations,
   skills,
   profileDescription,
-  description,
 }: Props) {
-  const defaultWorkExperience = [
-    {
-      company: "Company",
-      position: "Position",
-      location: "Location",
-      startDate: "Start Date",
-      endDate: "End Date",
-      description: "Description",
-      jobPoints: ["Job Point 1", "Job Point 2"],
-    },
-    {
-      company: "Company",
-      position: "Position",
-      location: "Location",
-      startDate: "Start Date",
-      endDate: "End Date",
-      description: "Description",
-      jobPoints: ["Job Point 1", "Job Point 2"],
-    },
-  ];
-
-  const defaultEducation = [
-    {
-      school: "School",
-      degree: "Degree",
-      fieldOfStudy: "Field of Study",
-      from: "From",
-      to: "To",
-      description: "Description",
-    },
-    {
-      school: "School",
-      degree: "Degree",
-      fieldOfStudy: "Field of Study",
-      from: "From",
-      to: "To",
-      description: "Description",
-    },
-  ];
-
-  const defaultProfileDescription = `I am Alex, a web developer with a passion for building and maintaining scalable, user-friendly websites and applications. I have a strong background in the latest technologies, and a talent for problem-solving. As a web developer, I am responsible for designing, building, and maintaining web-based solutions for a variety of clients.`;
-
-  const defaultDescription =
-    "This is where you can write a description about what you did at your job.";
-
-  const usableJobExperience = jobExperiences || defaultWorkExperience;
-  const usableEducation = educations || defaultEducation;
-  const usableProfileDescription =
-    profileDescription || defaultProfileDescription;
-  const usableDescription = description || defaultDescription;
-
   const jobExperienceRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -106,11 +55,11 @@ export default function Notion({
         <div className="col-span-2 grid pr-12-em">
           <div>
             <p className="mb-2-em font-bold">Bio</p>
-            <p>{usableProfileDescription}</p>
+            <p>{profileDescription}</p>
           </div>
           <div className="mt-8-em" ref={jobExperienceRef}>
             <p className="mb-2-em font-bold">Work Experience</p>
-            {usableJobExperience?.map((jobExperience, index) => (
+            {jobExperiences?.map((jobExperience, index) => (
               <div key={index} className="mb-8-em flex flex-col gap-4-em">
                 <div>
                   <p className="font-bold">
@@ -123,7 +72,7 @@ export default function Notion({
                     {convertDateToReadable(jobExperience.from)} -{" "}
                     {convertDateToReadable(jobExperience.to)}
                   </p>
-                  <p className="mt-2 mb-4 font-medium">
+                  <p className="mt-2-em mb-4-em font-medium">
                     {jobExperience.description}
                   </p>
                   <div className="bullet-points pl-4-em">
@@ -137,10 +86,10 @@ export default function Notion({
               </div>
             ))}
           </div>
-          <div className="mt-8-em">
+          <div className="mt-6-em">
             <p className="mb-2-em font-bold">Education</p>
             <div className="flex flex-col gap-4-em">
-              {usableEducation?.map((education, index) => (
+              {educations?.map((education, index) => (
                 <div key={index} className="flex flex-col">
                   <div>
                     <p className="font-bold">{education.school}</p>

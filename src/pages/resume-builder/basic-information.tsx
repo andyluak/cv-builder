@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { useResumeContext } from "src/context/ResumeContext";
 
 import BasicInformation from "src/components/Resume/ResumeInfo/BasicInformation";
@@ -11,7 +11,6 @@ import resumeBuilderContent from "content/resumeBuilderContent.json";
 
 function BasicInformationPage() {
   const { userInfo, setUserInfo, template } = useResumeContext();
-  const [showButton, setShowButton] = useState(false);
 
   const handleUserInfoChange = (e: { target: { name: any; value: any } }) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });

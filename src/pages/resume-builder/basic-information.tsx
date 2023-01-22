@@ -6,8 +6,6 @@ import BasicInformation from "src/components/Resume/ResumeInfo/BasicInformation"
 import TemplateDisplayer from "src/components/TemplateDisplayer";
 import MainLayout from "src/components/layout/Main";
 import Button from "src/components/ui/Button";
-import Input from "src/components/ui/Input";
-import Textarea from "src/components/ui/Textarea";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";
 
@@ -29,17 +27,17 @@ function BasicInformationPage() {
         </p>
       </div>
 
-        <BasicInformation
-          className="w-2/3"
-          firstName={userInfo.firstName}
-          lastName={userInfo.lastName}
-          position={userInfo.position}
-          phone={userInfo.phone}
-          email={userInfo.email}
-          profileDescription={userInfo.profileDescription}
-          onChange={handleUserInfoChange}
-          controlled
-        />
+      <BasicInformation
+        className="w-2/3"
+        firstName={userInfo.firstName}
+        lastName={userInfo.lastName}
+        position={userInfo.position}
+        phone={userInfo.phone}
+        email={userInfo.email}
+        profileDescription={userInfo.profileDescription}
+        onChange={handleUserInfoChange}
+        controlled
+      />
 
       <div
         className="relative w-[200px] cursor-pointer overflow-hidden outline-red-500 hover:outline-double hover:outline-2"

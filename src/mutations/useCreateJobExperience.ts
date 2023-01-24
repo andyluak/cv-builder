@@ -1,5 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+type MutationProps = {
+  resumeId: string;
+  company: string | FormDataEntryValue;
+  position: string | FormDataEntryValue;
+  to: string | FormDataEntryValue;
+  from: string | FormDataEntryValue;
+  description: string | FormDataEntryValue;
+  jobPoints: string[] | FormDataEntryValue;
+  location: string | FormDataEntryValue;
+}
+
 function useCreateJobExperience() {
   const queryClient = useQueryClient();
   const createMutation = useMutation({
@@ -12,16 +23,7 @@ function useCreateJobExperience() {
       description,
       jobPoints,
       location,
-    }: {
-      resumeId: string;
-      company: string;
-      position: string;
-      to: string;
-      from: string;
-      description: string;
-      jobPoints: string[];
-      location: string;
-    }) => {
+    }: MutationProps) => {
       const res = await fetch("/api/resume/create-job-experience", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

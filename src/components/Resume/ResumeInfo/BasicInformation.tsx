@@ -125,6 +125,7 @@ function BasicInformation({
               className={field.className}
               value={field.value}
               onChange={field.onChange}
+              controlled
             />
           );
         }

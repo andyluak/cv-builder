@@ -1,66 +1,38 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-nocheck
 import React from "react";
 
 import Button from "src/components/ui/Button";
 import Input from "src/components/ui/Input";
 import Textarea from "src/components/ui/Textarea";
 
-import useCreateJobExperience from "src/mutations/useCreateJobExperience";
-import useEditJobExperience from "src/mutations/useEditJobExperience";
-
 import { debounce } from "src/utils/debounce";
 
-import type { JobExperienceSchema } from "src/types/jobExperience";
 import type { ISavedJob } from "src/types/resume";
 
 import PositionSuggestion from "./PositionSuggestion";
+
+type JobFormProps = {
+  job?: ISavedJob | Record<string, never>;
+  resumeId: string;
+  newJob?: boolean;
+  handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+};
 
 function JobForm({
   job,
   resumeId,
   newJob = false,
-}: {
-  job?: ISavedJob | Record<string, never>;
-  resumeId: string;
-  newJob?: boolean;
-}) {
-  const editJob = useEditJobExperience();
-  const createJob = useCreateJobExperience();
-
+  handleChange,
+  handleSubmit,
+}: JobFormProps): JSX.Element {
   const { id, company, position, from, to, description, jobPoints, location } =
     job;
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    editJob.mutate({ id, [name]: value, resumeId });
-  };
+
   const debouncedHandleChange = debounce(handleChange, 500);
 
   const formattedJobPoints = jobPoints?.map(({ point }) => {
     return `${point}\n`;
   });
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const jobData = Object.fromEntries(new FormData(e.currentTarget).entries());
-
-    const { company, position, from, to, description, jobPoints, location } =
-      jobData as JobExperienceSchema;
-
-    if (!company || !position || !from || !to || !description || !jobPoints)
-      return;
-
-    createJob.mutate({
-      company,
-      position,
-      from,
-      to,
-      description,
-      jobPoints,
-      location,
-      resumeId,
-    });
-  };
 
   const formFields = [
     {

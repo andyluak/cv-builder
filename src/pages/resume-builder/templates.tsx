@@ -34,6 +34,7 @@ function Template() {
           name="firstName"
           className="w-[350px] max-w-[350px]"
           onChange={handleUserInfoChange}
+          controlled
         />
         <Input
           label="Last Name"
@@ -43,6 +44,7 @@ function Template() {
           name="lastName"
           className="w-[350px] max-w-[350px]"
           onChange={handleUserInfoChange}
+          controlled
         />
       </div>
       <div className="grid grid-cols-3 gap-16">

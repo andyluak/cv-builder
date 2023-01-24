@@ -14,13 +14,48 @@ import Loading from "src/components/ui/Loading";
 
 import useResume from "src/queries/useResume";
 
+import useCreateJobExperience from "src/mutations/useCreateJobExperience";
+import useEditJobExperience from "src/mutations/useEditJobExperience";
+
 import type { ISavedEducation, ISavedJob } from "src/types/resume";
 
 function Resume() {
   const router = useRouter();
-  const id = router.query.id as string;
+  const resumeId = router.query.id as string;
+  const editJob = useEditJobExperience();
+  const createJob = useCreateJobExperience();
 
-  const { isLoading, isError, resume } = useResume(id);
+  const handleJobSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const jobData = Object.fromEntries(new FormData(e.currentTarget).entries());
+
+    const { company, position, from, to, description, jobPoints, location } =
+      jobData;
+
+    if (
+      !company ||
+      !position ||
+      !from ||
+      !to ||
+      !description ||
+      !jobPoints ||
+      !location
+    )
+      return;
+
+    createJob.mutate({
+      company,
+      position,
+      from,
+      to,
+      description,
+      jobPoints,
+      location,
+      resumeId,
+    });
+  };
+
+  const { isLoading, isError, resume } = useResume(resumeId);
 
   if (isLoading) return <Loading message="Loading resume..." />;
 
@@ -53,7 +88,7 @@ function Resume() {
             phone={phone}
             email={email}
             profileDescription={profileDescription.text}
-            resumeId={id}
+            resumeId={resumeId}
           />
         </Accordion>
         <Accordion
@@ -71,24 +106,42 @@ function Resume() {
                   { from: bFrom }: { from: string }
                 ) => new Date(aFrom).getTime() - new Date(bFrom).getTime()
               )
-              .map((job: ISavedJob) => (
-                <Accordion
-                  key={job.id}
-                  triggerComponent={<JobComponent newJob={false} job={job} />}
-                  value={job.id}
-                  type="single"
-                  collapsible
-                >
-                  <JobForm job={job} resumeId={id} />
-                </Accordion>
-              ))}
+              .map((job: ISavedJob) => {
+                const handleJobChange = (
+                  e: React.ChangeEvent<HTMLInputElement>
+                ) => {
+                  const { name, value } = e.target;
+                  const { id } = job;
+                  editJob.mutate({ id, [name]: value, resumeId });
+                };
+                return (
+                  <Accordion
+                    key={job.id}
+                    triggerComponent={<JobComponent newJob={false} job={job} />}
+                    value={job.id}
+                    type="single"
+                    collapsible
+                  >
+                    <JobForm
+                      job={job}
+                      resumeId={resumeId}
+                      handleChange={handleJobChange}
+                    />
+                  </Accordion>
+                );
+              })}
             <Accordion
               triggerComponent={<JobComponent newJob job={undefined} />}
               value={"newJob"}
               type="single"
               collapsible
             >
-              <JobForm job={{}} newJob resumeId={id} />
+              <JobForm
+                job={{}}
+                newJob
+                resumeId={resumeId}
+                handleSubmit={handleJobSubmit}
+              />
             </Accordion>
           </div>
         </Accordion>
@@ -121,7 +174,7 @@ function Resume() {
                   type="single"
                   collapsible
                 >
-                  <EducationForm education={education} resumeId={id} />
+                  <EducationForm education={education} resumeId={resumeId} />
                 </Accordion>
               ))}
             <Accordion
@@ -130,7 +183,7 @@ function Resume() {
               type="single"
               collapsible
             >
-              <EducationForm isNewEducation resumeId={id} />
+              <EducationForm isNewEducation resumeId={resumeId} />
             </Accordion>
           </div>
         </Accordion>
@@ -141,7 +194,7 @@ function Resume() {
           collapsible
           hasChevron
         >
-          <SkillForm resumeId={id} skills={skills} />
+          <SkillForm resumeId={resumeId} skills={skills} />
         </Accordion>
       </aside>
       <div className="col-span-3">

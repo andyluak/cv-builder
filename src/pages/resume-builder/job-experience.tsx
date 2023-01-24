@@ -4,6 +4,7 @@ import { useResumeContext } from "src/context/ResumeContext";
 
 import JobExperiencePreview from "src/components/JobExperience";
 import JobExperienceForm from "src/components/JobExperienceForm";
+import JobForm from "src/components/Resume/Job/JobForm";
 import MainLayout from "src/components/layout/Main";
 import Button from "src/components/ui/Button";
 
@@ -123,6 +124,13 @@ export default function JobExperience() {
           onHandleInputChange={onHandleInputChange}
         />
       )}
+
+      <JobForm
+        newJob
+        job={{}}
+        onHandleJobExperienceSubmit={onHandleJobExperienceSubmit}
+        onHandleInputChange={onHandleInputChange}
+      />
 
       {isAddingJobExperience && (
         <JobExperienceForm

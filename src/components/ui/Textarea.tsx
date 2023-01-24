@@ -11,6 +11,7 @@ type Props = {
   required?: boolean;
   // eslint-disable-next-line @typescript-eslint/ban-types
   onChange?: Function;
+  controlled?: boolean;
 };
 
 const Textarea = ({
@@ -22,6 +23,7 @@ const Textarea = ({
   className,
   required,
   onChange,
+  controlled,
 }: Props) => {
   const textareaRef = useRef(null);
 
@@ -51,19 +53,33 @@ const Textarea = ({
   return (
     <div className={cx("flex flex-col", className)}>
       <label htmlFor={name}>{label}</label>
-      <textarea
-        className={cx(
-          "min-h-[150px] overflow-y-hidden rounded-md border border-gray-300 p-2 text-gray-800",
-          className
-        )}
-        placeholder={placeholder}
-        name={name}
-        value={value}
-        defaultValue={defaultValue}
-        onChange={handleTextAreaChange}
-        ref={textareaRef}
-        required={required}
-      />
+      {controlled ? (
+        <textarea
+          className={cx(
+            "min-h-[150px] overflow-y-hidden rounded-md border border-gray-300 p-2 text-gray-800",
+            className
+          )}
+          placeholder={placeholder}
+          name={name}
+          onChange={handleTextAreaChange}
+          ref={textareaRef}
+          required={required}
+          value={value}
+        />
+      ) : (
+        <textarea
+          className={cx(
+            "min-h-[150px] overflow-y-hidden rounded-md border border-gray-300 p-2 text-gray-800",
+            className
+          )}
+          placeholder={placeholder}
+          name={name}
+          defaultValue={defaultValue}
+          onChange={handleTextAreaChange}
+          ref={textareaRef}
+          required={required}
+        />
+      )}
     </div>
   );
 };

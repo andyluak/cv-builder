@@ -81,7 +81,6 @@ export default function JobExperience() {
   };
 
   const onHandleSavedJobInputChange = (e: any, id:string) => {
-    console.log(id)
     const updatedJobExperiences = jobExperiences.map(
       (jobExperience: ISavedJob) => {
         if (jobExperience.id === id) {

@@ -73,11 +73,9 @@ export default function JobExperience() {
         jobPoints: [{ point: e.target.value }],
       });
     } else {
-      console.log(e)
       setJobExperience({ ...jobExperience, [e.target.name]: e.target.value });
     }
   };
-  console.log(jobExperience);
   return (
     <div className="flex flex-col items-center gap-8 p-8">
       <div className="grid-row-6 grid gap-8">

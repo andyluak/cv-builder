@@ -1,3 +1,4 @@
+import cx from "clsx";
 import React from "react";
 
 import Button from "src/components/ui/Button";
@@ -15,6 +16,7 @@ type JobFormProps = {
   newJob?: boolean;
   handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+  className?: string;
 };
 
 function JobForm({
@@ -22,6 +24,7 @@ function JobForm({
   newJob = false,
   handleChange,
   handleSubmit,
+  className,
 }: JobFormProps): JSX.Element {
   const { id, company, position, from, to, description, jobPoints, location } =
     job;
@@ -100,7 +103,7 @@ function JobForm({
 
   return (
     <form
-      className="col-span-4 grid grid-cols-4 place-items-center gap-2"
+      className={cx("col-span-4 grid grid-cols-4 place-items-center gap-2", className)}
       onSubmit={newJob ? handleSubmit : undefined}
     >
       {formFields.map((field) => {

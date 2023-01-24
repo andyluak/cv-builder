@@ -115,6 +115,7 @@ export default function JobExperience() {
                 <JobForm
                   job={jobExperience}
                   handleChange={onHandleInputChange}
+                  className="w-1/2"
                 />
               </Accordion>
             )
@@ -136,6 +137,7 @@ export default function JobExperience() {
           job={{}}
           handleSubmit={onHandleJobExperienceSubmit}
           handleChange={onHandleInputChange}
+          className="w-1/2"
         />
       )}
 
@@ -145,6 +147,7 @@ export default function JobExperience() {
           job={{}}
           handleSubmit={onHandleJobExperienceSubmit}
           handleChange={onHandleInputChange}
+          className="w-1/2"
         />
       )}
       <div className="flex flex-row items-center justify-center gap-12">

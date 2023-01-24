@@ -31,6 +31,7 @@ function Template() {
           placeholder="First Name"
           type="text"
           value={userInfo.firstName}
+          defaultValue={userInfo.firstName}
           name="firstName"
           className="w-[350px] max-w-[350px]"
           onChange={handleUserInfoChange}
@@ -41,6 +42,7 @@ function Template() {
           placeholder="Last Name"
           type="text"
           value={userInfo.lastName}
+          defaultValue={userInfo.lastName}
           name="lastName"
           className="w-[350px] max-w-[350px]"
           onChange={handleUserInfoChange}

@@ -124,7 +124,6 @@ function Resume() {
                   >
                     <JobForm
                       job={job}
-                      resumeId={resumeId}
                       handleChange={handleJobChange}
                     />
                   </Accordion>
@@ -139,7 +138,6 @@ function Resume() {
               <JobForm
                 job={{}}
                 newJob
-                resumeId={resumeId}
                 handleSubmit={handleJobSubmit}
               />
             </Accordion>

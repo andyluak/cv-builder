@@ -128,8 +128,8 @@ export default function JobExperience() {
       <JobForm
         newJob
         job={{}}
-        onHandleJobExperienceSubmit={onHandleJobExperienceSubmit}
-        onHandleInputChange={onHandleInputChange}
+        handleSubmit={onHandleJobExperienceSubmit}
+        handleChange={onHandleInputChange}
       />
 
       {isAddingJobExperience && (

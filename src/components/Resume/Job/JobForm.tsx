@@ -12,7 +12,6 @@ import PositionSuggestion from "./PositionSuggestion";
 
 type JobFormProps = {
   job?: ISavedJob | Record<string, never>;
-  resumeId: string;
   newJob?: boolean;
   handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -20,7 +19,6 @@ type JobFormProps = {
 
 function JobForm({
   job,
-  resumeId,
   newJob = false,
   handleChange,
   handleSubmit,

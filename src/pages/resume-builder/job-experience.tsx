@@ -2,10 +2,10 @@ import Link from "next/link";
 import React from "react";
 import { useResumeContext } from "src/context/ResumeContext";
 
-import JobExperiencePreview from "src/components/JobExperience";
-import JobExperienceForm from "src/components/JobExperienceForm";
+import JobComponent from "src/components/Resume/Job/JobComponent";
 import JobForm from "src/components/Resume/Job/JobForm";
 import MainLayout from "src/components/layout/Main";
+import Accordion from "src/components/ui/Accordion";
 import Button from "src/components/ui/Button";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";
@@ -16,8 +16,8 @@ export default function JobExperience() {
     company: "",
     position: "",
     location: "",
-    startDate: "",
-    endDate: "",
+    from: "",
+    to: "",
     description: "",
     jobPoints: [
       {
@@ -29,6 +29,7 @@ export default function JobExperience() {
     React.useState(false);
 
   const onHandleJobExperienceSubmit = (e: any) => {
+    e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
 
@@ -42,15 +43,14 @@ export default function JobExperience() {
     const formattedJobPoints = filteredJobPoints.map((jobPoint: string) => {
       return { point: jobPoint };
     });
-
     const newJobExperience = { ...data, jobPoints: formattedJobPoints };
     setJobExperiences([...jobExperiences, newJobExperience]);
     setJobExperience({
       company: "",
       position: "",
       location: "",
-      startDate: "",
-      endDate: "",
+      from: "",
+      to: "",
       description: "",
       jobPoints: [
         {
@@ -96,14 +96,27 @@ export default function JobExperience() {
                 company: string;
                 position: string;
                 location: string;
-                startDate: string;
-                endDate: string;
+                from: string;
+                to: string;
                 description: string;
                 jobPoints: string[];
               },
               index: React.Key | null | undefined
             ) => (
-              <JobExperiencePreview key={index} jobExperience={jobExperience} />
+              <Accordion
+                key={index}
+                triggerComponent={
+                  <JobComponent newJob={false} job={jobExperience} />
+                }
+                value={`jobExperience_${jobExperience.company}_${index}}`}
+                type="single"
+                collapsible
+              >
+                <JobForm
+                  job={jobExperience}
+                  handleChange={onHandleInputChange}
+                />
+              </Accordion>
             )
           )}
           <Button
@@ -118,25 +131,20 @@ export default function JobExperience() {
       )}
 
       {jobExperiences.length === 0 && (
-        <JobExperienceForm
-          jobExperience={jobExperience}
-          onHandleJobExperienceSubmit={onHandleJobExperienceSubmit}
-          onHandleInputChange={onHandleInputChange}
+        <JobForm
+          newJob
+          job={{}}
+          handleSubmit={onHandleJobExperienceSubmit}
+          handleChange={onHandleInputChange}
         />
       )}
 
-      <JobForm
-        newJob
-        job={{}}
-        handleSubmit={onHandleJobExperienceSubmit}
-        handleChange={onHandleInputChange}
-      />
-
       {isAddingJobExperience && (
-        <JobExperienceForm
-          jobExperience={jobExperience}
-          onHandleJobExperienceSubmit={onHandleJobExperienceSubmit}
-          onHandleInputChange={onHandleInputChange}
+        <JobForm
+          newJob
+          job={{}}
+          handleSubmit={onHandleJobExperienceSubmit}
+          handleChange={onHandleInputChange}
         />
       )}
       <div className="flex flex-row items-center justify-center gap-12">

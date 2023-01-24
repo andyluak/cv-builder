@@ -6,7 +6,6 @@ import { useResumeContext } from "src/context/ResumeContext";
 import EducationPreview from "src/components/Education";
 import EducationForm from "src/components/EducationForm";
 import MainLayout from "src/components/layout/Main";
-import NotionTemplate from "src/components/templates/Notion";
 import Button from "src/components/ui/Button";
 
 import resumeBuilderContent from "content/resumeBuilderContent.json";

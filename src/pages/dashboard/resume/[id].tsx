@@ -14,7 +14,9 @@ import Loading from "src/components/ui/Loading";
 
 import useResume from "src/queries/useResume";
 
+import useCreateEducation from "src/mutations/useCreateEducation";
 import useCreateJobExperience from "src/mutations/useCreateJobExperience";
+import useEditEducation from "src/mutations/useEditEducation";
 import useEditJobExperience from "src/mutations/useEditJobExperience";
 
 import type { ISavedEducation, ISavedJob } from "src/types/resume";
@@ -24,6 +26,16 @@ function Resume() {
   const resumeId = router.query.id as string;
   const editJob = useEditJobExperience();
   const createJob = useCreateJobExperience();
+  const editEducation = useEditEducation();
+  const createEducation = useCreateEducation();
+
+  const handleJobChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: string
+  ) => {
+    const { name, value } = e.target;
+    editJob.mutate({ id, [name]: value, resumeId });
+  };
 
   const handleJobSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -107,13 +119,6 @@ function Resume() {
                 ) => new Date(aFrom).getTime() - new Date(bFrom).getTime()
               )
               .map((job: ISavedJob) => {
-                const handleJobChange = (
-                  e: React.ChangeEvent<HTMLInputElement>
-                ) => {
-                  const { name, value } = e.target;
-                  const { id } = job;
-                  editJob.mutate({ id, [name]: value, resumeId });
-                };
                 return (
                   <Accordion
                     key={job.id}
@@ -124,7 +129,9 @@ function Resume() {
                   >
                     <JobForm
                       job={job}
-                      handleChange={handleJobChange}
+                      handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleJobChange(e, job.id)
+                      }
                     />
                   </Accordion>
                 );
@@ -135,11 +142,7 @@ function Resume() {
               type="single"
               collapsible
             >
-              <JobForm
-                job={{}}
-                newJob
-                handleSubmit={handleJobSubmit}
-              />
+              <JobForm job={{}} newJob handleSubmit={handleJobSubmit} />
             </Accordion>
           </div>
         </Accordion>

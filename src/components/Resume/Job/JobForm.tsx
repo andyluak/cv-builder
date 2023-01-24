@@ -11,23 +11,28 @@ import type { ISavedJob } from "src/types/resume";
 
 import PositionSuggestion from "./PositionSuggestion";
 
+type HandleChangeType = (e: React.ChangeEvent<HTMLInputElement>) => void;
+type HandleChangeTypeId = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  id: string
+) => void;
+
 type JobFormProps = {
   job?: ISavedJob | Record<string, never>;
   newJob?: boolean;
-  handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange?: HandleChangeType | HandleChangeTypeId;
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
   className?: string;
 };
 
 function JobForm({
-  job,
+  job = {},
   newJob = false,
   handleChange,
   handleSubmit,
   className,
 }: JobFormProps): JSX.Element {
-  const { id, company, position, from, to, description, jobPoints, location } =
-    job;
+  const { company, position, from, to, description, jobPoints, location } = job;
 
   const debouncedHandleChange = debounce(handleChange, 500);
 
@@ -103,7 +108,10 @@ function JobForm({
 
   return (
     <form
-      className={cx("col-span-4 grid grid-cols-4 place-items-center gap-2", className)}
+      className={cx(
+        "col-span-4 grid grid-cols-4 place-items-center gap-2",
+        className
+      )}
       onSubmit={newJob ? handleSubmit : undefined}
     >
       {formFields.map((field) => {

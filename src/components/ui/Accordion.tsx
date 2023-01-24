@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import * as Accordion from "@radix-ui/react-accordion";
+import cx from "clsx";
 import React from "react";
 
 import ChevronDown from "public/chevron-down.svg";
@@ -14,6 +15,7 @@ type Props = {
   triggerComponent: string | React.ReactNode;
   children?: React.ReactNode;
   hasChevron?: boolean;
+  className?: string;
 };
 
 const AccordionComponent = ({
@@ -24,9 +26,10 @@ const AccordionComponent = ({
   children,
   triggerComponent,
   hasChevron,
+  className,
 }: Props) => (
   <Accordion.Root
-    className="AccordionRoot"
+    className={cx("AccordionRoot", className)}
     type={type}
     collapsible={collapsible}
     defaultValue={isOpened ? defaultValue : undefined}

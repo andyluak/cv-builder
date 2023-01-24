@@ -8,11 +8,14 @@ import MainLayout from "src/components/layout/Main";
 import Accordion from "src/components/ui/Accordion";
 import Button from "src/components/ui/Button";
 
+import { ISavedJob } from "src/types/resume";
+
 import resumeBuilderContent from "content/resumeBuilderContent.json";
 
 export default function JobExperience() {
   const jobId = useId();
   const { jobExperiences, setJobExperiences } = useResumeContext();
+  console.log(jobExperiences);
   const [jobExperience, setJobExperience] = React.useState({
     company: "",
     position: "",
@@ -76,6 +79,23 @@ export default function JobExperience() {
       setJobExperience({ ...jobExperience, [e.target.name]: e.target.value });
     }
   };
+
+  const onHandleSavedJobInputChange = (e: any, id:string) => {
+    console.log(id)
+    const updatedJobExperiences = jobExperiences.map(
+      (jobExperience: ISavedJob) => {
+        if (jobExperience.id === id) {
+          return {
+            ...jobExperience,
+            [e.target.name]: e.target.value,
+          };
+        }
+        return jobExperience;
+      }
+    );
+    setJobExperiences(updatedJobExperiences);
+  };
+
   return (
     <div className="flex flex-col items-center gap-8 p-8">
       <div className="grid-row-6 grid gap-8">
@@ -93,7 +113,7 @@ export default function JobExperience() {
       </div>
 
       {jobExperiences.length > 0 && (
-        <div className="flex flex-col items-start gap-4 self-start md:self-center">
+        <div className="flex flex-col items-start gap-4 self-start md:self-center w-1/2">
           {jobExperiences.map(
             (
               jobExperience: {
@@ -109,6 +129,7 @@ export default function JobExperience() {
               index: React.Key | null | undefined
             ) => (
               <Accordion
+                className="w-full"
                 key={index}
                 triggerComponent={
                   <JobComponent newJob={false} job={jobExperience} />
@@ -119,8 +140,7 @@ export default function JobExperience() {
               >
                 <JobForm
                   job={jobExperience}
-                  handleChange={onHandleInputChange}
-                  className="w-1/2"
+                  handleChange={(e)=>onHandleSavedJobInputChange(e, jobExperience.id)}
                 />
               </Accordion>
             )

@@ -52,7 +52,7 @@ function JobForm({
       name: "position",
       className: "col-span-2 w-full",
       value: newJob ? undefined : position,
-      onChange: newJob ? undefined : debouncedHandleChange,
+      onChange: debouncedHandleChange,
     },
     {
       label: "Location",

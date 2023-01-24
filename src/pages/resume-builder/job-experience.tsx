@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { useId } from "react";
 import { useResumeContext } from "src/context/ResumeContext";
 
 import JobComponent from "src/components/Resume/Job/JobComponent";
@@ -11,6 +11,7 @@ import Button from "src/components/ui/Button";
 import resumeBuilderContent from "content/resumeBuilderContent.json";
 
 export default function JobExperience() {
+  const jobId = useId();
   const { jobExperiences, setJobExperiences } = useResumeContext();
   const [jobExperience, setJobExperience] = React.useState({
     company: "",
@@ -43,7 +44,11 @@ export default function JobExperience() {
     const formattedJobPoints = filteredJobPoints.map((jobPoint: string) => {
       return { point: jobPoint };
     });
-    const newJobExperience = { ...data, jobPoints: formattedJobPoints };
+    const newJobExperience = {
+      ...data,
+      jobPoints: formattedJobPoints,
+      id: jobId,
+    };
     setJobExperiences([...jobExperiences, newJobExperience]);
     setJobExperience({
       company: "",
@@ -68,10 +73,11 @@ export default function JobExperience() {
         jobPoints: [{ point: e.target.value }],
       });
     } else {
+      console.log(e)
       setJobExperience({ ...jobExperience, [e.target.name]: e.target.value });
     }
   };
-
+  console.log(jobExperience);
   return (
     <div className="flex flex-col items-center gap-8 p-8">
       <div className="grid-row-6 grid gap-8">
@@ -93,13 +99,14 @@ export default function JobExperience() {
           {jobExperiences.map(
             (
               jobExperience: {
+                id: string;
                 company: string;
                 position: string;
                 location: string;
                 from: string;
                 to: string;
                 description: string;
-                jobPoints: string[];
+                jobPoints: { point: string }[];
               },
               index: React.Key | null | undefined
             ) => (

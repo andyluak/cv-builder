@@ -79,6 +79,7 @@ function PositionSuggestion({ className, value, onChange }: Props) {
           })}
           defaultValue={inputValue}
           label="Position"
+          controlled
         />
         <div
           className={cx(
